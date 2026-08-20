@@ -1,10 +1,15 @@
 import { Router } from "express";
+import { makeGetProfile } from "../../factories/authMakers";
+
 
 
 const router = Router()
 
-router.get("/get", (_req, res)=>{
-  res.status(200).json({message: "el microservicio esta corriendo"})
+const controllers = makeGetProfile()
+
+router.get("/profile", async (req, res)=>{
+  const rsp = await controllers.ver(req)
+  res.status(rsp.status).json(rsp.message)
 })
 
 export default router
