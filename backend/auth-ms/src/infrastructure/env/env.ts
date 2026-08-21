@@ -12,7 +12,10 @@ export const env= {
   db_port: Number(process.env.DB_PORT),
   db_name: String(process.env.DB_NAME),
   db_user: String(process.env.DB_USER),
-  db_password: String(process.env.DB_PASSWORD)
+  db_password: String(process.env.DB_PASSWORD),
+
+  //jwt data
+  jwtSecret: String(process.env.JWT_SECRET)
 }
 //que todas estas conversiones se hagan desde el env.ts
 //y asi nunca retorna undefined
