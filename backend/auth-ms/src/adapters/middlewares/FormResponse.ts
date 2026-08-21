@@ -10,7 +10,7 @@ export const formResponse = (
   return {
     type: type,
     statusCode: statusCode,
-    message: message? message[0] : "",
+    message: type? message[0] : "",
     data: data,
     errors: type? []: message, 
     timestamp: DateHelper.now()
