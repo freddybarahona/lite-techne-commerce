@@ -20,11 +20,11 @@ export class loginUseCase{
     
     const user = await this.repository.findByEmail(data.email)
     if(user == null) 
-      return formResponse(false, 404, [ResponseConstants.USER_NOT_FOUND])  
+      return formResponse(false, 400, [ResponseConstants.USER_BAD_EMAIL_PASSWORD])  
     validPassword=await bcrypt.compare(data.password, user.password_hash)
       
     if(!validPassword)
-      return formResponse(false, 400, [ResponseConstants.USER_BAD_PASSWORD])  
+      return formResponse(false, 400, [ResponseConstants.USER_BAD_EMAIL_PASSWORD])  
     token=this.jwt.generateToken(user!) 
     
     return formResponse(true, 200, [ResponseConstants.USER_LOGIN], token) 

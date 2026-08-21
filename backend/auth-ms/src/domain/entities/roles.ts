@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { User } from "./users";
 
 //las entidades de typeOrm solo trabajan sobre clases
 @Entity("roles")
@@ -13,6 +14,9 @@ export class Role{
 
   @CreateDateColumn({ nullable: false })
   created_at!: Date;
-  @UpdateDateColumn()
-  updated_at!: Date;
+  @DeleteDateColumn()
+  deleted_at!: Date;
+
+  @OneToMany(() => User, user => user.role)
+  users!: User[]
 }
