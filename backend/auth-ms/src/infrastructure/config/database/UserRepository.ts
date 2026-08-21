@@ -9,6 +9,10 @@ export class UserRepository implements IUserRepository{
   constructor(private repository: Repository<User>){
     this.repository = AppDataSource.getRepository(User)
   }
+  async findByEmail(data: string): Promise<User | null> {
+    const result = await this.repository.findOneBy({email: data})
+    return result
+  }
   
   async ifExistsName(data: string): Promise<Boolean> {
     const result= await this.repository.existsBy({first_name: data})
