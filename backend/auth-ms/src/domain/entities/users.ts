@@ -18,7 +18,7 @@ export class User{
   @Column()
   password_hash!: string;
 
-  @ManyToOne(() => Role)
+  @ManyToOne(() => Role, {nullable: false})
   @JoinColumn({name: "role_id"})
   role!: Role;
 

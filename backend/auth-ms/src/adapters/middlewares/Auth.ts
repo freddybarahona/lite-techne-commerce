@@ -12,7 +12,7 @@ export class Auth{
       rsp= formResponse(false, 401,[ResponseConstants.TOKEN_INVALID])
       return res.status(rsp.statusCode).json(rsp)
     }
-    const token = authHeader.split("hola")[1]
+    const token = authHeader.split(" ")[1]
     try{
       const payload = jwt.verify(token, env.jwtSecret)as{
         id: number

@@ -6,8 +6,8 @@ export class JwtService {
     return jwt.sign({
       id: user.user_id,
       email:user.email,
-      role: user.role.name,
-      name: user.first_name + " " + user.last_name
+      role: user.role,
+      name: user.first_name
     },env.jwtSecret,{
       expiresIn: "1h"
     })

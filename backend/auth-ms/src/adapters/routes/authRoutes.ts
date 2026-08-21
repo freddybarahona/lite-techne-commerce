@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { makeGetProfile, makeLogin } from "../../factories/authMakers";
+import { Auth } from "../middlewares/Auth";
 
 
 
@@ -7,7 +8,7 @@ const router = Router()
 
 let getProfilecontroller = makeGetProfile()
 
-router.get("/profile", async (req, res)=>{
+router.get("/profile", Auth.validate, async (req, res)=>{
   const rsp = await getProfilecontroller.ver(req)
   res.status(rsp.status).json(rsp.message)
 })
