@@ -1,9 +1,10 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from "typeorm";
 import { Role } from "./roles";
 
 @Entity("users")
+@Unique("UQ_USERS_EMAIL", ["email"]) //forma para poner las keys en typeorm con nombre
 export class User{
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({primaryKeyConstraintName: "PK_USERS"})
   user_id!: number;
 
   @Column()
@@ -12,14 +13,14 @@ export class User{
   @Column()
   last_name!: string;
 
-  @Column({ unique: true, nullable: false })
+  @Column({ nullable: false })
   email!: string;
 
   @Column()
   password_hash!: string;
 
   @ManyToOne(() => Role, {nullable: false})
-  @JoinColumn({name: "role_id"})
+  @JoinColumn({name: "role_id", foreignKeyConstraintName: "FK_USERS_ROLES"})
   role!: Role;
 
   @Column()

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { makeGetProfile, makeLogin } from "../../factories/authMakers";
+import { makeGetProfile, makeLogin, makeRegisterUser } from "../../factories/authMakers";
 import { Auth } from "../middlewares/Auth";
 
 
@@ -19,6 +19,11 @@ router.post("/login", async (req, res) =>{
   res.status(rsp.statusCode).json(rsp)
 })
 
+const registerUserController = makeRegisterUser()
 
+router.post("/register", async (req, res) =>{
+  const rsp= await registerUserController.registrar(req)
+  res.status(rsp.statusCode).json(rsp)
+})
 
 export default router

@@ -6,4 +6,6 @@ export class ResponseConstants{
   //good responses
   static USER_LOGIN="Inicio de sesion exitoso"
   static USER_FOUND_YES="Usuario encontrado con exito"
+  static USER_CREATED_YES="Usuario creado con exito"
+  static USER_ROLE_INVALID="Ese rol es invalido"
 }

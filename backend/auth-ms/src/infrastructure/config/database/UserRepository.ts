@@ -2,6 +2,7 @@ import { Repository } from "typeorm";
 import { IUserRepository } from "../../../domain/repositories/IUserRepository";
 import { User } from "../../../domain/entities/users";
 import { AppDataSource } from "./DataSource";
+import { RegisterUserRequest } from "../../../application/model/requests/RegisterUserRequest";
 
 
 export class UserRepository implements IUserRepository{

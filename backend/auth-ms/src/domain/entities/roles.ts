@@ -1,12 +1,13 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryColumn, Unique, UpdateDateColumn } from "typeorm";
 import { User } from "./users";
 
 //las entidades de typeOrm solo trabajan sobre clases
 @Entity("roles")
+@Unique("UQ_ROLES_NAME", ["name"])
 export class Role{
-  @PrimaryColumn()
+  @PrimaryColumn({primaryKeyConstraintName: "PK_ROLE"})
   role_id!: number; 
-  @Column({ unique: true, length: 50, nullable: false })
+  @Column({ length: 50, nullable: false })
   name!: string;
 
   @Column({ length: 100, nullable: false })

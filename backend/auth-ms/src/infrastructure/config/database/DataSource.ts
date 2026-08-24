@@ -16,6 +16,6 @@ export const AppDataSource = new DataSource({
   migrations:[
     path.join(__dirname, "../../migrations/*.js")
   ],
-  synchronize: true,
+  synchronize: false,
   logging: false //muestra sql en consola
 })

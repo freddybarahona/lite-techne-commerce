@@ -1,8 +1,10 @@
 import { GetProfileController } from "../adapters/controllers/GetProfileController"
 import { LoginController } from "../adapters/controllers/LoginController"
+import { RegisterUserController } from "../adapters/controllers/RegisterUserController"
 import { JwtService } from "../adapters/middlewares/JwtService"
 import { GetProfileUseCase } from "../application/use-cases/GetProfileUseCase"
 import { loginUseCase } from "../application/use-cases/LoginUseCase"
+import { RegisterUserUseCase } from "../application/use-cases/RegisterUserUseCase"
 import { Role } from "../domain/entities/roles"
 import { User } from "../domain/entities/users"
 import { AppDataSource } from "../infrastructure/config/database/DataSource"
@@ -23,4 +25,10 @@ export const makeLogin = () =>{
   const roleRepo = new RoleRepository(roleSource)
   const useCase = new loginUseCase(userRepository, roleRepo, jwt)
   return new LoginController(useCase)
+}
+
+export const makeRegisterUser =() =>{
+  const roleRepo= new RoleRepository(roleSource)
+  const useCase = new RegisterUserUseCase(userRepository, roleRepo)
+  return new RegisterUserController(useCase)
 }
