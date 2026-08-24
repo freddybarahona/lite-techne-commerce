@@ -23,7 +23,7 @@ export class Auth{
       (req as any).user = payload 
       next()
     }catch{
-      rsp = formResponse(false, 401, [ResponseConstants.TOKEN_INVALID])
+      rsp = formResponse(false, 401, [ResponseConstants.USER_TOKEN_INVALID])
       return res.status(rsp.statusCode).json(rsp)
     }
   }
