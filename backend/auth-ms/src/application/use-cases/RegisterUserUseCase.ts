@@ -1,13 +1,10 @@
 import { formResponse } from "../../adapters/middlewares/FormResponse";
-import { User } from "../../domain/entities/users";
 import { IRoleRepository } from "../../domain/repositories/IRoleRepository";
 import { IUserRepository } from "../../domain/repositories/IUserRepository";
 import { ResponseConstants } from "../../shared/constants/ResponseConstants";
 import { RegisterUserRequest } from "../model/requests/RegisterUserRequest";
 import { GenericResponse } from "../responses/GenericResponse";
 import { ValidatorHelper } from "../../shared/helpers/ValidatorHelper";
-import bcrypt from "bcrypt"
-import { Role } from "../../domain/entities/roles";
 import { UserMapper } from "../mappers/user/userMapper";
 
 export class RegisterUserUseCase{
@@ -25,13 +22,11 @@ export class RegisterUserUseCase{
       errors.push(ResponseConstants.USER_ROLE_INVALID)
 
     const existsEmail= await this.repository.IfExistsEmail(data.email)
-    if(existsEmail){
+    if(existsEmail)
       errors.push(ResponseConstants.USER_EMAIL_EXISTS)
-    }
     
-    if(errors.length > 0){
+    if(errors.length > 0)
       return formResponse(false, 400, errors)
-    }
 
     const userEntity = await UserMapper.mapEnt(data, roleUser!)
 
