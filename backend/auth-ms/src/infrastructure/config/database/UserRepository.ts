@@ -10,6 +10,10 @@ export class UserRepository implements IUserRepository{
   constructor(private repository: Repository<User>){
     this.repository = AppDataSource.getRepository(User)
   }
+  async IfExistsEmail(data: string): Promise<boolean> {
+    const result = await this.repository.existsBy({email: data})
+    return result
+  }
   async createUser(data: Omit<User, "user_id" | "created_at" | "updated_at">): Promise<User> {
     const result = await this.repository.save(await this.repository.create(data))
     return result
@@ -22,12 +26,12 @@ export class UserRepository implements IUserRepository{
   //relaciones automaticamente sino que en el repo se 
   //las debe pedir manualmente 
   
-  async ifExistsName(data: string): Promise<Boolean> {
+  async ifExistsName(data: string): Promise<boolean> {
     const result= await this.repository.existsBy({first_name: data})
       ? true : this.repository.existsBy({last_name: data})
     return result
   }
-  async ifExistsID(data: number): Promise<Boolean> {
+  async ifExistsID(data: number): Promise<boolean> {
     return await this.repository.existsBy({user_id: data})
   }
 }

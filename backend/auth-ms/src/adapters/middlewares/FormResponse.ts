@@ -2,17 +2,17 @@ import { GenericResponse } from "../../application/responses/GenericResponse";
 import { DateHelper } from "../../shared/helpers/DateHelper";
 
 export const formResponse = (
-  type: boolean,
+  success: boolean,
   statusCode: number,
   message: string[] = [],
   data?: any
 ): GenericResponse => {
   return {
-    type: type,
+    success: success,
     statusCode: statusCode,
-    message: type? message[0] : "",
+    message: success? message[0] : "",
     data: data,
-    errors: type? []: message, 
+    errors: success? []: message, 
     timestamp: DateHelper.now()
   }
 }

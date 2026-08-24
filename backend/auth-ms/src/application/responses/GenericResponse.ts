@@ -1,5 +1,5 @@
 export interface GenericResponse{
-  type: boolean
+  success: boolean
   statusCode: number
   message: string
   data?: any
