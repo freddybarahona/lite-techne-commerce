@@ -9,7 +9,7 @@ export class Auth{
     let rsp
     const authHeader = req.headers.authorization
     if(!authHeader){
-      rsp= formResponse(false, 401,[ResponseConstants.TOKEN_INVALID])
+      rsp= formResponse(false, 401,[ResponseConstants.USER_TOKEN_INVALID])
       return res.status(rsp.statusCode).json(rsp)
     }
     const token = authHeader.split(" ")[1]
