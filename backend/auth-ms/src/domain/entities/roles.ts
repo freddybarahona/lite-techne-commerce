@@ -19,4 +19,7 @@ export class Role{
 
   @OneToMany(() => User, user => user.role)
   users!: User[]
+  //ojo typeorm al momento de consultas no carga las 
+  //relaciones automaticamente sino que en el repo se 
+  //las debe pedir manualmente 
 }

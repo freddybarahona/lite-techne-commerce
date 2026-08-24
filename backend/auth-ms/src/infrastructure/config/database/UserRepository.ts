@@ -14,9 +14,12 @@ export class UserRepository implements IUserRepository{
     return result
   }
   async findByEmail(data: string): Promise<User | null> {
-    const result = await this.repository.findOneBy({email: data})
+    const result = await this.repository.findOne({where:{email: data},relations: {role: true}})
     return result
   }
+  //ojo typeorm al momento de consultas no carga las 
+  //relaciones automaticamente sino que en el repo se 
+  //las debe pedir manualmente 
   
   async ifExistsName(data: string): Promise<Boolean> {
     const result= await this.repository.existsBy({first_name: data})
