@@ -1,0 +1,22 @@
+import { Repository } from "typeorm";
+import { Category } from "../../../domain/entities/category";
+import { ICategoryRepository } from "../../../domain/repositories/ICategoryRepository";
+import { AppdDataSource } from "./dataSource";
+
+export class CategoryRepository implements ICategoryRepository{
+
+  constructor(private readonly repository: Repository<Category>){
+    this.repository= AppdDataSource.getRepository(Category)
+  }
+
+  async ifExistsCategoryByName(data: string): Promise<Boolean> {
+    const result= await this.repository.existsBy({name: data})
+    return result
+  }
+
+  async createCategory(data: Category): Promise<Category> {
+    const result = await this.repository.save(await this.repository.create(data))
+    return result
+  }
+
+}
