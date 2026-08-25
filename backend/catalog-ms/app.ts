@@ -8,7 +8,7 @@ app.use(express.json())
 app.use(cors({origin: "*"}))
 
 //registro de rutas
-app.use("/catalog", catalogRoutes)
-app.use("/product", productRoutes)
+app.use("/catalogs", catalogRoutes)
+app.use("/products", productRoutes)
 
 export default app
