@@ -14,7 +14,7 @@ export class CategoryRepository implements ICategoryRepository{
     return result
   }
 
-  async createCategory(data: Category): Promise<Category> {
+  async createCategory(data: Category | Omit<Category, "created_at" | "deleted_at" | "product">): Promise<Category> {
     const result = await this.repository.save(await this.repository.create(data))
     return result
   }
