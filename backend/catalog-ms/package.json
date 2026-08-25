@@ -27,9 +27,10 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "mssql": "^12.7.0",
     "pg": "^8.23.0",
     "reflect-metadata": "^0.2.2",
     "tsconfig": "^7.0.0",
-    "typeorm": "^0.3.27"
+    "typeorm": "^0.3.31"
   }
 }

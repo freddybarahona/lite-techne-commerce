@@ -149,7 +149,7 @@ package-lock.json
 
 # End of https://www.toptal.com/developers/gitignore/api/dotenv,node
 
-#esto es para ignorar archivos en otros archivos no relevantes en esta rama
+#esto es para ignorar archivos en otros archivos no relevantes en esta rama(si git ya los trackeo entonces esto se aplica en el siguiente cambio)
 # Dependencias
 **/node_modules/
 
