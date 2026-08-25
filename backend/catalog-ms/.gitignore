@@ -1,6 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/dotenv,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=dotenv,node
 
+auth-ms/
 ### dotenv ###
 .env
 
@@ -46,6 +47,7 @@ bower_components
 build/Release
 
 # Dependency directories
+
 node_modules/
 jspm_packages/
 
@@ -146,3 +148,16 @@ dist
 package-lock.json
 
 # End of https://www.toptal.com/developers/gitignore/api/dotenv,node
+
+#esto es para ignorar archivos en otros archivos no relevantes en esta rama
+# Dependencias
+**/node_modules/
+
+# Variables de entorno
+**/.env
+
+# Compilados
+**/dist
+
+# Logs
+**/*.log
