@@ -3,7 +3,7 @@
 
 auth-ms/
 ### dotenv ###
-.env
+##.env
 
 ### Node ###
 # Logs
@@ -154,7 +154,7 @@ package-lock.json
 **/node_modules/
 
 # Variables de entorno
-**/.env
+#**/.env
 
 # Compilados
 **/dist
