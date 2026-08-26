@@ -4,4 +4,5 @@ export interface ICategoryRepository{
   createCategory(data: Category): Promise<Category>
   ifExistsCategoryByName(data: string): Promise<Boolean>
   getAllCategories(): Promise<Category[]>
+  getCategoryById(data: number): Promise<Category | null>
 }

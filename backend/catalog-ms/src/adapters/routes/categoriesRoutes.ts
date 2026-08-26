@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { makeCreateCategory, makeGetCategories } from "../../factories/categoryMakers";
+import { makeCreateCategory, makeGetCategories, makeGetCategoryById } from "../../factories/categoryMakers";
 
 const router = Router()
 
@@ -16,5 +16,10 @@ router.get("", async(req, res)=>{
   res.status(rsp.statusCode).json(rsp)
 })
 
+const getCategoryByIdController = makeGetCategoryById()
+router.get("/:id", async(req, res)=>{
+  const rsp= await getCategoryByIdController.obtener(req)
+  res.status(rsp.statusCode).json(rsp)
+})
 
 export default router

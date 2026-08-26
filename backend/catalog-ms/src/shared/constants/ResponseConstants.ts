@@ -8,6 +8,10 @@ export class ResponseConstants{
     return `se encontraron ${cant} elementos en ${data} data`
   }
 
+  static somethingFoundHere(element: string, ind: number, data: string){
+    return `se encontro el elemento ${element} con indice ${ind} en ${data} data`
+  }
+
   //bad responses
   static requiredSpace(data: string){
     return `el campo ${data} es requerido`
@@ -22,6 +26,10 @@ export class ResponseConstants{
 
   static dbEmpty(data: string ){
     return `no se encontraron elementos en ${data} data`
+  }
+
+  static nothingLikeThatHere(data: string, ind: number){
+    return `no se encontro el elemento ${ind} en ${data} data`
   }
 
   static CATEGORY_ALREADY_EXISTS= "esta categoria ya existe" 

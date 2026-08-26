@@ -8,6 +8,12 @@ export class CategoryRepository implements ICategoryRepository{
   constructor(private readonly repository: Repository<Category>){
     this.repository= AppdDataSource.getRepository(Category)
   }
+
+  async getCategoryById(data: number): Promise<Category | null> {
+    const result= await this.repository.findOneBy({category_id: data})
+    return result
+  }
+
   async getAllCategories(): Promise<Category[]> {
     const result = await this.repository.find()
     return result
