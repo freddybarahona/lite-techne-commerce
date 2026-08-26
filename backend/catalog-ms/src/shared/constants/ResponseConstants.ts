@@ -1,5 +1,9 @@
 export class ResponseConstants{
   //good responses
+  static productCreatedCorrectly(data: string){
+    return `el producto ${data} se creo correctamente`
+  }
+
   static categoryCreatedCorrectly(data: string){
     return `la categoria ${data} se creo correctamente`
   }
@@ -38,4 +42,5 @@ export class ResponseConstants{
 
   static CATEGORY_ALREADY_EXISTS= "esta categoria ya existe"
   static ERASED_ELEMENT= "elemento borrado correctamente" 
+  static PRODUCT_ALREADY_EXISTS= "este producto ya existe"
 }

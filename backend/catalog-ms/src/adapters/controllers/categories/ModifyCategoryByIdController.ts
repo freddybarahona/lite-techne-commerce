@@ -1,6 +1,6 @@
 import { Request } from "express";
-import { ModifyCategoryByIdRequest } from "../../../application/model/requests/ModifyCategoryByIdRequest";
 import { ModifyCategoryByIdUseCase } from "../../../application/useCases/categories/ModifyCategoryByIdUseCase";
+import { ModifyCategoryByIdRequest } from "../../../application/model/requests/categories/ModifyCategoryByIdRequest";
 
 export class ModifyCategoryByIdController{
   constructor(private readonly useCase: ModifyCategoryByIdUseCase){}

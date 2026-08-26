@@ -3,7 +3,7 @@ import { ICategoryRepository } from "../../../domain/repositories/ICategoryRepos
 import { ResponseConstants } from "../../../shared/constants/ResponseConstants";
 import { ValidatorHelper } from "../../../shared/helpers/validatorHelper";
 import { CategoryMapper } from "../../mappers/CategoryMapper";
-import { ModifyCategoryByIdRequest } from "../../model/requests/ModifyCategoryByIdRequest";
+import { ModifyCategoryByIdRequest } from "../../model/requests/categories/ModifyCategoryByIdRequest";
 import { GenericResponse } from "../../responses/genericResponse";
 
 export class ModifyCategoryByIdUseCase{

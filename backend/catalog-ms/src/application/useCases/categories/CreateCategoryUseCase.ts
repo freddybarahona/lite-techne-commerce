@@ -3,7 +3,7 @@ import { ICategoryRepository } from "../../../domain/repositories/ICategoryRepos
 import { ResponseConstants } from "../../../shared/constants/ResponseConstants";
 import { ValidatorHelper } from "../../../shared/helpers/validatorHelper";
 import { CategoryMapper } from "../../mappers/CategoryMapper";
-import { CreateCategoryRequest } from "../../model/requests/CreateCategoryRequest";
+import { CreateCategoryRequest } from "../../model/requests/categories/CreateCategoryRequest";
 import { GenericResponse } from "../../responses/genericResponse";
 
 export class CreateCategoryUseCase{

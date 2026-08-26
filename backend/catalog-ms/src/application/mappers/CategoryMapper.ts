@@ -6,7 +6,8 @@ export class CategoryMapper{
     return {
       category_id: data.category_id,
       name: data.name,
-      description: data.description
+      description: data.description,
+      product: data.product
     }
   }
 

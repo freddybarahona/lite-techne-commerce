@@ -1,5 +1,6 @@
 import { IsAlpha, IsNotEmpty, IsNumber, IsString } from "class-validator"
-import { ResponseConstants } from "../../../shared/constants/ResponseConstants"
+import { ResponseConstants } from "../../../../shared/constants/ResponseConstants"
+
 
 export class ModifyCategoryByIdRequest{
   @IsNotEmpty({message: ResponseConstants.requiredSpace(("id"))})
