@@ -11,7 +11,7 @@ export class Product {
 
   @Column({nullable: false, length: 150})
   description!: string
-  @Column({nullable: false, type: "decimal"})
+  @Column({nullable: false, type: "decimal", precision: 2})
   price!: number
 
   @Column({nullable: false})
