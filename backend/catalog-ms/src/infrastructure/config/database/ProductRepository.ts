@@ -1,8 +1,5 @@
 import { Repository } from "typeorm";
-import { Category } from "../../../domain/entities/category";
-import { ICategoryRepository } from "../../../domain/repositories/ICategoryRepository";
 import { AppdDataSource } from "./dataSource";
-import { DeleteResult } from "typeorm/browser";
 import { IProductRepository } from "../../../domain/repositories/IProductRepository";
 import { Product } from "../../../domain/entities/product";
 

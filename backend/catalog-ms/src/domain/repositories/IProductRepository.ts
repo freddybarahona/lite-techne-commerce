@@ -1,5 +1,3 @@
-import { DeleteResult } from "typeorm";
-import { Category } from "../entities/category";
 import { Product } from "../entities/product";
 
 export interface IProductRepository{
