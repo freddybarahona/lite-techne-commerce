@@ -2,7 +2,6 @@ import { Repository } from "typeorm";
 import { Category } from "../../../domain/entities/category";
 import { ICategoryRepository } from "../../../domain/repositories/ICategoryRepository";
 import { AppdDataSource } from "./dataSource";
-import { DeleteResult } from "typeorm/browser";
 
 export class CategoryRepository implements ICategoryRepository{
 
