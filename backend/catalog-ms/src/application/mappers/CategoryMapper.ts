@@ -9,4 +9,10 @@ export class CategoryMapper{
       description: data.description
     }
   }
+
+  static mapEnt<T>(data: T): Category{
+    const category = Object.assign(new Category(),data)
+
+    return category
+  } 
 }

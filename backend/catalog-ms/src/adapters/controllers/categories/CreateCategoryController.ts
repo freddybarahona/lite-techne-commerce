@@ -14,7 +14,7 @@ export class CreateCategoryController{
 
   private mapRequest(data: Request): CreateCategoryRequest{
     return {
-      category_id: data.body.id,
+      category_id: Number(data.params.id),
       name: data.body.name,
       description: data.body.description
     }

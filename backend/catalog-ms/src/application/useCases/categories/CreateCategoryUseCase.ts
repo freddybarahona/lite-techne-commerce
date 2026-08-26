@@ -1,5 +1,4 @@
 import { formResponse } from "../../../adapters/middlewares/formResponses";
-import { Category } from "../../../domain/entities/category";
 import { ICategoryRepository } from "../../../domain/repositories/ICategoryRepository";
 import { ResponseConstants } from "../../../shared/constants/ResponseConstants";
 import { ValidatorHelper } from "../../../shared/helpers/validatorHelper";
@@ -19,17 +18,10 @@ export class CreateCategoryUseCase{
     if(errors.length > 0)
       return formResponse(false, 400, errors)
 
-    console.log(this.mapEnt(data))
-    const category= await this.repository.createCategory(this.mapEnt(data))
+    const category= await this.repository.createCategory(CategoryMapper.mapEnt(data))
 
 
     return formResponse(true, 201, [ResponseConstants.categoryCreatedCorrectly(data.name)], CategoryMapper.mapDTO(category))
 
-  }
-
-  private mapEnt(data: CreateCategoryRequest): Category{
-    const category = Object.assign(new Category(),data)
-
-    return category
   }
 }

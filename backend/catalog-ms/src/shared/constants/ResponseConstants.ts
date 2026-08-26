@@ -32,5 +32,10 @@ export class ResponseConstants{
     return `no se encontro el elemento ${ind} en ${data} data`
   }
 
-  static CATEGORY_ALREADY_EXISTS= "esta categoria ya existe" 
+  static modifiedCorrectlyHere(name: string, ind: number ,data:string){
+    return `se modifico el elemento ${name} con ${ind} en ${data} data`
+  }
+
+  static CATEGORY_ALREADY_EXISTS= "esta categoria ya existe"
+  static ERASED_ELEMENT= "elemento borrado correctamente" 
 }
