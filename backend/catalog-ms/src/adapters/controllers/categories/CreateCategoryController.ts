@@ -1,6 +1,6 @@
 import { Request } from "express";
-import { CreateCategoryRequest } from "../../application/model/requests/CreateCategoryRequest";
-import { CreateCategoryUseCase } from "../../application/useCases/categories/CreateCategoryUseCase";
+import { CreateCategoryRequest } from "../../../application/model/requests/CreateCategoryRequest";
+import { CreateCategoryUseCase } from "../../../application/useCases/categories/CreateCategoryUseCase";
 
 
 export class CreateCategoryController{
