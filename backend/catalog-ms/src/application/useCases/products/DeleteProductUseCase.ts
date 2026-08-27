@@ -8,6 +8,8 @@ export class DeleteProductUseCase{
 
   async verifica(data: number): Promise<GenericResponse>{
     const exists= await this.repository.getProductById(data)
+    if(exists == null)
+      return formResponse(false, 400, [ResponseConstants.nothingLikeThatHere("products", data)])
 
     const result= await this.repository.deleteProduct(data)
 

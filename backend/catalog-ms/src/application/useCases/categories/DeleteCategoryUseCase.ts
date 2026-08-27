@@ -8,7 +8,8 @@ export class DeleteCategoryUseCase{
 
   async verifica(data: number): Promise<GenericResponse>{
     const exists= await this.repository.getCategoryById(data)
-    if()
+    if(exists == null)
+      return formResponse(false, 400, [ResponseConstants.nothingLikeThatHere("categories", data)])
 
     const result= await this.repository.deleteCategory(data)
     console.log(result)
