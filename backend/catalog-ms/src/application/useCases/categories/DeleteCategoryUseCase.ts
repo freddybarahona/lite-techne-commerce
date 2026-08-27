@@ -7,6 +7,9 @@ export class DeleteCategoryUseCase{
   constructor(private readonly repository: ICategoryRepository){}
 
   async verifica(data: number): Promise<GenericResponse>{
+    const exists= await this.repository.getCategoryById(data)
+    if()
+
     const result= await this.repository.deleteCategory(data)
     console.log(result)
 
