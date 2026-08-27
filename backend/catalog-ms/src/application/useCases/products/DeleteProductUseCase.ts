@@ -7,6 +7,8 @@ export class DeleteProductUseCase{
   constructor(private readonly repository: IProductRepository){}
 
   async verifica(data: number): Promise<GenericResponse>{
+    const exists= await this.repository.getProductById(data)
+
     const result= await this.repository.deleteProduct(data)
 
     return formResponse(true, 200, [ResponseConstants.ERASED_ELEMENT])
