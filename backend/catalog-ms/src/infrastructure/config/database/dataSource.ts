@@ -17,6 +17,6 @@ export const AppdDataSource = new DataSource({
   migrations:[
     path.join(__dirname, "../../migrations/*.js")
   ],
-  synchronize: true,
+  synchronize: false,
   logging: false
 })
