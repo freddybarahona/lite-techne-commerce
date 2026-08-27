@@ -1,6 +1,4 @@
 import { Request } from "express";
-import { CreateCategoryRequest } from "../../../application/model/requests/categories/CreateCategoryRequest";
-import { CreateCategoryUseCase } from "../../../application/useCases/categories/CreateCategoryUseCase";
 import { CreateProductRequest } from "../../../application/model/requests/products/CreateProductRequest";
 import { CreateProductUseCase } from "../../../application/useCases/products/CreateProductUseCase";
 

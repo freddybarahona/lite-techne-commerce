@@ -16,7 +16,7 @@ export class ProductMapper{
 
   static mapEnt<T>(data: T): Product{
     const product = Object.assign(new Product(),data)
-
+    console.log(product)
     return product
   } 
 }
