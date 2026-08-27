@@ -154,6 +154,7 @@ package-lock.json
 # Dependencias
 */node_modules/
 ../../auth-ms/node_modules/
+../../catalog-ms/node_modules/
 **/node_modules/
 # Variables de entorno
 **/.env
