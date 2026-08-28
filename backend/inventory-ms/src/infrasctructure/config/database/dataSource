@@ -1,3 +1,0 @@
-docker run --name bd-lite-techne-inventory -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Admin1234@" -p 1434:1434 -d mcr.microsoft.com/mssql/server:2025-latest
-
-este es el comando para crear el contenedor de docker donde estara la base de datos de inventory

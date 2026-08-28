@@ -1,8 +1,9 @@
 import path from "node:path";
 import { DataSource } from "typeorm";
 import { env } from "../env/env";
+import { Inventory } from "../../../domain/entities/inventory";
 
-export const AppdDataSource = new DataSource({
+export const AppDataSource = new DataSource({
   type: "mssql", //sql server
   host: env.db_host,
   port: env.db_port,
@@ -10,7 +11,7 @@ export const AppdDataSource = new DataSource({
   password: env.db_password,
   database: env.db_name,
   options: {encrypt: true, trustServerCertificate: true},
-  entities:[],
+  entities:[Inventory],
   migrations:[
     path.join(__dirname, "../../migrations/*.js")
   ],
