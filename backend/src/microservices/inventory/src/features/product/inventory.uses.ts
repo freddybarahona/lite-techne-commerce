@@ -4,7 +4,7 @@ import { CreateInventoryRequest } from "./requests/create.request";
 export class InventoryUseCases{
   constructor(private readonly repository: IInventoryRepository){}
 
-  async verficacionCreacionInventario(data: CreateInventoryRequest){
-
+  async verficacionCreacionInventario(data: CreateInventoryRequest): Promise<GenericResponse<InventoryDTO>>{
+    return formResponse({})
   }
 }
