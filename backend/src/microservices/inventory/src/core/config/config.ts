@@ -1,17 +1,23 @@
 import { DataSource } from "typeorm";
 import { Environment } from "../../infrastructure/config/env/env";
-import { Inventory } from "../../domain/entities/inventory";
 import {InitializeConstants} from "../../../../shared/constants/initialize.constants"
 import { AppCore } from "../app.core";
-import path from "node:path";
-import { MyConnectionOptions } from "../../features/product/product.types";
+import { MyConnectionOptions } from "../../features/product/inventory.types";
+import { AppDataSource } from "../../infrastructure/config/database/data.source";
 
 export class serverconfigurations{
-  constructor(
-      private env: Environment,
-      private connect: MyConnectionOptions,
-      private app: AppCore
-    ){}
+  private env: Environment
+  private dBSource: AppDataSource 
+  private typeDB: MyConnectionOptions
+  private app: AppCore
+
+
+  constructor({env, dbSource, typeDB, app}: {env: Environment, dbSource: AppDataSource, typeDB:MyConnectionOptions, app:AppCore}){
+    this.env= env
+    this.dBSource= dbSource
+    this.typeDB= typeDB
+    this.app= app
+  }
     async initializeDBandBack(){
       const dbSource=await this.database()
       dbSource.initialize().then(()=>{
@@ -20,22 +26,8 @@ export class serverconfigurations{
       })
     }
 
-    private async database(): Promise<DataSource>{
-        return await new DataSource({
-              type: this.connect.type, //sql server
-              host: this.env.db_host,
-              port: this.env.db_port,
-              username: this.env.db_user,
-              password: this.env.db_password,
-              database: this.env.db_name,
-              options: { encrypt: true, trustServerCertificate: true},
-              entities: [Inventory],
-              migrations:[
-                path.join(__dirname, "../../migrations/*.js")
-              ],
-              synchronize: false,
-              logging: false
-            })
+    async database(): Promise<DataSource>{
+        return await this.dBSource.dataSource(this.typeDB,this.env)
     }
 
     back({portBack}: {portBack: number}){

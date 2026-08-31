@@ -14,6 +14,6 @@ export class AppCore{
   }
   
   private routes(){
-    //this.config.use("/inventory", inventoryRoutes)
+    //this.config.use("/inventory", InventoryRoutes)
   }
 }
