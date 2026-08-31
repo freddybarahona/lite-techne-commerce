@@ -5,7 +5,7 @@ import { Inventory } from "../../../domain/entities/inventory";
 import path from "node:path";
 
 export class AppDataSource{
-  async dataSource(connect: MyConnectionOptions, env: Environment): Promise<DataSource>{
+  static async dataSource(connect: MyConnectionOptions, env: Environment): Promise<DataSource>{
     return await new DataSource({
               type: connect.type, //sql server
               host: env.db_host,
