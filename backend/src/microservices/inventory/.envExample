@@ -1,3 +1,13 @@
-PORT_BACK= #puerto escucha del back
+PORT= #puerto escucha del back
 
-info de la BD
+#info de la BD
+DB_HOST=#localhost
+#host es una direccion de red, localhost es la usual
+DB_PORT=#0986
+#puerto donde escuchara la base de datos localmente
+DB_USER=holi
+#el nombre de usuario de la BD para entrar
+DB_PASSWORD=#holi1234
+#la contrasena del usuario de la BD 
+DB_NAME=#entidadDb
+#nombre de la base de datos dentro del servidor
