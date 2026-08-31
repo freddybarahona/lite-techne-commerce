@@ -14,7 +14,7 @@ export class env implements Ienv{
   db_password!: string
   db_name!: string
 
-  constructor(env: dotenv){
+  constructor(env=process.env){
     this.port= Number(env.PORT_BACK)
     this.db_host= String(env.)
   }
