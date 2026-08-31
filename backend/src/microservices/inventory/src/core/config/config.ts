@@ -7,14 +7,12 @@ import { AppDataSource } from "../../infrastructure/config/database/data.source"
 
 export class serverconfigurations{
   private env: Environment
-  private dBSource: AppDataSource 
   private typeDB: MyConnectionOptions
   private app: AppCore
 
 
-  constructor({env, dbSource, typeDB, app}: {env: Environment, dbSource: AppDataSource, typeDB:MyConnectionOptions, app:AppCore}){
+  constructor({env, typeDB, app}: {env: Environment, typeDB:MyConnectionOptions, app:AppCore}){
     this.env= env
-    this.dBSource= dbSource
     this.typeDB= typeDB
     this.app= app
   }
@@ -27,7 +25,7 @@ export class serverconfigurations{
     }
 
     async database(): Promise<DataSource>{
-        return await this.dBSource.dataSource(this.typeDB,this.env)
+        return await AppDataSource.dataSource(this.typeDB,this.env)
     }
 
     back({portBack}: {portBack: number}){

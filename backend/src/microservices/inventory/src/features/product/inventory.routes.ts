@@ -3,10 +3,13 @@ import { InventoryMakers } from "../../factories/inventory.makers";
 
 export class InventoryRoutes{
   private router= Router()
-  private maker!: InventoryMakers
-  async createInventory(controller= this.maker.createInventoryMaker()){
+  constructor(private readonly maker: InventoryMakers){}
+
+
+  async createInventory(){
     this.router.post("", async(req, res)=>{
-      const rsp = await controller.crear(req)
+      const instance=await this.maker.createInventoryMaker()
+      const rsp = await instance.crearInventario(req)
       res.status(rsp.statusCode).json(rsp)
     })
   }
