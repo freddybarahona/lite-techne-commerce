@@ -1,5 +1,5 @@
 import { Request } from "express"
-import { InventoryUseCases } from "./inventory.uses"
+import { InventoryUseCases } from "./inventory.use.cases"
 import { CreateInventoryRequest } from "./requests/create.request"
 
 export class InventoryControllers{

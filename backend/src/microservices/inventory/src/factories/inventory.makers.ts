@@ -3,7 +3,7 @@ import { Inventory } from "../domain/entities/inventory";
 import { InventoryControllers } from "../features/product/inventory.controller";
 import { InventoryRepository } from "../features/product/inventory.repository";
 import { MyConnectionOptions } from "../features/product/inventory.types";
-import { InventoryUseCases } from "../features/product/inventory.uses";
+import { InventoryUseCases } from "../features/product/inventory.use.cases";
 import { AppDataSource } from "../infrastructure/config/database/data.source";
 import { Environment } from "../infrastructure/config/env/env";
 
