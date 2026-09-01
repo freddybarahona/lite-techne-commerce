@@ -1,0 +1,42 @@
+export class ResponseConstants{
+  //good responses
+  static entityCreatedCorrectly(params:{entity: string, creation_data: string | number}){
+    return `el ${params.entity} conocido como ${params.creation_data} se creo correctamente`
+  }
+
+  static dbFull(params:{data: string, cant: number}){
+    return `se encontraron ${params.cant} elementos en ${params.data} data`
+  }
+
+  static somethingFoundHere(params:{element: string, ind: number, data: string}){
+    return `se encontro el elemento ${params.element} con indice ${params.ind} en ${params.data} data`
+  }
+
+  //bad responses
+  static requiredSpace(params:{campo: string}){
+    return `el campo ${params.campo} es requerido`
+  }
+  static onlyTypes(params:{campo: string, type: string}){
+    return `el campo ${params.campo} solo admite ${params.type}`
+  }
+
+  static maxLength(params:{data: string, max: number}){
+    return `el campo ${params.data} tiene un maximo de ${params.max} caracteres`
+  }
+
+  static dbEmpty(params:{data: string} ){
+    return `no se encontraron elementos en ${params.data} data`
+  }
+
+  static nothingLikeThatHere(params:{data: string, ind: number}){
+    return `no se encontro el elemento ${params.ind} en ${params.data} data`
+  }
+
+  static modifiedCorrectlyHere(params:{name: string, ind: number ,data:string}){
+    return `se modifico el elemento ${params.name} con ${params.ind} en ${params.data} data`
+  }
+
+  static CATEGORY_ALREADY_EXISTS= "esta categoria ya existe"
+  static ERASED_ELEMENT= "elemento borrado correctamente" 
+  static PRODUCT_ALREADY_EXISTS= "este producto ya existe"
+}

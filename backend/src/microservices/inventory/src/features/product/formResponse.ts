@@ -5,7 +5,7 @@ export class formResponse{
     success: boolean
     statusCode: number
     message: string[]
-    dataDTO: DTO
+    dataDTO?: DTO
   }):GenericResponse<DTO>{
     return {
       success: params.success,

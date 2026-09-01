@@ -1,7 +1,7 @@
 export class InitializeConstants{
   //good responses
   static infoBackActive(port: number, ms_name: string){
-    return `la conexion con ${ms_name}-ms en http://localhost:${port}`
+    return `la conexion con ${ms_name}-ms en http://localhost:${port} es exitosa`
   }
 
   static dbConnectionEstablished(db:string, port: number){
