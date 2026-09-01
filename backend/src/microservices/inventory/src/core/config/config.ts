@@ -5,10 +5,6 @@ import AppDataSource from "../../infrastructure/config/database/data.source";
 import AppCore from "../app.core";
 
 export default class serverconfigurations{
-
-  constructor(){
-    
-  }
     initializeDBandBack(){
       const env = new Environment
       const dbSource= this.database()

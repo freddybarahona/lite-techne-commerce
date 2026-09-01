@@ -1,6 +1,6 @@
 import express from "express"
 import cors from "cors"
-import { InventoryRoutes } from "../features/product/inventory.routes"
+import InventoryRoutes from "../features/product/inventory.routes"
 import { InventoryMakers } from "../factories/inventory.makers"
 import { Environment } from "../infrastructure/config/env/env"
 
@@ -10,7 +10,6 @@ export default class AppCore{
     this.config()
   }
   private config(){
-    this.app= express()
     this.app.use(express.json)
     console.log("ingreso a la configuracion")
     
@@ -22,6 +21,5 @@ export default class AppCore{
     this.app.use("/inventory", inventoryRoutes.create()) 
     //hay algo aqui que esta mal
     console.log("paso a las rutas")
-    return this.app
   }
 }
