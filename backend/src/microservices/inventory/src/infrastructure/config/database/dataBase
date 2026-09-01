@@ -22,3 +22,5 @@ USE InventoryDB;
 dividelo por lotes ya que dbeaver no lo 
 lee asi al completo 
 osea selecciona y ejecuta una parte y luego la otra
+
+cd backend/src/microservices/inventory
