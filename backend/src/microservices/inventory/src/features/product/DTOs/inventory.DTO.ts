@@ -1,5 +1,4 @@
-import { IsNotEmpty, IsNumber} from "class-validator";
-import { ResponseConstants } from "../../../../../shared/constants/response.constants"
+
 export class InventoryDTO{
 
   product_id!: number
