@@ -1,18 +1,17 @@
 import { Repository } from "typeorm";
 import { Inventory } from "../../domain/entities/inventory";
 import { IInventoryRepository } from "./inventory.repository.interface";
-import { AppDataSource } from "../../infrastructure/config/database/data.source";
+import AppDataSource from "../../infrastructure/config/database/data.source";
 import { MyConnectionOptions } from "./inventory.types";
 import { Environment } from "../../infrastructure/config/env/env";
 
 export class InventoryRepository implements IInventoryRepository{
   constructor(
     private repository: Repository<Inventory>,
-    private readonly connect: MyConnectionOptions,
     private readonly env: Environment
   ){}
   private async infoRepo(){
-    const dataSource= await AppDataSource.dataSource(this.connect, this.env)
+    const dataSource= new AppDataSource().create()
     this.repository= dataSource.getRepository(Inventory)
   }
 

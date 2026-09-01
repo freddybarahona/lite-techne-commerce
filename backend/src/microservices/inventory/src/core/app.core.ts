@@ -1,17 +1,27 @@
 import express from "express"
 import cors from "cors"
 import { InventoryRoutes } from "../features/product/inventory.routes"
+import { InventoryMakers } from "../factories/inventory.makers"
+import { Environment } from "../infrastructure/config/env/env"
 
-export class AppCore{
-  static appConfig(){
-    const config= express()
-    config.use(express.json)
+export default class AppCore{
+  app= express()
+  constructor(){
+    this.config()
+  }
+  private config(){
+    this.app= express()
+    this.app.use(express.json)
     console.log("ingreso a la configuracion")
-    config.use(cors({origin: "*"}))
-    const inventoryRoutes= new InventoryRoutes()
+    
+    this.app.use(cors({origin: "*"}))
+    const env= new Environment
+    const makers = new InventoryMakers(env)
+    const inventoryRoutes= new InventoryRoutes(makers)
     //informacion de rutas de rutas
-    config.use("/inventory", inventoryRoutes.create()) //hay algo aqui que esta mal
+    this.app.use("/inventory", inventoryRoutes.create()) 
+    //hay algo aqui que esta mal
     console.log("paso a las rutas")
-    return config
+    return this.app
   }
 }

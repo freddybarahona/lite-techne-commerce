@@ -1,32 +1,31 @@
 import { DataSource } from "typeorm";
 import { Environment } from "../../infrastructure/config/env/env";
 import {InitializeConstants} from "../../../../shared/constants/initialize.constants"
-import { AppCore } from "../app.core";
-import { MyConnectionOptions } from "../../features/product/inventory.types";
-import { AppDataSource } from "../../infrastructure/config/database/data.source";
+import AppDataSource from "../../infrastructure/config/database/data.source";
+import AppCore from "../app.core";
 
-export class serverconfigurations{
-  private env: Environment
+export default class serverconfigurations{
 
-
-  constructor({env}: {env: Environment}){
-    this.env= env
+  constructor(){
+    
   }
     initializeDBandBack(){
+      const env = new Environment
       const dbSource= this.database()
       dbSource.initialize().then(()=>{
-          console.log(InitializeConstants.dbConnectionEstablished({db:this.env.db_name, port:this.env.db_port}))
-          this.config_back({portBack: this.env.port})
+          console.log(InitializeConstants.dbConnectionEstablished({db:env.db_name, port:env.db_port}))
+          this.config_back({portBack: env.port})
       })
     }
 
     database(): DataSource{
-        return AppDataSource.create(this.env)
+      const dataSource= new AppDataSource() 
+        return dataSource.create()
     }
 
     config_back({portBack}: {portBack: number}){
-      const back= AppCore.appConfig()
-      back.listen(portBack,() => {
+      const back= new AppCore()
+      back.app.listen(portBack,() => {
         console.log(InitializeConstants.infoBackActive({port:portBack, ms_name:"inventory"}))
       })
     }

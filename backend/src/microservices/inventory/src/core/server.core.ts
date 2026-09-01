@@ -1,9 +1,8 @@
 import "reflect-metadata"
-import { serverconfigurations } from "./config/config"
 import { Environment } from "../infrastructure/config/env/env"
-import { AppCore } from "./app.core"
-import { MyConnectionOptions } from "../features/product/inventory.types"
+import serverconfigurations from "./config/config"
+
 const envVars= new Environment
-const server= new serverconfigurations({env: envVars})
+const server= new serverconfigurations()
 
 server.initializeDBandBack()

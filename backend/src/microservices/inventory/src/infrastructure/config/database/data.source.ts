@@ -1,11 +1,15 @@
 import { DataSource } from "typeorm";
-import { MyConnectionOptions } from "../../../features/product/inventory.types";
 import { Environment } from "../env/env";
 import { Inventory } from "../../../domain/entities/inventory";
 import path from "node:path";
 
-export class AppDataSource{
-  static create(env: Environment): DataSource{
+export default class AppDataSource{
+  constructor(){
+    this.create()
+  }
+
+  create(): DataSource{
+    const env= new Environment
     return new DataSource({
               type: "mssql", //sql server
               host: env.db_host,
