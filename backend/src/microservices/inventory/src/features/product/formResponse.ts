@@ -1,17 +1,17 @@
 import { GenericResponse } from "./GenericResponse"
-
+import { DateHelper } from "../../../../shared/helpers/date.helper"
 export class formResponse{
-  static Response<data>(params:{
+  static create<DTO>(params:{
     success: boolean
     statusCode: number
     message: string[]
-    data: data
-  }):GenericResponse<>{
+    dataDTO: DTO
+  }):GenericResponse<DTO>{
     return {
       success: params.success,
       statusCode: params.statusCode,
-      message: params.success? message[0] : "",
-      data: params.data,
+      message: params.success? params.message[0] : "",
+      data: params.dataDTO,
       errors: params.success? []: params.message, 
       timestamp: DateHelper.now()
     }

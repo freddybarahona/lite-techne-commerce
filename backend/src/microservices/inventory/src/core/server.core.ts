@@ -9,4 +9,4 @@ const app= new AppCore
 const connections: MyConnectionOptions={type: "mssql"}
 const server= new serverconfigurations({env: envVars, typeDB: connections, app: app})
 
-server.initializeDBandBack()
+const Server_activo=server.initializeDBandBack()
