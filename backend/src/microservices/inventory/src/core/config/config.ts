@@ -1,4 +1,3 @@
-import { DataSource } from "typeorm";
 import { Environment } from "../../infrastructure/config/env/env";
 import {InitializeConstants} from "../../../../shared/constants/initialize.constants"
 import AppDataSource from "../../infrastructure/config/database/data.source";
@@ -8,7 +7,7 @@ export default class serverconfigurations{
     env = new Environment
     dbSource= new AppDataSource().dataSource
     back= new AppCore
-    
+
     initializeDBandBack(){
       this.dbSource.initialize().then(()=>{
           console.log(InitializeConstants.dbConnectionEstablished({db:this.env.db_name, port:this.env.db_port}))
