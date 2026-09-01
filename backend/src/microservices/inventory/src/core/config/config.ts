@@ -7,30 +7,27 @@ import { AppDataSource } from "../../infrastructure/config/database/data.source"
 
 export class serverconfigurations{
   private env: Environment
-  private typeDB: MyConnectionOptions
-  private app: AppCore
 
 
-  constructor({env, typeDB, app}: {env: Environment, typeDB:MyConnectionOptions, app:AppCore}){
+  constructor({env}: {env: Environment}){
     this.env= env
-    this.typeDB= typeDB
-    this.app= app
   }
-    async initializeDBandBack(){
-      const dbSource=await this.database()
+    initializeDBandBack(){
+      const dbSource= this.database()
       dbSource.initialize().then(()=>{
-          console.log(InitializeConstants.dbConnectionEstablished(this.env.db_name,this.env.db_port))
-          this.back({portBack: this.env.port})
+          console.log(InitializeConstants.dbConnectionEstablished({db:this.env.db_name, port:this.env.db_port}))
+          this.config_back({portBack: this.env.port})
       })
     }
 
-    async database(): Promise<DataSource>{
-        return await AppDataSource.dataSource(this.typeDB,this.env)
+    database(): DataSource{
+        return AppDataSource.create(this.env)
     }
 
-    back({portBack}: {portBack: number}){
-      this.app.config.listen(portBack,() => {
-        console.log(InitializeConstants.infoBackActive(portBack, "inventory"))
+    config_back({portBack}: {portBack: number}){
+      const back= AppCore.appConfig()
+      back.listen(portBack,() => {
+        console.log(InitializeConstants.infoBackActive({port:portBack, ms_name:"inventory"}))
       })
     }
 }
