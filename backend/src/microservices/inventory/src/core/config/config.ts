@@ -20,7 +20,7 @@ export default class serverconfigurations{
 
     database(): DataSource{
       const dataSource= new AppDataSource() 
-        return dataSource.create()
+        return dataSource.dataSource
     }
 
     config_back({portBack}: {portBack: number}){

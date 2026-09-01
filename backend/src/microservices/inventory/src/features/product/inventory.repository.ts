@@ -11,7 +11,7 @@ export class InventoryRepository implements IInventoryRepository{
     private readonly env: Environment
   ){}
   private async infoRepo(){
-    const dataSource= new AppDataSource().create()
+    const dataSource= new AppDataSource().dataSource
     this.repository= dataSource.getRepository(Inventory)
   }
 
