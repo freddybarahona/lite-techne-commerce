@@ -18,8 +18,8 @@ export class AppDataSource{
               migrations:[
                 path.join(__dirname, "../../migrations/*.js")
               ],
-              synchronize: false,
-              logging: false
+              synchronize: true,
+              logging: true
             })
   }
 }

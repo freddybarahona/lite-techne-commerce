@@ -6,7 +6,6 @@ import { MyConnectionOptions } from "../features/product/inventory.types"
 import { AppDataSource } from "../infrastructure/config/database/data.source"
 const envVars= new Environment
 const app= new AppCore
-const dataSource= new AppDataSource
 const connections: MyConnectionOptions={type: "mssql"}
 const server= new serverconfigurations({env: envVars, typeDB: connections, app: app})
 

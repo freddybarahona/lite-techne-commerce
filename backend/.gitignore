@@ -1,3 +1,4 @@
 **/node_modules/
 **/.env
 **/catalog-ms
+**/package-lock.json

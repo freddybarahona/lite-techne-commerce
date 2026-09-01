@@ -156,7 +156,7 @@ package-lock.json
 ../../auth-ms/node_modules/
 ../../catalog-ms/node_modules/
 **/node_modules/
-# Variables de entorno
+# Variables de entorno 
 **/.env
 
 # Compilados
