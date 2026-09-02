@@ -4,8 +4,8 @@ export class ResponseConstants{
     return `el ${params.entity} conocido como ${params.creation_data} se creo correctamente`
   }
 
-  static dbFull(params:{data: string, cant: number}){
-    return `se encontraron ${params.cant} elementos en ${params.data} data`
+  static dbFull({entity, cant}:{entity: string, cant: number}){
+    return `se encontraron ${cant} elementos en ${entity} data`
   }
 
   static somethingFoundHere(params:{element: string, ind: number, data: string}){
