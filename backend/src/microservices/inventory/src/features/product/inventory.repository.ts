@@ -17,7 +17,7 @@ export class InventoryRepository implements IInventoryRepository{
   }
 
   async ifExistsInventoryById(data: number): Promise<Boolean> {
-    return await this.repository.existsBy({inventory_id: data}) 
+    return await this.repository.existsBy({inventory_id: data})? true : false
   }
 
   async getAllInventory(): Promise<Inventory[]> {
