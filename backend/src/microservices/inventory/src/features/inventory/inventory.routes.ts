@@ -6,24 +6,19 @@ export default class InventoryRoutes{
 
   constructor(private readonly maker: InventoryMakers){}
 
-  crear_inventario(){
+  instanciar(){
     this.router.post("", async(req, res)=>{
       const instance=await this.maker.instance()
       const rsp = await instance.crearInventario(req)
-      console.log("ingreso a la ruta")
       res.status(rsp.statusCode).json(rsp)
     })
 
-
-    return this.router
-  }
-
-  obtener_inventario_general(){
-    this.router.get("", async(req, res)=>{
+    this.router.get("/get", async(req, res)=>{
       const instance=await this.maker.instance()
       const rsp = await instance.obtener_inventario_completo()
-      console.log("ingreso a la ruta")
       res.status(rsp.statusCode).json(rsp)
     })
+
+    return this.router
   }
 }

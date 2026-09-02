@@ -32,9 +32,19 @@ export class InventoryUseCases{
   }
 
 
-  async verificacion_obtencion_inventario_completo(): Promise<GenericResponse<InventoryDTO>>{
+  async verificacion_obtencion_inventario_completo(): Promise<GenericResponse<InventoryDTO[]>>{
     const repo_result= await this.repository.getAllInventory()
+    const response: InventoryDTO[]= []
+    let actual_inventory
+    for (const inventory of repo_result){
+      actual_inventory=InventoryMapper.mapDTO({entity: inventory})
+      response.push(actual_inventory)
+    }
+    if(repo_result.length == 0)
+      return formResponse.create({success: true, statusCode: 200, message: [ResponseConstants.dbEmpty({ entity: "inventario"})], dataDTO: response})
+    
 
-    return formResponse.create({success: true, statusCode: 200, message: [ResponseConstants.dbFull({cant: repo_result.length, entity: "inventario"})]})
+
+    return formResponse.create({success: true, statusCode: 200, message: [ResponseConstants.dbFull({cant: repo_result.length, entity: "inventario"})], dataDTO: response})
   }
 }

@@ -24,8 +24,8 @@ export class ResponseConstants{
     return `el campo ${params.data} tiene un maximo de ${params.max} caracteres`
   }
 
-  static dbEmpty(params:{data: string} ){
-    return `no se encontraron elementos en ${params.data} data`
+  static dbEmpty(params:{entity: string} ){
+    return `no se encontraron elementos en ${params.entity} data`
   }
 
   static nothingLikeThatHere(params:{data: string, ind: number}){
