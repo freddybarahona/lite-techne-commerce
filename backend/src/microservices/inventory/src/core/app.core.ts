@@ -23,7 +23,7 @@ export default class AppCore{
     const makers = new InventoryMakers(env)
     const inventoryRoutes= new InventoryRoutes(makers)
     //informacion de rutas de rutas
-    this.app.use("/inventory", inventoryRoutes.instanciar()) 
+    this.app.use("/inventory", inventoryRoutes.registrar_ruta()) 
     //hay algo aqui que esta mal
     console.log("paso a las rutas")
   }

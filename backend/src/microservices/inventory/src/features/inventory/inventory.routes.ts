@@ -1,24 +1,37 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import { InventoryMakers } from "../../factories/inventory.makers";
 
 export default class InventoryRoutes{
-  router= Router()
+  private readonly router= Router()
 
   constructor(private readonly maker: InventoryMakers){}
 
-  instanciar(){
-    this.router.post("", async(req, res)=>{
-      const instance=await this.maker.instance()
-      const rsp = await instance.crearInventario(req)
-      res.status(rsp.statusCode).json(rsp)
-    })
-
-    this.router.get("/get", async(req, res)=>{
-      const instance=await this.maker.instance()
-      const rsp = await instance.obtener_inventario_completo()
-      res.status(rsp.statusCode).json(rsp)
-    })
+  registrar_ruta(): Router{
+    this.router.post("", this.createInventory.bind(this))
+    this.router.get("", this.getAll.bind(this))
 
     return this.router
   }
+
+  private async createInventory(req: Request, res: Response){
+    const controller=await this.maker.instance()
+    const rsp = await controller.crearInventario(req)
+    res.status(rsp.statusCode).json(rsp)
+  }
+
+  private async getAll(_req: Request, res: Response){
+    const controller=await this.maker.instance()
+      const rsp = await controller.obtener_inventario_completo()
+      res.status(rsp.statusCode).json(rsp)
+  }
 }
+
+/* hay que investigar mas sobre .bind(this) ya que se ve muy util
+Alternativas a .bind(this)
+// Opción 1: Arrow function (captura this del closure)
+this.router.get("", async (req, res) => this.getAll(req, res));
+
+// Opción 2: Arrow function en la propiedad (el arrow function no tiene su propio this)
+private getAll = async (_req: Request, res: Response) => {
+  // this ya está capturado correctamente
+}; */
