@@ -47,10 +47,13 @@ export class InventoryUseCases{
   }
 
   async verificacion_obtener_miembro_inventario({data}:{data: ObtenerMiembroPorIdRequest}): Promise<GenericResponse<InventoryDTO>>{
+    const errors: string[]= await ValidatorHelper.getErrors({request: data})
     const repo_result= await this.repository.getInventoryById({id: data.product_id})
     if(repo_result == null)
-      return formResponse.create({success: true, statusCode: 200, message: [ResponseConstants.nothingLikeThatHere({element:"inventario" , ind:data.product_id })]})
-    const inventoryDTO= InventoryMapper.mapDTO({entity:repo_result})
+      errors.push(ResponseConstants.nothingLikeThatHere({element:"inventario" , ind:data.product_id }))
+    if(errors.length > 0)
+      return formResponse.create({success: true, statusCode: 200, message: errors})
+    const inventoryDTO= InventoryMapper.mapDTO({entity:repo_result!})
     return formResponse.create({success: true, statusCode: 200, message: [ResponseConstants.somethingFoundHere({element:"no nombrado", ind:inventoryDTO.product_id, entity:"inventario"})], dataDTO: inventoryDTO})
 
   }
