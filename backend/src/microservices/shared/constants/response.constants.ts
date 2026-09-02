@@ -8,8 +8,8 @@ export class ResponseConstants{
     return `se encontraron ${cant} elementos en ${entity} data`
   }
 
-  static somethingFoundHere(params:{element: string, ind: number, data: string}){
-    return `se encontro el elemento ${params.element} con indice ${params.ind} en ${params.data} data`
+  static somethingFoundHere(params:{element: string, ind: number, entity: string}){
+    return `se encontro el elemento ${params.element} con indice ${params.ind} en ${params.entity} data`
   }
 
   //bad responses
@@ -28,8 +28,8 @@ export class ResponseConstants{
     return `no se encontraron elementos en ${params.entity} data`
   }
 
-  static nothingLikeThatHere(params:{data: string, ind: number}){
-    return `no se encontro el elemento ${params.ind} en ${params.data} data`
+  static nothingLikeThatHere(params:{element: string, ind: number}){
+    return `no se encontro el elemento ${params.ind} en ${params.element} data`
   }
 
   static modifiedCorrectlyHere(params:{name: string, ind: number ,data:string}){

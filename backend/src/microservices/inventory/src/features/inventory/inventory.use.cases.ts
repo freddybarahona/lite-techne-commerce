@@ -6,6 +6,7 @@ import { CreateInventoryRequest } from "../requests/create.request";
 import { ValidatorHelper } from "../../../../shared/helpers/validator.helper"
 import { ResponseConstants } from "../../../../shared/constants/response.constants";
 import { InventoryMapper } from "./inventory.mappers";
+import { ObtenerMiembroPorIdRequest } from "../requests/obtener.inventario.id.Request";
 
 export class InventoryUseCases{
   constructor(private readonly repository: IInventoryRepository){}
@@ -42,9 +43,15 @@ export class InventoryUseCases{
     }
     if(repo_result.length == 0)
       return formResponse.create({success: true, statusCode: 200, message: [ResponseConstants.dbEmpty({ entity: "inventario"})], dataDTO: response})
-    
-
-
     return formResponse.create({success: true, statusCode: 200, message: [ResponseConstants.dbFull({cant: repo_result.length, entity: "inventario"})], dataDTO: response})
+  }
+
+  async verificacion_obtener_miembro_inventario({data}:{data: ObtenerMiembroPorIdRequest}): Promise<GenericResponse<InventoryDTO>>{
+    const repo_result= await this.repository.getInventoryById({id: data.product_id})
+    if(repo_result == null)
+      return formResponse.create({success: true, statusCode: 200, message: [ResponseConstants.nothingLikeThatHere({element:"inventario" , ind:data.product_id })]})
+    const inventoryDTO= InventoryMapper.mapDTO({entity:repo_result})
+    return formResponse.create({success: true, statusCode: 200, message: [ResponseConstants.somethingFoundHere({element:"no nombrado", ind:inventoryDTO.product_id, entity:"inventario"})], dataDTO: inventoryDTO})
+
   }
 }

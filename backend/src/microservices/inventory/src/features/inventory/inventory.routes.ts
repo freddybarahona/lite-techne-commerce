@@ -9,6 +9,7 @@ export default class InventoryRoutes{
   registrar_ruta(): Router{
     this.router.post("", this.createInventory.bind(this))
     this.router.get("", this.getAll.bind(this))
+    this.router.get(":id", this.getOne.bind(this))
 
     return this.router
   }
@@ -21,8 +22,13 @@ export default class InventoryRoutes{
 
   private async getAll(_req: Request, res: Response){
     const controller=await this.maker.instance()
-      const rsp = await controller.obtener_inventario_completo()
-      res.status(rsp.statusCode).json(rsp)
+    const rsp = await controller.obtener_inventario_completo()
+    res.status(rsp.statusCode).json(rsp)
+  }
+  private async getOne(req: Request, res: Response ){
+    const controller= await this.maker.instance()
+    const rsp = await controller.obtener_miembro_inventario(req)
+    res.status(rsp.statusCode).json(rsp)
   }
 }
 
