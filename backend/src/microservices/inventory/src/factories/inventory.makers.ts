@@ -15,7 +15,7 @@ export class InventoryMakers{
     return new InventoryRepository(inventoryRepo)
   }
 
-  async createInventoryMaker(): Promise<InventoryControllers>{
+  async instance(): Promise<InventoryControllers>{
     console.log("maker")
     const useCase = new InventoryUseCases(await this.refreshingSourceandRepo())
     console.log("maker2")
