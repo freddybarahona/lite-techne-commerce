@@ -1,7 +1,7 @@
 import { Inventory } from "../domain/entities/inventory";
-import { InventoryControllers } from "../features/product/inventory.controller";
-import { InventoryRepository } from "../features/product/inventory.repository";
-import { InventoryUseCases } from "../features/product/inventory.use.cases";
+import { InventoryControllers } from "../features/inventory/inventory.controller";
+import { InventoryRepository } from "../features/inventory/inventory.repository";
+import { InventoryUseCases } from "../features/inventory/inventory.use.cases";
 import AppDataSource from "../infrastructure/config/database/data.source";
 import { Environment } from "../core/config/env/env";
 

@@ -1,6 +1,6 @@
 import express from "express"
 import cors from "cors"
-import InventoryRoutes from "../features/product/inventory.routes"
+import InventoryRoutes from "../features/inventory/inventory.routes"
 import { InventoryMakers } from "../factories/inventory.makers"
 import { Environment } from "./config/env/env"
 
