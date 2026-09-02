@@ -1,6 +1,6 @@
 import { InventoryDTO } from "./DTOs/inventory.DTO";
 import { formResponse } from "../../../../shared/responses/formResponse";
-import { GenericResponse } from "../../../../shared/responses/GenericResponse";
+import GenericResponse from "../../../../shared/responses/GenericResponse";
 import { IInventoryRepository } from "./inventory.repository.interface";
 import { CreateInventoryRequest } from "./requests/create.request";
 import { ValidatorHelper } from "../../../../shared/helpers/validator.helper"

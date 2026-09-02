@@ -2,7 +2,7 @@ import express from "express"
 import cors from "cors"
 import InventoryRoutes from "../features/product/inventory.routes"
 import { InventoryMakers } from "../factories/inventory.makers"
-import { Environment } from "../infrastructure/config/env/env"
+import { Environment } from "./config/env/env"
 
 export default class AppCore{
   app= express()

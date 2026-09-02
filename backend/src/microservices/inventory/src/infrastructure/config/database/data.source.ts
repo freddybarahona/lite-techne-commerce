@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm";
-import { Environment } from "../env/env";
+import { Environment } from "../../../core/config/env/env";
 import { Inventory } from "../../../domain/entities/inventory";
 import path from "node:path";
 

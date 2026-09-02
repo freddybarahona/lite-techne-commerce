@@ -1,4 +1,4 @@
-import { Environment } from "../../infrastructure/config/env/env";
+import { Environment } from "./env/env";
 import {InitializeConstants} from "../../../../shared/constants/initialize.constants"
 import AppDataSource from "../../infrastructure/config/database/data.source";
 import AppCore from "../app.core";

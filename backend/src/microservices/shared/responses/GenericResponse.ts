@@ -1,4 +1,4 @@
-export interface GenericResponse<data>{
+export default interface GenericResponse<data>{
   success: boolean
   statusCode: number
   message: string

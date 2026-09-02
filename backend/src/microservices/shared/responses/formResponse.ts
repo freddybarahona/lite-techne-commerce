@@ -1,4 +1,4 @@
-import { GenericResponse } from "./GenericResponse"
+import GenericResponse from "./GenericResponse"
 import { DateHelper } from "../helpers/date.helper"
 export class formResponse{
   static create<DTO>(params:{

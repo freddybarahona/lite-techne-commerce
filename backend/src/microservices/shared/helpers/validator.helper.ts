@@ -1,4 +1,4 @@
-import {validate} from "../../inventory/node_modules/class-validator"
+import {validate} from "class-validator"
 
 export class ValidatorHelper{
   static async getErrors(params:{request: object}): Promise<string[]>{
