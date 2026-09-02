@@ -10,7 +10,7 @@ export class InventoryMakers{
     private readonly env: Environment,
   ){}
   private async refreshingSourceandRepo(){
-    const source= new AppDataSource().dataSource
+    const source= new AppDataSource().create_get_instance()
     const inventoryRepo= source.getRepository(Inventory)
     return new InventoryRepository(inventoryRepo)
   }

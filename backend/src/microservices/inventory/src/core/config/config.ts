@@ -5,7 +5,7 @@ import AppCore from "../app.core";
 
 export default class serverconfigurations{
     env = new Environment
-    dbSource= new AppDataSource().dataSource
+    dbSource= new AppDataSource().create_get_instance()
     back= new AppCore
 
     initializeDBandBack(){

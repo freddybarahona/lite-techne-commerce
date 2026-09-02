@@ -1,10 +1,10 @@
 import { Inventory } from "../../domain/entities/inventory";
 
 export interface IInventoryRepository{
-  createInventory(data: Inventory): Promise<Inventory>
-  ifExistsInventoryById(data: number): Promise<Boolean>
+  createInventory({entity}:{entity: Inventory}): Promise<Inventory>
+  ifExistsInventoryById({id}:{id: number}): Promise<Boolean>
   getAllInventory(): Promise<Inventory[]>
-  getInventoryById(data: number): Promise<Inventory | null>
-  modInventoryById(data: Inventory): Promise<Inventory>
-  deleteInventory(data: number): Promise<Boolean>
+  getInventoryById({id}:{id: number}): Promise<Inventory | null>
+  modInventoryById({id}:{id: Inventory}): Promise<Inventory>
+  deleteInventory({id}:{id: number}): Promise<Boolean>
 }

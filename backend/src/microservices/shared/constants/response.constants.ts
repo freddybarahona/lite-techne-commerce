@@ -37,7 +37,7 @@ export class ResponseConstants{
   }
 
   static entityAlreadyExists({entity, id}:{entity:string, id: number}){
-    return `el ${entity} de ${id} ya existe`
+    return `el ${entity} de indice ${id} ya existe`
   }
 
   static CATEGORY_ALREADY_EXISTS= "esta categoria ya existe"
