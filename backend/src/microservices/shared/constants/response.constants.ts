@@ -36,7 +36,10 @@ export class ResponseConstants{
     return `se modifico el elemento ${params.name} con ${params.ind} en ${params.data} data`
   }
 
+  static entityAlreadyExists({entity, id}:{entity:string, id: number}){
+    return `el ${entity} de ${id} ya existe`
+  }
+
   static CATEGORY_ALREADY_EXISTS= "esta categoria ya existe"
   static ERASED_ELEMENT= "elemento borrado correctamente" 
-  static PRODUCT_ALREADY_EXISTS= "este producto ya existe"
 }

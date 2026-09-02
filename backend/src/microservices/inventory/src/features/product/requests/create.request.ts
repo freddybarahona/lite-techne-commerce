@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber} from "class-validator";
+import { IsDate, IsNotEmpty, IsNumber} from "class-validator";
 import { ResponseConstants } from "../../../../../shared/constants/response.constants"
 export class CreateInventoryRequest{
 
@@ -18,7 +18,7 @@ export class CreateInventoryRequest{
   @IsNotEmpty({message: ResponseConstants.requiredSpace({campo:"minimum_stock"})})
   minimum_stock!: number
   
-  @IsNumber({},{message: ResponseConstants.onlyTypes({campo: "last_movement", type: "fecha"}) })
+  @IsDate({message: ResponseConstants.onlyTypes({campo: "last_movement", type: "fecha"}) })
   @IsNotEmpty({message: ResponseConstants.requiredSpace({campo:"last_movement"})})
   last_movement!: Date
 }

@@ -12,7 +12,7 @@ export class InventoryMakers{
   private async refreshingSourceandRepo(){
     const source= new AppDataSource().dataSource
     const inventoryRepo= source.getRepository(Inventory)
-    return new InventoryRepository(inventoryRepo, this.env)
+    return new InventoryRepository(inventoryRepo)
   }
 
   async createInventoryMaker(): Promise<InventoryControllers>{

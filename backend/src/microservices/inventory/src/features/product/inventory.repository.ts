@@ -2,35 +2,36 @@ import { Repository } from "typeorm";
 import { Inventory } from "../../domain/entities/inventory";
 import { IInventoryRepository } from "./inventory.repository.interface";
 import AppDataSource from "../../infrastructure/config/database/data.source";
-import { MyConnectionOptions } from "./inventory.types";
-import { Environment } from "../../infrastructure/config/env/env";
 
 export class InventoryRepository implements IInventoryRepository{
   constructor(
     private repository: Repository<Inventory>,
-    private readonly env: Environment
-  ){}
-  private async infoRepo(){
+  ){
     const dataSource= new AppDataSource().dataSource
     this.repository= dataSource.getRepository(Inventory)
   }
 
-  createInventory(data: Inventory): Promise<Inventory> {
-    throw new Error("Method not implemented.");
+  async createInventory(data: Inventory): Promise<Inventory> {
+    const result= this.repository.create(data)
+    return this.repository.save(result)
   }
-  ifExistsInventoryByName(data: string): Promise<Boolean> {
-    throw new Error("Method not implemented.");
+
+  async ifExistsInventoryById(data: number): Promise<Boolean> {
+    return await this.repository.existsBy({inventory_id: data}) 
   }
-  getAllInventory(): Promise<Inventory[]> {
-    throw new Error("Method not implemented.");
+
+  async getAllInventory(): Promise<Inventory[]> {
+    return await this.repository.find()
   }
-  getInventoryById(data: number): Promise<Inventory | null> {
-    throw new Error("Method not implemented.");
+
+  async getInventoryById(data: number): Promise<Inventory | null> {
+    return await this.repository.findOneBy({product_id: data})
   }
-  modInventoryById(data: Inventory): Promise<Inventory> {
-    throw new Error("Method not implemented.");
+  
+  async modInventoryById(data: Inventory): Promise<Inventory> {
+    return await this.repository.save(data)
   }
-  deleteInventory(data: number): Promise<Boolean> {
-    throw new Error("Method not implemented.");
+  async deleteInventory(data: number): Promise<Boolean> {
+    return await this.repository.softDelete(data) ? true : false 
   }
 }
