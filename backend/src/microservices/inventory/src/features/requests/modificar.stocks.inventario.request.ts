@@ -1,5 +1,6 @@
 import { IsDate, IsNotEmpty, IsNumber } from "class-validator";
 import { ResponseConstants } from "../../../../shared/constants/response.constants";
+import { IsNull } from "typeorm";
 
 export class ModificarStocksInventarioRequest{
   @IsNumber({},{message: ResponseConstants.onlyTypes({campo: "product_id", type: "enteros"}) })

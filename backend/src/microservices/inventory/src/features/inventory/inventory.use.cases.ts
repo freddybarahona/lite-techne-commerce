@@ -70,9 +70,14 @@ export class InventoryUseCases{
     if(errors.length > 0){
       return formResponse.create({success: false, statusCode: 400, message: errors})
     }
-    const entity: Inventory= InventoryMapper.mapEnt({request:inventory_data}) 
-    console.log(entity)
-    const dataDTO= InventoryMapper.mapDTO({entity: entity})
+    
+    inventory_data.stock== undefined? exists!.stock : exists!.stock= inventory_data.stock
+    inventory_data.minimum_stock== undefined? exists!.minimum_stock : exists!.minimum_stock= inventory_data.minimum_stock 
+    inventory_data.stock== undefined? exists!.reserved_stock : exists!.reserved_stock= inventory_data.reserved_stock!
+    console.log(exists)
+
+    const repo_result= await this.repository.modInventoryById({entity: exists!})
+    const dataDTO= InventoryMapper.mapDTO({entity: repo_result})
     console.log(dataDTO)
     return formResponse.create({success: false, statusCode: 200, message: errors, dataDTO: dataDTO})
   }

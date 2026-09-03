@@ -28,7 +28,7 @@ export class InventoryControllers{
 
   async obtener_miembro_id_inventario(req: Request){
     const request: ObtenerMiembroPorIdRequest={
-      product_id: Number(req.params.id)
+      product_id: Number(req.params.product_id)
     }
     console.log("request: ", request)
     const validation= Object.assign(new ObtenerMiembroPorIdRequest, request)

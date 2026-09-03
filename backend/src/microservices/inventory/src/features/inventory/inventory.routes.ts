@@ -10,7 +10,7 @@ export default class InventoryRoutes{
     this.router.post("", this.createInventory.bind(this))
     this.router.get("", this.getAll.bind(this))
     this.router.get("/:product_id", this.getOne.bind(this))
-    this.router.put("/:product_id", this.modifyOne.bind(this))
+    this.router.patch("/:product_id", this.modifyOne.bind(this))
     
 
     return this.router
