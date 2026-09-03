@@ -28,8 +28,8 @@ export class ResponseConstants{
     return `no se encontraron elementos en ${params.entity} data`
   }
 
-  static nothingLikeThatHere(params:{element: string, ind: number}){
-    return `no se encontro el elemento ${params.ind} en ${params.element} data`
+  static nothingLikeThatHere(params:{entity: string, ind: number}){
+    return `no se encontro el elemento ${params.ind} en ${params.entity} data`
   }
 
   static modifiedCorrectlyHere(params:{name: string, ind: number ,data:string}){

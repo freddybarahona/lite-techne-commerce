@@ -5,6 +5,6 @@ export interface IInventoryRepository{
   ifExistsInventoryById({id}:{id: number}): Promise<Boolean>
   getAllInventory(): Promise<Inventory[]>
   getInventoryById({id}:{id: number}): Promise<Inventory | null>
-  modInventoryById({id}:{id: Inventory}): Promise<Inventory>
+  modInventoryById({entity}:{entity: Inventory}): Promise<Inventory>
   deleteInventory({id}:{id: number}): Promise<Boolean>
 }

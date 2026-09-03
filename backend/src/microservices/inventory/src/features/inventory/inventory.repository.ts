@@ -25,8 +25,8 @@ export class InventoryRepository implements IInventoryRepository{
     return await this.repository.findOneBy({product_id: id})
   }
   
-  async modInventoryById({id}:{id: Inventory}): Promise<Inventory> {
-    return await this.repository.save(id)
+  async modInventoryById({entity}:{entity: Inventory}): Promise<Inventory>{
+    return await this.repository.save(entity)
   }
   async deleteInventory({id}:{id: number}): Promise<Boolean> {
     return await this.repository.softDelete(id) ? true : false 

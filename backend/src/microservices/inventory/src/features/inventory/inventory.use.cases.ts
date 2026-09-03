@@ -53,7 +53,7 @@ export class InventoryUseCases{
     console.log("errors: ", errors)
     const repo_result= await this.repository.getInventoryById({id: data.product_id})
     if(repo_result == null)
-      errors.push(ResponseConstants.nothingLikeThatHere({element:"inventario" , ind:data.product_id }))
+      errors.push(ResponseConstants.nothingLikeThatHere({entity:"inventario" , ind:data.product_id }))
     if(errors.length > 0)
       return formResponse.create({success: true, statusCode: 200, message: errors})
     const inventoryDTO= InventoryMapper.mapDTO({entity:repo_result!})
@@ -63,6 +63,10 @@ export class InventoryUseCases{
   async verificacion_modificar_stocks_inventario_id({inventory_data}:{inventory_data: ModificarStocksInventarioRequest}): Promise<GenericResponse<InventoryDTO | null>>{
     const errors: string[]= await ValidatorHelper.getErrors({request: inventory_data})
     console.log(errors)
+    const exists= await this.repository.getInventoryById({id: inventory_data.product_id})
+    if(exists == null){
+      errors.push(ResponseConstants.nothingLikeThatHere({entity: "inventario",ind: inventory_data.product_id}))
+    }
     if(errors.length > 0){
       return formResponse.create({success: false, statusCode: 400, message: errors})
     }
@@ -70,7 +74,7 @@ export class InventoryUseCases{
     console.log(entity)
     const dataDTO= InventoryMapper.mapDTO({entity: entity})
     console.log(dataDTO)
-    return formResponse.create({success: false, statusCode: 400, message: errors, dataDTO: dataDTO})
+    return formResponse.create({success: false, statusCode: 200, message: errors, dataDTO: dataDTO})
   }
 
 }
