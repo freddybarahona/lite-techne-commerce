@@ -3,6 +3,7 @@ import { CreateInventoryRequest } from "../requests/create.request"
 import { InventoryUseCases } from "./inventory.use.cases"
 import { ObtenerMiembroPorIdRequest } from "../requests/obtener.inventario.id.Request"
 import { ModificarStocksInventarioRequest } from "../requests/modificar.stocks.inventario.request"
+import { SoftDeleteInventarioRequest } from "../requests/soft.delete.inventario.request"
 
 export class InventoryControllers{
   constructor(private readonly useCase: InventoryUseCases){}
@@ -37,7 +38,6 @@ export class InventoryControllers{
   }
 
   async modificar_stocks_inventario_id({req}:{req: Request}){
-    console.log(req)
     const fecha_actual: Date= new Date()
 
     const request: ModificarStocksInventarioRequest={
@@ -49,6 +49,16 @@ export class InventoryControllers{
     }
     const validation= Object.assign(new ModificarStocksInventarioRequest, request)
     const rsp= await this.useCase.verificacion_modificar_stocks_inventario_id({inventory_data: validation})
+    return rsp
+  }
+
+  async soft_delete_inventario_id(req: Request){
+    const request: SoftDeleteInventarioRequest={
+      product_id: Number(req.params.product_id)
+    }
+
+    const validation= Object.assign(new SoftDeleteInventarioRequest, request)
+    const rsp= this.useCase.verificacion_soft_Delete_inventario_id({request_data: validation})
     return rsp
   }
 

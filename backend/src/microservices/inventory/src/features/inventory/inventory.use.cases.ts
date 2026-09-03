@@ -9,6 +9,7 @@ import { InventoryMapper } from "./inventory.mappers";
 import { ObtenerMiembroPorIdRequest } from "../requests/obtener.inventario.id.Request";
 import { ModificarStocksInventarioRequest } from "../requests/modificar.stocks.inventario.request";
 import { Inventory } from "../../domain/entities/inventory";
+import { SoftDeleteInventarioRequest } from "../requests/soft.delete.inventario.request";
 
 export class InventoryUseCases{
   constructor(private readonly repository: IInventoryRepository){}
@@ -82,4 +83,20 @@ export class InventoryUseCases{
     return formResponse.create({success: false, statusCode: 200, message: errors, dataDTO: dataDTO})
   }
 
+  async verificacion_soft_Delete_inventario_id({request_data}:{request_data: SoftDeleteInventarioRequest}): Promise<GenericResponse<InventoryDTO | null>>{
+    const errors: string[]= await ValidatorHelper.getErrors({request: request_data})
+    console.log(errors)
+    const exists= await this.repository.getInventoryById({id: request_data.product_id})
+
+    if(exists == null)
+      errors.push(ResponseConstants.nothingLikeThatHere({entity: "inventario",ind: request_data.product_id}))
+    
+    if(errors.length > 0)
+      return formResponse.create({success: false, statusCode: 400, message: errors})
+    
+    const repo_result= await this.repository.deleteInventory({id: request_data.product_id})
+    const inventoryDTO= InventoryMapper.mapDTO({entity: exists!})
+    return formResponse.create({success: repo_result, statusCode: 200, message: [ResponseConstants.ERASED_ELEMENT], dataDTO: inventoryDTO})
+    
+  }
 }

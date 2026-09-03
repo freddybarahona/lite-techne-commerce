@@ -11,7 +11,7 @@ export default class InventoryRoutes{
     this.router.get("", this.getAll.bind(this))
     this.router.get("/:product_id", this.getOne.bind(this))
     this.router.patch("/:product_id", this.modifyOne.bind(this))
-    
+    this.router.delete("/:product_id", this.deleteOne.bind(this))
 
     return this.router
   }
@@ -36,6 +36,12 @@ export default class InventoryRoutes{
   private async modifyOne(req: Request, res: Response){
     const controller= await this.maker.instance()
     const rsp= await controller.modificar_stocks_inventario_id({req:req})
+    res.status(rsp.statusCode).json(rsp)
+  }
+
+  private async deleteOne(req: Request, res: Response){
+    const controller= await this.maker.instance()
+    const rsp= await controller.soft_delete_inventario_id(req)
     res.status(rsp.statusCode).json(rsp)
   }
 
