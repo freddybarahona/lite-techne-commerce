@@ -73,7 +73,7 @@ export class InventoryUseCases{
     
     inventory_data.stock== undefined? exists!.stock : exists!.stock= inventory_data.stock
     inventory_data.minimum_stock== undefined? exists!.minimum_stock : exists!.minimum_stock= inventory_data.minimum_stock 
-    inventory_data.stock== undefined? exists!.reserved_stock : exists!.reserved_stock= inventory_data.reserved_stock!
+    inventory_data.reserved_stock== undefined? exists!.reserved_stock : exists!.reserved_stock= inventory_data.reserved_stock!
     console.log(exists)
 
     const repo_result= await this.repository.modInventoryById({entity: exists!})

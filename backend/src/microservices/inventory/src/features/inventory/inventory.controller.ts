@@ -42,13 +42,14 @@ export class InventoryControllers{
 
     const request: ModificarStocksInventarioRequest={
       product_id: Number(req.params.product_id),
-      stock: Number(req.body.stock),
-      reserved_stock: Number(req.body.reserved),
-      minimum_stock: Number(req.body.minimum),
+      stock: req.body.stock != null? Number(req.body.stock): undefined,
+      reserved_stock: req.body.reserved != null? Number(req.body.reserved): undefined,
+      minimum_stock: req.body.minimum != null? Number(req.body.minimum) : undefined,
       last_movement: fecha_actual
     }
     const validation= Object.assign(new ModificarStocksInventarioRequest, request)
     const rsp= await this.useCase.verificacion_modificar_stocks_inventario_id({inventory_data: validation})
+    return rsp
   }
 
 }

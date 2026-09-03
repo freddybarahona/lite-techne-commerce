@@ -36,6 +36,7 @@ export default class InventoryRoutes{
   private async modifyOne(req: Request, res: Response){
     const controller= await this.maker.instance()
     const rsp= await controller.modificar_stocks_inventario_id({req:req})
+    res.status(rsp.statusCode).json(rsp)
   }
 
 }
