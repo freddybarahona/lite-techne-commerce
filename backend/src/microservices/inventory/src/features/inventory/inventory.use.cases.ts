@@ -8,7 +8,6 @@ import { ResponseConstants } from "../../../../shared/constants/response.constan
 import { InventoryMapper } from "./inventory.mappers";
 import { ObtenerMiembroPorIdRequest } from "../requests/obtener.inventario.id.Request";
 import { ModificarStocksInventarioRequest } from "../requests/modificar.stocks.inventario.request";
-import { Inventory } from "../../domain/entities/inventory";
 import { SoftDeleteInventarioRequest } from "../requests/soft.delete.inventario.request";
 
 export class InventoryUseCases{
