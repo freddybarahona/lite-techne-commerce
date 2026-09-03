@@ -2,6 +2,7 @@ import { Request } from "express"
 import { CreateInventoryRequest } from "../requests/create.request"
 import { InventoryUseCases } from "./inventory.use.cases"
 import { ObtenerMiembroPorIdRequest } from "../requests/obtener.inventario.id.Request"
+import { ModificarStocksInventarioRequest } from "../requests/modificar.stocks.inventario.request"
 
 export class InventoryControllers{
   constructor(private readonly useCase: InventoryUseCases){}
@@ -14,20 +15,40 @@ export class InventoryControllers{
       reserved_stock: req.body.reserved,
       minimum_stock: req.body.minimum,
       last_movement: fecha_actual
-    } 
+    }
+    console.log("request: ", request)
     const validation= Object.assign(new CreateInventoryRequest, request)
-    return await this.useCase.verificacionCreacionInventario({request: request})
+    console.log("post-validation: ", validation)
+    return await this.useCase.verificacionCreacionInventario({request_validado: validation})
   }
 
   async obtener_inventario_completo(){
     return await this.useCase.verificacion_obtencion_inventario_completo()
   }
 
-  async obtener_miembro_inventario(req: Request){
+  async obtener_miembro_id_inventario(req: Request){
     const request: ObtenerMiembroPorIdRequest={
-      product_id: req.body.product_id
+      product_id: Number(req.params.id)
     }
+    console.log("request: ", request)
     const validation= Object.assign(new ObtenerMiembroPorIdRequest, request)
-    return await this.useCase.verificacion_obtener_miembro_inventario({data: validation})
+    console.log("validation: ", validation)
+    return await this.useCase.verificacion_obtener_miembro_id_inventario({data: validation})
   }
+
+  async modificar_stocks_inventario_id({req}:{req: Request}){
+    console.log(req)
+    const fecha_actual: Date= new Date()
+
+    const request: ModificarStocksInventarioRequest={
+      product_id: Number(req.params.product_id),
+      stock: Number(req.body.stock),
+      reserved_stock: Number(req.body.reserved),
+      minimum_stock: Number(req.body.minimum),
+      last_movement: fecha_actual
+    }
+    const validation= Object.assign(new ModificarStocksInventarioRequest, request)
+    const rsp= await this.useCase.verificacion_modificar_stocks_inventario_id({inventory_data: validation})
+  }
+
 }

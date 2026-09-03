@@ -7,29 +7,31 @@ import { ValidatorHelper } from "../../../../shared/helpers/validator.helper"
 import { ResponseConstants } from "../../../../shared/constants/response.constants";
 import { InventoryMapper } from "./inventory.mappers";
 import { ObtenerMiembroPorIdRequest } from "../requests/obtener.inventario.id.Request";
+import { ModificarStocksInventarioRequest } from "../requests/modificar.stocks.inventario.request";
+import { Inventory } from "../../domain/entities/inventory";
 
 export class InventoryUseCases{
   constructor(private readonly repository: IInventoryRepository){}
 
-  async verificacionCreacionInventario({request}:{request: CreateInventoryRequest}): Promise<GenericResponse<InventoryDTO | null>>{
-    const errors: string[]= await ValidatorHelper.getErrors({request: request})
-
-    const exists= await this.repository.ifExistsInventoryById({id:request.product_id})
+  async verificacionCreacionInventario({request_validado}:{request_validado: CreateInventoryRequest}): Promise<GenericResponse<InventoryDTO | null>>{
+    const errors: string[]= await ValidatorHelper.getErrors({request: request_validado})
+    console.log("errores: ", errors)
+    const exists= await this.repository.ifExistsInventoryById({id:request_validado.product_id})
     console.log(exists)
     if(exists == true){
-      errors.push(ResponseConstants.entityAlreadyExists({entity:"inventario" , id:request.product_id }))
+      errors.push(ResponseConstants.entityAlreadyExists({entity:"inventario" , id:request_validado.product_id }))
     }
 
     if(errors.length > 0){
       return formResponse.create({success: false, statusCode: 400, message: errors})
     }
-    const actual_inventory= InventoryMapper.mapEnt({request: request})
+    const actual_inventory= InventoryMapper.mapEnt({request: request_validado})
 
     const repo_result= await this.repository.createInventory({entity:actual_inventory})
 
     const DTO= InventoryMapper.mapDTO({entity: repo_result})
 
-    return formResponse.create({ success: true, statusCode: 201, message: [ResponseConstants.entityCreatedCorrectly({entity:"inventario", creation_data: request.product_id })], dataDTO: DTO })
+    return formResponse.create({ success: true, statusCode: 201, message: [ResponseConstants.entityCreatedCorrectly({entity:"inventario", creation_data: request_validado.product_id })], dataDTO: DTO })
   }
 
 
@@ -46,8 +48,9 @@ export class InventoryUseCases{
     return formResponse.create({success: true, statusCode: 200, message: [ResponseConstants.dbFull({cant: repo_result.length, entity: "inventario"})], dataDTO: response})
   }
 
-  async verificacion_obtener_miembro_inventario({data}:{data: ObtenerMiembroPorIdRequest}): Promise<GenericResponse<InventoryDTO>>{
+  async verificacion_obtener_miembro_id_inventario({data}:{data: ObtenerMiembroPorIdRequest}): Promise<GenericResponse<InventoryDTO>>{
     const errors: string[]= await ValidatorHelper.getErrors({request: data})
+    console.log("errors: ", errors)
     const repo_result= await this.repository.getInventoryById({id: data.product_id})
     if(repo_result == null)
       errors.push(ResponseConstants.nothingLikeThatHere({element:"inventario" , ind:data.product_id }))
@@ -55,6 +58,19 @@ export class InventoryUseCases{
       return formResponse.create({success: true, statusCode: 200, message: errors})
     const inventoryDTO= InventoryMapper.mapDTO({entity:repo_result!})
     return formResponse.create({success: true, statusCode: 200, message: [ResponseConstants.somethingFoundHere({element:"no nombrado", ind:inventoryDTO.product_id, entity:"inventario"})], dataDTO: inventoryDTO})
-
   }
+
+  async verificacion_modificar_stocks_inventario_id({inventory_data}:{inventory_data: ModificarStocksInventarioRequest}): Promise<GenericResponse<InventoryDTO | null>>{
+    const errors: string[]= await ValidatorHelper.getErrors({request: inventory_data})
+    console.log(errors)
+    if(errors.length > 0){
+      return formResponse.create({success: false, statusCode: 400, message: errors})
+    }
+    const entity: Inventory= InventoryMapper.mapEnt({request:inventory_data}) 
+    console.log(entity)
+    const dataDTO= InventoryMapper.mapDTO({entity: entity})
+    console.log(dataDTO)
+    return formResponse.create({success: false, statusCode: 400, message: errors, dataDTO: dataDTO})
+  }
+
 }

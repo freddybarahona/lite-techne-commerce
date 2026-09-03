@@ -9,7 +9,9 @@ export default class InventoryRoutes{
   registrar_ruta(): Router{
     this.router.post("", this.createInventory.bind(this))
     this.router.get("", this.getAll.bind(this))
-    this.router.get(":id", this.getOne.bind(this))
+    this.router.get("/:product_id", this.getOne.bind(this))
+    this.router.put("/:product_id", this.modifyOne.bind(this))
+    
 
     return this.router
   }
@@ -27,9 +29,15 @@ export default class InventoryRoutes{
   }
   private async getOne(req: Request, res: Response ){
     const controller= await this.maker.instance()
-    const rsp = await controller.obtener_miembro_inventario(req)
+    const rsp = await controller.obtener_miembro_id_inventario(req)
     res.status(rsp.statusCode).json(rsp)
   }
+
+  private async modifyOne(req: Request, res: Response){
+    const controller= await this.maker.instance()
+    const rsp= await controller.modificar_stocks_inventario_id({req:req})
+  }
+
 }
 
 /* hay que investigar mas sobre .bind(this) ya que se ve muy util
