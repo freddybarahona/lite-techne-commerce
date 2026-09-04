@@ -1,4 +1,4 @@
 
-export class InventoryClient{
-  
+export class CatalogClient{
+
 }

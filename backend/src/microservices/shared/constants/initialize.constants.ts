@@ -9,7 +9,7 @@ export class InitializeConstants{
   }
 
   //bad responses
-  static dbConnectionFailed(params:{db:string, port: number}){
-    return `Conexion fallida con ${params.db} en el puerto http://localhost:${params.port}`
+  static dbConnectionFailed(params:{db:string, port: number, error_code: string}){
+    return `Conexion fallida con ${params.db} en el puerto http://localhost:${params.port}, codigo de error: ${params.error_code}`
   }
 }

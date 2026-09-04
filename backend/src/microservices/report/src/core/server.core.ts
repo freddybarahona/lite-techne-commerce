@@ -1,5 +1,5 @@
 import "reflect-metadata"
-import Serverconfigurations from "./config/core.config"
+import CoreConfigurations from "./config/core.config"
 
 
-new Serverconfigurations()
+new CoreConfigurations()
