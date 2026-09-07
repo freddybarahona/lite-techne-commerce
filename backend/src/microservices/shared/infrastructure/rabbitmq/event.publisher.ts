@@ -8,7 +8,7 @@ export class EventPublisher {
 
     channel.publish("litetechne", routingKey, Buffer.from(JSON.stringify({
       event: routingKey,
-      timestamp: new Date().toISOString(),
+      timestamp: DateHelper.now(),
       data
     })))
   }
