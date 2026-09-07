@@ -6,4 +6,8 @@ export type HandlerParams = (req: Request, res: Response) => Promise<void>
 
 export type MovementType = "IN" | "OUT"
 
-export type publishtype = "inventory.created" | "inventory.updated" | "inventory.deleted"
+type publishers = "inventory" | "catalog.product"
+
+type actions = "created" | "updated" | "deleted"
+
+export type publishType = `${publishers}.${actions}` 

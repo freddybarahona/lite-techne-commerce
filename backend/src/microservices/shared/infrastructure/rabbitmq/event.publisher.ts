@@ -1,9 +1,9 @@
 import { DateHelper } from "../../helpers/date.helper";
-import { publishtype } from "../../types/shared.types";
+import { publishType } from "../../types/shared.types";
 import { RabbitMQConnection } from "./rabbitmq.connection";
 
 export class EventPublisher {
-  static async publish({routingKey, data}:{routingKey: publishtype, data: object}){
+  static async publish({routingKey, data}:{routingKey: publishType, data: object}){
     const channel =await  RabbitMQConnection.getChannel()
     
     await channel.assertExchange("litetechne", "topic", {durable: true})
