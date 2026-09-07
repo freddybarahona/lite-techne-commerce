@@ -9,6 +9,7 @@ import { ICategoryRepository } from "../category/category.repository.interface";
 import { ProductDTO } from "../DTOs/product.DTO";
 import { Product } from "../../domain/entities/product";
 import { Category } from "../../domain/entities/category";
+import { EventPublisher } from "../../../../shared/infrastructure/rabbitmq/event.publisher"
 
 export class ProductUseCases{
   private mapper= new ProductMapper()
@@ -37,6 +38,7 @@ export class ProductUseCases{
     entity.category= {category_id: request_validado.category_id} as Category
 
     const created= await this.repository.createProduct({entity})
+    await EventPublisher.publish({routingKey: "catalog.product.created", data: created})
     const dto= this.mapper.EntityToDTO({entity: created})
     return formResponse.create({success:true, statusCode:201, message:[ResponseConstants.entityCreatedCorrectly({entity:"producto", creation_data: created.name})], dataDTO: dto})
   }
@@ -82,6 +84,7 @@ export class ProductUseCases{
     entity.category= {category_id: category_id} as Category
 
     const modified= await this.repository.modProductById({entity})
+    await EventPublisher.publish({routingKey: "catalog.product.updated", data: modified})
     const dto= this.mapper.EntityToDTO({entity: modified})
     return formResponse.create({success:true, statusCode:200, message:[ResponseConstants.modifiedCorrectlyHere({name: modified.name, ind: modified.product_id, data:"Products"})], dataDTO: dto})
   }
@@ -92,7 +95,9 @@ export class ProductUseCases{
       return formResponse.create({success:false, statusCode:404, message:[ResponseConstants.nothingLikeThatHere({entity:"Producto", ind: product_id})]})
     }
 
-    await this.repository.deleteProduct({id: product_id})
+    const repo_result= await this.repository.deleteProduct({id: product_id})
+    await EventPublisher.publish({routingKey: "catalog.product.deleted", data: repo_result})
+    
     return formResponse.create({success:true, statusCode:200, message:[ResponseConstants.ERASED_ELEMENT]})
   }
 }
