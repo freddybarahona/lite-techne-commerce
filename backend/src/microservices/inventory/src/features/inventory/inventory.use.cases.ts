@@ -9,6 +9,7 @@ import { InventoryMapper } from "./inventory.mappers";
 import { ObtenerMiembroPorIdRequest } from "../requests/obtener.inventario.id.Request";
 import { ModificarStocksInventarioRequest } from "../requests/modificar.stocks.inventario.request";
 import { SoftDeleteInventarioRequest } from "../requests/soft.delete.inventario.request";
+import { EventPublisher } from "../../../../shared/infrastructure/rabbitmq/event.publisher"
 
 export class InventoryUseCases{
   constructor(private readonly repository: IInventoryRepository){}
@@ -28,6 +29,7 @@ export class InventoryUseCases{
     const actual_inventory= InventoryMapper.mapEnt({request: request_validado})
 
     const repo_result= await this.repository.createInventory({entity:actual_inventory})
+    await EventPublisher.publish({routingKey: "inventory.created", data: repo_result})
 
     const DTO= InventoryMapper.mapDTO({entity: repo_result})
 
@@ -77,9 +79,12 @@ export class InventoryUseCases{
     console.log(exists)
 
     const repo_result= await this.repository.modInventoryById({entity: exists!})
+
+    await EventPublisher.publish({routingKey: "inventory.updated", data: repo_result})
+
     const dataDTO= InventoryMapper.mapDTO({entity: repo_result})
     console.log(dataDTO)
-    return formResponse.create({success: false, statusCode: 200, message: errors, dataDTO: dataDTO})
+    return formResponse.create({success: true, statusCode: 200, message: [ResponseConstants.modifiedCorrectlyHere({name:"inventario",data:"inventory",ind:repo_result.product_id})], dataDTO: dataDTO})
   }
 
   async verificacion_soft_Delete_inventario_id({request_data}:{request_data: SoftDeleteInventarioRequest}): Promise<GenericResponse<InventoryDTO | null>>{
@@ -94,6 +99,9 @@ export class InventoryUseCases{
       return formResponse.create({success: false, statusCode: 400, message: errors})
     
     const repo_result= await this.repository.deleteInventory({id: request_data.product_id})
+
+    await EventPublisher.publish({routingKey: "inventory.deleted", data: {product_id: request_data}})
+
     const inventoryDTO= InventoryMapper.mapDTO({entity: exists!})
     return formResponse.create({success: repo_result, statusCode: 200, message: [ResponseConstants.ERASED_ELEMENT], dataDTO: inventoryDTO})
   }
