@@ -1,19 +1,19 @@
-import { Column, Entity, PrimaryColumn, UpdateDateColumn } from "typeorm"
-
+import { Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { MovementType } from "../../../../shared/types/shared.types"
 @Entity("InventoryHistories")
 export class InventoryHistory{
-  @PrimaryColumn({primaryKeyConstraintName: "INVENTORYHISTORY_id"})
+  @PrimaryGeneratedColumn({primaryKeyConstraintName: "INVENTORYHISTORY_id"})
   id!: number
 
   @Column({nullable: false})
   productId!: number
 
-  @Column({nullable: false})
-  movementType!: string
+  @Column({nullable: false, type: "varchar", length: 3})
+  movementType!: MovementType
 
   @Column({nullable: false})
   quantity!: number
 
-  @UpdateDateColumn()
+  @CreateDateColumn()
   movementDate!: Date
 }

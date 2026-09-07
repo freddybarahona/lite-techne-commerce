@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm"
 import { Environment } from "../../core/config/env/env"
+import { InventoryHistory } from "../../domain/entities/inventory.history"
 import path from "node:path"
 
 
@@ -17,7 +18,7 @@ export default class AppDataSource{
         password: this.env.db_password,
         database: this.env.db_name,
         options: { encrypt: true, trustServerCertificate: true},
-        entities: [],
+        entities: [InventoryHistory],
         migrations:[
           path.join(__dirname, "../../migrations/*.js")
         ],

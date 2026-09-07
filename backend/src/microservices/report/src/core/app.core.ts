@@ -1,6 +1,8 @@
 import express from "express"
 import { Environment } from "./config/env/env"
 import cors from "cors"
+import InventoryHistoryRoutes from "../features/inventory.history/inventory.history.routes"
+import { InventoryHistoryMakers } from "../factories/inventory.history.makers"
 
 export default class AppCore{
   app= express()
@@ -13,6 +15,8 @@ export default class AppCore{
 
     this.app.use(cors({origin: "*"}))
     const env= new Environment()
-    //this.app.use("/report", )
+    const makers= new InventoryHistoryMakers(env)
+    const inventoryHistoryRoutes= new InventoryHistoryRoutes(makers)
+    this.app.use("/report/inventory-history", inventoryHistoryRoutes.registrar_ruta())
   }
 }
