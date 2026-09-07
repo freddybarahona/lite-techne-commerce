@@ -8,7 +8,7 @@ export default class AppDataSource{
   env= new Environment()
   private static instance: DataSource | null = null
 
-  create_get_instance(): DataSource{
+  validate_instance(): DataSource{
     if(!AppDataSource.instance){
       AppDataSource.instance= new DataSource({
         type: "mssql", //sql server

@@ -6,10 +6,14 @@ import { SeedCategories } from "../../infrastructure/seed/seed.categories";
 
 export default class serverconfigurations{
     env = new Environment
-    dbSource= new AppDataSource().create_get_instance()
+    dbSource= new AppDataSource().validate_instance()
     back= new AppCore
 
-    initializeDBandBack(){
+    constructor(){
+      this.initializeDBandBack()
+    }
+
+    private initializeDBandBack(){
       this.dbSource.initialize().then(()=>{
           console.log(InitializeConstants.dbConnectionEstablished({db:this.env.db_name, port:this.env.db_port}))
           new SeedCategories(this.env).start()
@@ -19,7 +23,7 @@ export default class serverconfigurations{
       })
     }
 
-    config_back({portBack}: {portBack: number}){
+    private config_back({portBack}: {portBack: number}){
       this.back.app.listen(portBack,() => {
         console.log(InitializeConstants.infoBackActive({port:portBack, ms_name:"catalog"}))
       })

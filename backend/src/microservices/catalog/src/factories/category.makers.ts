@@ -10,7 +10,7 @@ export class CategoryMakers{
     private readonly env: Environment,
   ){}
   async instance(): Promise<CategoryControllers>{
-    const source= new AppDataSource().create_get_instance()
+    const source= new AppDataSource().validate_instance()
     const categoryRepo= source.getRepository(Category)
 
     const useCase = new CategoryUseCases(new CategoryRepository(categoryRepo))

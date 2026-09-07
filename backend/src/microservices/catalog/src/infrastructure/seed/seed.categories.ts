@@ -4,7 +4,7 @@ import AppDataSource from "../config/database/data.source";
 import { Environment } from "../../core/config/env/env";
 
 export class SeedCategories{
-  private source= new AppDataSource().create_get_instance()
+  private source= new AppDataSource().validate_instance()
 
   constructor(private readonly env: Environment){}
 

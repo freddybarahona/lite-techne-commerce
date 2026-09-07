@@ -12,7 +12,7 @@ export class ProductMakers{
     private readonly env: Environment,
   ){}
   async instance(): Promise<ProductControllers>{
-    const source= new AppDataSource().create_get_instance()
+    const source= new AppDataSource().validate_instance()
     const productRepo= source.getRepository(Product)
     const categoryRepo= source.getRepository(Category)
 
