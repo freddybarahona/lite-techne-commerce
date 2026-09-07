@@ -1,7 +1,7 @@
 import { RabbitMQConnection } from "./rabbitmq.connection";
 
 export class EventPublisher {
-  static async publish(routingKey: string, data: object){
+  static async publish({routingKey, data}:{routingKey: publishType, data: object}){
     const channel =await  RabbitMQConnection.getChannel()
     
     await channel.assertExchange("litetechne", "topic", {durable: true})
