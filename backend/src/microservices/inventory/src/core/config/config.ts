@@ -12,6 +12,8 @@ export default class serverconfigurations{
       this.dbSource.initialize().then(()=>{
           console.log(InitializeConstants.dbConnectionEstablished({db:this.env.db_name, port:this.env.db_port}))
           this.config_back({portBack: this.env.port})
+      }).catch((error) => {
+        console.error(InitializeConstants.dbConnectionFailed({db: this.env.db_name, port: this.env.db_port, error_code: error.code}))
       })
     }
 
