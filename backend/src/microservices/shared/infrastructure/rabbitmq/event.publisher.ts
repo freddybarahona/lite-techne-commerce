@@ -1,3 +1,4 @@
+import { DateHelper } from "../../helpers/date.helper";
 import { publishtype } from "../../types/shared.types";
 import { RabbitMQConnection } from "./rabbitmq.connection";
 
@@ -9,7 +10,7 @@ export class EventPublisher {
 
     channel.publish("litetechne", routingKey, Buffer.from(JSON.stringify({
       event: routingKey,
-      timestamp: new Date().toISOString(),
+      timestamp: DateHelper.now(),
       data
     })))
   }
