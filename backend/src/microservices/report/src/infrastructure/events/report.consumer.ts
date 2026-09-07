@@ -11,6 +11,6 @@ export class ReportConsumer{
     await EventConsumer.subscribe({ 
       queue: "report.catalog", 
       routing_key: "catalog.#", 
-      handler: (routingKey, data)=> clients.inventory.handleEvent(routingKey, data)})
+      handler: (routingKey, data)=> clients.catalog.handleEvent(routingKey, data)})
   }
 }
