@@ -2,7 +2,7 @@
 export class CatalogClient{
   private products = new Map<number, {
     product_id: number
-    name: number
+    name: string
     price: number
     category: string
   }>()
@@ -13,7 +13,7 @@ export class CatalogClient{
       case "catalog.product.updated": 
         this.products.set(Number(data.product_id), {
           product_id: Number(data.product_id),
-          name: Number(data.stock),
+          name: String(data.name),
           price: Number(data.price),
           category: String(data.category)
         })

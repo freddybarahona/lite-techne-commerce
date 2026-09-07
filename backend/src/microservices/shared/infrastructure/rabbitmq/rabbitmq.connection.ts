@@ -1,5 +1,4 @@
 import amqp from "amqplib"
-import dotenv from "dotenv"
 import { env } from "../../env/env"
 
 export class RabbitMQConnection{
