@@ -100,7 +100,7 @@ export class InventoryUseCases{
     
     const repo_result= await this.repository.deleteInventory({id: request_data.product_id})
 
-    await EventPublisher.publish({routingKey: "inventory.deleted", data: {product_id: request_data}})
+    await EventPublisher.publish({routingKey: "inventory.deleted", data: {product_id: request_data.product_id}})
 
     const inventoryDTO= InventoryMapper.mapDTO({entity: exists!})
     return formResponse.create({success: repo_result, statusCode: 200, message: [ResponseConstants.ERASED_ELEMENT], dataDTO: inventoryDTO})
