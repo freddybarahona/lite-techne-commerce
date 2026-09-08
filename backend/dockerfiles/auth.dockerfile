@@ -40,3 +40,10 @@ CMD ["node", "dist/server.js"]
 #Esto replica la estructura backend/src/microservices/ que tienes local, así las rutas relativas siguen funcionando igual.
 
 #por cierto nodemon es para typescript, tsc es para javascript no lo confundas
+
+#docker build -f <ruta|nombre del archivo> -t <nombre de la imagen a crear> 
+
+#ejemplos
+#docker build -t litetechne-auth .   si el archivo es generico (.dockerfile)    
+#docker build -f backend/dockerfiles/auth.dockerfile -t litetechne-auth .
+#docker build -f auth.dockerfile -t litetechne-auth .
