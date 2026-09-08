@@ -31,7 +31,7 @@ WORKDIR /app/microservices/auth
 
 EXPOSE 3000
 
-CMD ["node", "start"]
+CMD ["npm", "start"]
 
 #/app/
 #  microservices/
@@ -47,3 +47,7 @@ CMD ["node", "start"]
 #docker build -t litetechne-auth .   si el archivo es generico (.dockerfile)    
 #docker build -f backend/dockerfiles/auth.dockerfile -t litetechne-auth .
 #docker build -f auth.dockerfile -t litetechne-auth .
+
+
+#docker build -f backend/dockerfiles/auth.dockerfile -t litetechne-auth .
+#docker run -d --name litetechne-auth -p 3000:3000 litetechne-auth
