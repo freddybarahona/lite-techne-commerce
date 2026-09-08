@@ -31,7 +31,7 @@ WORKDIR /app/microservices/auth
 
 EXPOSE 3000
 
-CMD ["node", "dist/server.js"]
+CMD ["node", "start"]
 
 #/app/
 #  microservices/
