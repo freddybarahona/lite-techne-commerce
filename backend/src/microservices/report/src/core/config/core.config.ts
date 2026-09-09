@@ -5,6 +5,7 @@ import AppDataSource from "../../infrastructure/database/data.source";
 import { InventoryClient } from "../../domain/clients/inventory.client";
 import { CatalogClient } from "../../domain/clients/catalog.client";
 import { ReportConsumer } from "../../infrastructure/events/report.consumer";
+import { RabbitMQConnection } from "../../../../shared/infrastructure/rabbitmq/rabbitmq.connection";
 
 export default class CoreConfigurations{
   private env= new Environment()
@@ -20,6 +21,9 @@ export default class CoreConfigurations{
       console.log(InitializeConstants.dbConnectionEstablished({db:this.env.db_name, port:this.env.db_port}))
       this.consumers_clients()
       this.config_back({portBack: this.env.port})
+      RabbitMQConnection.getChannel().catch((error) => {
+        console.log(InitializeConstants.toolConnectionFailed({tool: "rabbitmq", error_code: error.code}))
+      })
     }).catch((error)=>{
       console.log(InitializeConstants.dbConnectionFailed({db: this.env.db_name, port: this.env.db_port, error_code: error.code}))
     })
