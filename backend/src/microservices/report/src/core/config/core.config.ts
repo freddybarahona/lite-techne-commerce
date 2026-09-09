@@ -34,6 +34,8 @@ export default class CoreConfigurations{
 
   private async consumers_clients(){
     const clients= {inventory: new InventoryClient(), catalog: new CatalogClient()}
-    await ReportConsumer.start(clients)
+    await ReportConsumer.start(clients).catch((error)=> {
+      console.log(InitializeConstants.toolConnectionFailed({tool:"rabbitmq", error_code: error.code}))
+    })
   }
 }
