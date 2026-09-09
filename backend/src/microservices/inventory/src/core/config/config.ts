@@ -2,6 +2,7 @@ import { Environment } from "./env/env";
 import {InitializeConstants} from "../../../../shared/constants/initialize.constants"
 import AppDataSource from "../../infrastructure/config/database/data.source";
 import AppCore from "../app.core";
+import { RabbitMQConnection } from "../../../../shared/infrastructure/rabbitmq/rabbitmq.connection";
 
 export default class serverconfigurations{
     env = new Environment
@@ -12,6 +13,9 @@ export default class serverconfigurations{
       this.dbSource.initialize().then(()=>{
           console.log(InitializeConstants.dbConnectionEstablished({db:this.env.db_name, port:this.env.db_port}))
           this.config_back({portBack: this.env.port})
+          RabbitMQConnection.getChannel().catch((error)=>{
+            console.log(InitializeConstants.toolConnectionFailed({tool:"rabbitmq", error_code: error.code}))
+          })
       }).catch((error) => {
         console.error(InitializeConstants.dbConnectionFailed({db: this.env.db_name, port: this.env.db_port, error_code: error.code}))
       })
