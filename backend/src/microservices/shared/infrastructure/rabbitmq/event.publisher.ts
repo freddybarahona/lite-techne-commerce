@@ -1,4 +1,6 @@
-import { RabbitMQConnection } from "./rabbitmq.connection";
+import { RabbitMQConnection } from "./rabbitmq.connection"
+import { DateHelper } from "./../../helpers/date.helper"
+import { publishType } from "./../../types/shared.types"
 
 export class EventPublisher {
   static async publish({routingKey, data}:{routingKey: publishType, data: object}){
