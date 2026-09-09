@@ -7,8 +7,7 @@ dotenv.config()
 //dejalo asi
 
 export class Environment implements Ienv{
-  port= Boolean(process.env.DOCKER)? Number(process.env.PORT_DOCKER) : Number(process.env.PORT)
-
+  port= Number(process.env.PORT)
   db_host= Boolean(process.env.DOCKER)? String(process.env.DB_HOST_DOCKER) : String(process.env.DB_HOST)
   db_port= Number(process.env.DB_PORT)
   db_user= String(process.env.DB_USER)
