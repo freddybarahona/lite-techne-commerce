@@ -1,8 +1,6 @@
 import dotenv from "dotenv"
 import { Ienv } from "./env.interface"
 
-dotenv.config()
-
 export class Environment implements Ienv{
   port= Number(process.env.PORT_BACK)
   db_host= Boolean(process.env.DOCKER)? String(process.env.DB_HOST_DOCKER) : String(process.env.DB_HOST)
