@@ -37,4 +37,4 @@ EXPOSE 3002
 CMD ["npm", "start"]
 
 #docker build -f backend/dockerfiles/inventory.dockerfile -t litetechne-inventory .
-#docker run -d --name litetechne-inventory -p 3001:3001 litetechne-inventory
+#docker run -d --name litetechne-inventory -p 3002:3002 litetechne-inventory
