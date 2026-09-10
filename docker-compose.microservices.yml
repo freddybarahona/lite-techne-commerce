@@ -3,6 +3,9 @@ services:
   litetechne-auth:
     image: litetechne-auth
     container_name: litetechne-auth
+    environment:
+      SYNCHRONIZE: true
+      LOGGING: true
     depends_on:
       - bd-lite-techne-auth
     ports:
