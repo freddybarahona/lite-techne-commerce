@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm"
 import { DatabaseBootstrapParams } from "./bootstrap.params.interface"
-export default class bootstrap{
+export default class Bootstrap{
   async createDatabase(params: DatabaseBootstrapParams){
     const bootstrap= new DataSource({
       type:"mssql",
