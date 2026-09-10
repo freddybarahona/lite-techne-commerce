@@ -23,19 +23,21 @@ export class InventoryClient{
           minimum_stock: Number(data.minimum_stock ?? 0)
         })
         await this.persistMovement({product_id: Number(data.product_id), movementType: "IN", quantity: Number(data.stock)})
+        console.log("entrada al cliente en memoria, updated/created")
         break
-      case "inventory.deleted":
-        const previo= this.stocks.get(Number(data.product_id))
-        await this.persistMovement({product_id: Number(data.product_id), movementType: "OUT", quantity: previo?.stock ?? 0})
-        this.stocks.delete(Number(data.product_id))
-        break
+        case "inventory.deleted":
+          const previo= this.stocks.get(Number(data.product_id))
+          await this.persistMovement({product_id: Number(data.product_id), movementType: "OUT", quantity: previo?.stock ?? 0})
+          this.stocks.delete(Number(data.product_id))
+          console.log("entrada al cliente en memoria, delete")
+          break
     }
 
   }
   //cuando un metodo asincrono no retorna nada no es necesario que tenga el await en el metodo que lo llama
   private async persistMovement({product_id, movementType, quantity}: {product_id: number, movementType: MovementType, quantity: number}){
     try{
-      const entity= Object.assign(new InventoryHistory(), {productId: product_id})
+      const entity= Object.assign(new InventoryHistory(), {productId: product_id, movementType, quantity})
       await this.repository.create({entity})
     }catch(error){
       console.error(`InventoryClient no pudo persistir el movimiento ${movementType} del producto ${product_id}:`, error)

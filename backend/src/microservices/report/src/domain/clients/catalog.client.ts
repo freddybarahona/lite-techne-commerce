@@ -20,9 +20,11 @@ export class CatalogClient{
           price: Number(data.price),
           category: String(data.category)
         })
+        console.log("entrada al cliente en memoria, updated/created")
         break
       case "catalog.product.deleted":
         this.products.delete(Number(data.product_id))
+        console.log("entrada al cliente en memoria, delete")
         break
     }
 
