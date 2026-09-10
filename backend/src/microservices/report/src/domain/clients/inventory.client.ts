@@ -32,13 +32,13 @@ export class InventoryClient{
     }
 
   }
-
-  private async persistMovement({product_id, movementType, quantity}: {product_id: number, movementType: MovementType, quantity: number}): Promise<void>{
+  //cuando un metodo asincrono no retorna nada no es necesario que tenga el await en el metodo que lo llama
+  private async persistMovement({product_id, movementType, quantity}: {product_id: number, movementType: MovementType, quantity: number}){
     try{
-      const entity= Object.assign(new InventoryHistory(), {productId: product_id, movementType, quantity})
+      const entity= Object.assign(new InventoryHistory(), {productId: product_id})
       await this.repository.create({entity})
     }catch(error){
-      console.error(`[InventoryClient] no se pudo persistir el movimiento ${movementType} del producto ${product_id}:`, error)
+      console.error(`InventoryClient no pudo persistir el movimiento ${movementType} del producto ${product_id}:`, error)
     }
   }
 
