@@ -42,4 +42,5 @@ export class ResponseConstants{
 
   static CATEGORY_ALREADY_EXISTS= "esta categoria ya existe"
   static ERASED_ELEMENT= "elemento borrado correctamente" 
+  static PRODUCT_ALREADY_EXISTS= "este producto ya existe"
 }
