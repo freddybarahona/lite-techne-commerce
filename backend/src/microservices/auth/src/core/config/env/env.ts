@@ -11,8 +11,8 @@ export class Environment implements Ienv{
   db_user= String(process.env.DB_USER)
   db_password= String(process.env.DB_PASSWORD)
   db_name= String(process.env.DB_NAME)
-  synchronize= Boolean(process.env.SYNCHRONIZE)
-  logging= Boolean(process.env.SYNCHRONIZE) ? true : false
+  synchronize= process.env.SYNCHRONIZE === "true" ? true : false
+  logging= process.env.LOGGING === "true" ? true : false
   jwt_secret= String(process.env.JWT_SECRET)
 
   role_1_id= Number(process.env.ROLE_1_ID)
