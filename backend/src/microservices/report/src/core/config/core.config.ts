@@ -8,6 +8,7 @@ import { InventoryHistory } from "../../domain/entities/inventory.history";
 import { InventoryHistoryRepository } from "../../features/inventory.history/inventory.history.repository";
 import { ReportConsumer } from "../../infrastructure/events/report.consumer";
 import { RabbitMQConnection } from "../../../../shared/infrastructure/rabbitmq/rabbitmq.connection";
+import DatabaseBootstrap from "../../../../shared/helpers/database/bootstrap"
 
 export default class CoreConfigurations{
   private env= new Environment()
@@ -18,7 +19,14 @@ export default class CoreConfigurations{
     this.initializeDBandBack()
   }
 
-  private initializeDBandBack(){
+  private async initializeDBandBack(){
+    await new DatabaseBootstrap().createDatabase({
+      host: this.env.db_host,
+      port: this.env.db_port,
+      username: this.env.db_user,
+      password: this.env.db_password,
+      database: this.env.db_name
+    })
     this.dbSource.initialize().then(() =>{
       console.log(InitializeConstants.dbConnectionEstablished({db:this.env.db_name, port:this.env.db_port}))
       this.consumers_clients()
