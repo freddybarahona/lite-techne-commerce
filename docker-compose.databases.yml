@@ -1,0 +1,48 @@
+name: lite-techne-databases
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-managemet
+    container_name: lite_techne_rabbitmq
+    ports:
+      - 5672:5672
+      - 15672-15672
+  bd-lite_techne_catalog:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    container_name: bd-lite_techne_catalog
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Admin1234@"
+    ports:
+      -1433:1433
+    volumes:
+      -  catalog-db-data:/var/opt/mssql
+  bd-lite_techne_inventory:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    container_name: bd-lite_techne_inventory
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Admin1234@"
+    ports:
+      - 1434:1433
+    volumes:
+      - inventory-db-data:/var/opt/mssql
+  bd-lite-techne-report:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    container_name: bd-lite-techne-report
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Admin1234@"
+    ports:
+      - "1435:1433"
+    volumes:
+      - report-db-data:/var/opt/mssql
+  volumes:
+    catalog-db-data:
+    inventory-db-data:
+    report-db-data:
+    lite-techne:
+      external: true
+
+
+#Nota: lite-techne es external: true para que postgres conserve los datos del volumen que ya existe.

@@ -1,0 +1,36 @@
+name: lite-techne-microservices
+services:
+  litetechne-auth:
+    image: litetechne-auth
+    container_name: litetechne-auth
+    depends_on:
+      - bd-lite-techne-auth
+    ports:
+      - "3000:3000"
+
+  litetechne-catalog:
+    image: litetechne-catalog
+    container_name: litetechne-catalog
+    depends_on:
+      - bd-lite-techne-catalog
+      - rabbitmq
+    ports:
+      - "3001:3001"
+
+  litetechne-inventory:
+    image: litetechne-inventory
+    container_name: litetechne-inventory
+    depends_on:
+      - bd-lite-techne-inventory
+      - rabbitmq
+    ports:
+      - "3002:3002"
+
+  litetechne-report:
+    image: litetechne-report
+    container_name: litetechne-report
+    depends_on:
+      - bd-lite-techne-report
+      - rabbitmq
+    ports:
+      - "3003:3003"
