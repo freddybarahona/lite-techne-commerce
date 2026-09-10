@@ -1,10 +1,14 @@
 export interface Ienv{
     port: number
+
     db_host: string
     db_port: number
     db_user: string
     db_password: string
     db_name: string
+    synchronize: boolean
+    logging: boolean
+    
     category_1_id: number
     category_1_name: string
     category_1_description: string
