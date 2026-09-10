@@ -8,9 +8,6 @@ export class RabbitMQConnection{
   private static env= new env
 
   static async getChannel(): Promise<amqp.Channel>{
-    if(this.channel) 
-      return this.channel
-
     this.connection= await amqp.connect(this.env.rabbitmq_url || "amqp://localhost")
     this.channel = await this.connection.createChannel() 
     if(this.channel){
@@ -24,7 +21,4 @@ export class RabbitMQConnection{
 Sin fallback: amqp.connect(this.env.rabbitmq_url) → agregar || "amqp://localhost"
 El fallback importa porque si RABBITMQ_URL no se carga, String(undefined) = "undefined" → URL 
 inválida y nadie te manda eventos. Report-ms es un puerto sin eventos = dashboard vacío.
-
-contenedor de rabbitmq:
-docker run -d --hostname my-rabbit --name lite_techne_rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3
 */
