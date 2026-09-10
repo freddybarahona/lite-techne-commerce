@@ -24,8 +24,8 @@ export default class AppDataSource{
         migrations:[
           path.join(__dirname, "../../migrations/*.js")
         ],
-        synchronize: false,
-        logging: false
+        synchronize: this.env.synchronize,
+        logging: this.env.logging
       })
     }
     return AppDataSource.instance
