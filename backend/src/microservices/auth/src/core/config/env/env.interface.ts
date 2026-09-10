@@ -5,6 +5,8 @@ export interface Ienv{
     db_user: string
     db_password: string
     db_name: string
+    synchronize: boolean
+    logging: Boolean
     jwt_secret: string
     role_1_id: number
     role_1_name: string
