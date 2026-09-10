@@ -3,13 +3,21 @@ import {InitializeConstants} from "../../../../shared/constants/initialize.const
 import AppDataSource from "../../infrastructure/config/database/data.source";
 import AppCore from "../app.core";
 import { RabbitMQConnection } from "../../../../shared/infrastructure/rabbitmq/rabbitmq.connection";
+import DatabaseBootstrap from "../../../../shared/helpers/database/bootstrap"
 
 export default class serverconfigurations{
     env = new Environment
     dbSource= new AppDataSource().create_get_instance()
     back= new AppCore
 
-    initializeDBandBack(){
+    async initializeDBandBack(){
+      await new DatabaseBootstrap().createDatabase({
+        host: this.env.db_host,
+        port: this.env.db_port,
+        username: this.env.db_user,
+        password: this.env.db_password,
+        database: this.env.db_name
+      })
       this.dbSource.initialize().then(()=>{
           console.log(InitializeConstants.dbConnectionEstablished({db:this.env.db_name, port:this.env.db_port}))
           this.config_back({portBack: this.env.port})
