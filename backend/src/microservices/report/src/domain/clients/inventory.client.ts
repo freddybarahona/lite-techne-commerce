@@ -1,4 +1,10 @@
+import { IInventoryHistoryRepository } from "../../features/inventory.history/inventory.history.repository.interface"
+import { InventoryHistory } from "../entities/inventory.history"
+import { MovementType } from "../../../../shared/types/shared.types"
+
 export class InventoryClient{
+  constructor(private readonly repository: IInventoryHistoryRepository){}
+
   private stocks = new Map<number, {
     product_id: number
     stock: number
@@ -6,7 +12,7 @@ export class InventoryClient{
     minimum_stock: number
   }>()
 
-  handleEvent(event: string, data: any): void{
+  async handleEvent(event: string, data: any){
     switch (event){
       case "inventory.created":
       case "inventory.updated": 
@@ -16,12 +22,24 @@ export class InventoryClient{
           reserved_stock: Number(data.reserved_stock ?? 0),
           minimum_stock: Number(data.minimum_stock ?? 0)
         })
+        await this.persistMovement({product_id: Number(data.product_id), movementType: "IN", quantity: Number(data.stock)})
         break
       case "inventory.deleted":
+        const previo= this.stocks.get(Number(data.product_id))
+        await this.persistMovement({product_id: Number(data.product_id), movementType: "OUT", quantity: previo?.stock ?? 0})
         this.stocks.delete(Number(data.product_id))
         break
     }
 
+  }
+
+  private async persistMovement({product_id, movementType, quantity}: {product_id: number, movementType: MovementType, quantity: number}): Promise<void>{
+    try{
+      const entity= Object.assign(new InventoryHistory(), {productId: product_id, movementType, quantity})
+      await this.repository.create({entity})
+    }catch(error){
+      console.error(`[InventoryClient] no se pudo persistir el movimiento ${movementType} del producto ${product_id}:`, error)
+    }
   }
 
   getAll(){

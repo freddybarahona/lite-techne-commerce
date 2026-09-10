@@ -4,6 +4,8 @@ import {InitializeConstants} from "../../../../shared/constants/initialize.const
 import AppDataSource from "../../infrastructure/database/data.source";
 import { InventoryClient } from "../../domain/clients/inventory.client";
 import { CatalogClient } from "../../domain/clients/catalog.client";
+import { InventoryHistory } from "../../domain/entities/inventory.history";
+import { InventoryHistoryRepository } from "../../features/inventory.history/inventory.history.repository";
 import { ReportConsumer } from "../../infrastructure/events/report.consumer";
 import { RabbitMQConnection } from "../../../../shared/infrastructure/rabbitmq/rabbitmq.connection";
 
@@ -33,7 +35,8 @@ export default class CoreConfigurations{
   }
 
   private async consumers_clients(){
-    const clients= {inventory: new InventoryClient(), catalog: new CatalogClient()}
+    const inventoryHistoryRepo= new InventoryHistoryRepository(this.dbSource.getRepository(InventoryHistory))
+    const clients= {inventory: new InventoryClient(inventoryHistoryRepo), catalog: new CatalogClient(inventoryHistoryRepo)}
     await ReportConsumer.start(clients).catch((error)=> {
       console.log(InitializeConstants.toolConnectionFailed({tool:"rabbitmq", error_code: error.code}))
     })

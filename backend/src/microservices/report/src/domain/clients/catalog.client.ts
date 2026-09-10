@@ -1,5 +1,8 @@
+import { IInventoryHistoryRepository } from "../../features/inventory.history/inventory.history.repository.interface"
 
 export class CatalogClient{
+  constructor(private readonly repository: IInventoryHistoryRepository){}
+
   private products = new Map<number, {
     product_id: number
     name: string
@@ -7,7 +10,7 @@ export class CatalogClient{
     category: string
   }>()
 
-  handleEvent(event: string, data: any): void{
+  async handleEvent(event: string, data: any){
     switch (event){
       case "catalog.product.created":
       case "catalog.product.updated": 

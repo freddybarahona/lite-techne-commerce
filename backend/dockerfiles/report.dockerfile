@@ -32,7 +32,7 @@ COPY --from=build /app/microservices/report/ ./microservices/report/
 
 WORKDIR /app/microservices/report
 
-EXPOSE 3002
+EXPOSE 3003
 
 CMD ["npm", "start"]
 
