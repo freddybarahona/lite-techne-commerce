@@ -13,4 +13,5 @@ export interface IEnv{
   db_name: string
   synchronize: boolean
   logging: boolean
+  jwt_secret: string
 }

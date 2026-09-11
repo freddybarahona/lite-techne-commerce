@@ -1,15 +1,19 @@
 import { Request, Response, Router } from "express";
 import { InventoryHistoryMakers } from "../../factories/inventory.history.makers";
+import { Auth } from "../../../../shared/infrastructure/middlewares/auth.jwt";
 
 export default class InventoryHistoryRoutes{
   private readonly router= Router()
 
-  constructor(private readonly maker: InventoryHistoryMakers){}
+  constructor(
+    private readonly maker: InventoryHistoryMakers,
+    private readonly auth: Auth
+  ){}
 
   registrar_ruta(): Router{
-    this.router.post("", this.registrarMovimiento.bind(this))
-    this.router.get("", this.obtenerTodo.bind(this))
-    this.router.get("/:productId", this.obtenerPorProducto.bind(this))
+    this.router.post("", this.auth.validate, this.registrarMovimiento.bind(this))
+    this.router.get("", this.auth.validate, this.obtenerTodo.bind(this))
+    this.router.get("/:productId", this.auth.validate, this.obtenerPorProducto.bind(this))
 
     return this.router
   }
