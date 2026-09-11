@@ -7,6 +7,7 @@ services:
     environment:
       SYNCHRONIZE: true
       LOGGING: true
+      JWT_SECRET: secretodetest
     depends_on:
       bd-lite-techne-auth:
         condition: service_healthy
@@ -19,6 +20,7 @@ services:
     environment:
       SYNCHRONIZE: true
       LOGGING: true
+      JWT_SECRET: secretodetest
     depends_on:
       bd-lite-techne-catalog:
         condition: service_healthy
@@ -33,6 +35,7 @@ services:
     environment:
       SYNCHRONIZE: true
       LOGGING: true
+      JWT_SECRET: secretodetest
     depends_on:
       bd-lite-techne-inventory:
         condition: service_healthy
@@ -47,6 +50,7 @@ services:
     environment:
       SYNCHRONIZE: true
       LOGGING: true
+      JWT_SECRET: secretodetest
     depends_on:
       bd-lite-techne-report:
         condition: service_healthy
