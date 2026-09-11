@@ -13,6 +13,7 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    restart: unless-stopped
     volumes:
       - rabbitmq-data:/var/lib/rabbitmq
   bd-lite-techne-auth:
@@ -30,6 +31,7 @@ services:
       start_period: 10s
     ports:
       - "5432:5432"
+    restart: unless-stopped
     volumes:
       - lite-techne:/var/lib/postgresql/data
 
@@ -47,6 +49,7 @@ services:
       start_period: 30s
     ports:
       - "1433:1433"
+    restart: unless-stopped
     volumes:
       - catalog-db-data:/var/opt/mssql
 
@@ -60,10 +63,11 @@ services:
       test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q \"SELECT 1\" || exit 1"]
       interval: 10s
       timeout: 5s
-      retries: 10
-      start_period: 30s
+      retries: 15
+      start_period: 45s
     ports:
       - "1434:1433"
+    restart: unless-stopped
     volumes:
       - inventory-db-data:/var/opt/mssql
 
@@ -81,6 +85,7 @@ services:
       start_period: 30s
     ports:
       - "1435:1433"
+    restart: unless-stopped
     volumes:
       - report-db-data:/var/opt/mssql
 
