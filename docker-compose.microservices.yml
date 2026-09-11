@@ -62,3 +62,21 @@ services:
     ports:
       - "3003:3003"
     restart: unless-stopped
+
+  litetechne-gateway:
+    image: litetechne-gateway
+    container_name: lite-techne-gateway
+    command: ["--configFile=/etc/traefik/traefik.yml"]
+    depends_on:
+      litetechne-auth:
+        condition: service_started
+      litetechne-catalog:
+        condition: service_started
+      litetechne-inventory:
+        condition: service_started
+      litetechne-report:
+        condition: service_started
+    ports:
+      - "80:80"
+      - "8081:8080"
+    restart: unless-stopped
