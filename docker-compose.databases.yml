@@ -2,47 +2,101 @@ name: lite-techne-databases
 
 services:
   rabbitmq:
-    image: rabbitmq:3-managemet
-    container_name: lite_techne_rabbitmq
+    image: rabbitmq:3-management
+    container_name: lite-techne-rabbitmq
+    healthcheck:
+      test: ["CMD-SHELL", "rabbitmq-diagnostics -q ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
     ports:
-      - 5672:5672
-      - 15672-15672
-  bd-lite_techne_catalog:
-    image: mcr.microsoft.com/mssql/server:2025-latest
-    container_name: bd-lite_techne_catalog
+      - "5672:5672"
+      - "15672:15672"
+
+  bd-lite-techne-auth:
+    image: postgres:17
+    container_name: bd-lite-techne-auth
     environment:
-      ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "Admin1234@"
+      POSTGRES_DB: bd-lite-techne
+      POSTGRES_USER: adminadmin
+      POSTGRES_PASSWORD: adminadmin
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U adminadmin -d bd-lite-techne"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
     ports:
-      -1433:1433
+      - "5432:5432"
     volumes:
-      -  catalog-db-data:/var/opt/mssql
-  bd-lite_techne_inventory:
+      - lite-techne:/var/lib/postgresql/data
+
+  bd-lite-techne-catalog:
     image: mcr.microsoft.com/mssql/server:2025-latest
-    container_name: bd-lite_techne_inventory
+    container_name: bd-lite-techne-catalog
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: "Admin1234@"
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q \"SELECT 1\" || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
     ports:
-      - 1434:1433
+      - "1433:1433"
+    volumes:
+      - catalog-db-data:/var/opt/mssql
+
+  bd-lite-techne-inventory:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    container_name: bd-lite-techne-inventory
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Admin1234@"
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q \"SELECT 1\" || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    ports:
+      - "1434:1433"
     volumes:
       - inventory-db-data:/var/opt/mssql
+
   bd-lite-techne-report:
     image: mcr.microsoft.com/mssql/server:2025-latest
     container_name: bd-lite-techne-report
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: "Admin1234@"
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q \"SELECT 1\" || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
     ports:
       - "1435:1433"
     volumes:
       - report-db-data:/var/opt/mssql
-  volumes:
-    catalog-db-data:
-    inventory-db-data:
-    report-db-data:
-    lite-techne:
-      external: true
+
+volumes:
+  catalog-db-data:
+  inventory-db-data:
+  report-db-data:
+  lite-techne:
+    external: true
 
 
 #Nota: lite-techne es external: true para que postgres conserve los datos del volumen que ya existe.
+#El healthcheck es un chequeo de salud que Docker ejecuta periódicamente dentro del contenedor para saber si está "realmente listo" o muerto. Está pensado para las BDs y rabbit, que tardan en arrancar:
+#Que el comando devuelva 0 = saludable; que devuelva algo distinto = "aún no está listo".
+#Desglose del bloque:
+#- test — el comando que se ejecuta como paciente. En mssql: sqlcmd -S localhost -U sa -P "<contraseña>" -C -Q "SELECT 1". Es decir: "conéctate a SQL Server con el usuario sa y ejecuta SELECT 1". Si responde → la BD está viva y acepta conexiones. El || exit 1 hace que si el comando falla, el chequeo se marque como fallido (exit 1). El $$ es solo para escapar el $ de la contraseña y que compose no intente reemplazarla por una variable suya.
+#- interval: 10s — cada 10 segundos vuelve a ejecutar la prueba.
+#- timeout: 5s — si la prueba tarda más de 5s, cuenta como fallida.
+#- retries: 10 — cuántas fallas consecutivas se toleran antes de marcar el contenedor como "unhealthy".
+#- start_period: 30s — período de gracia al arrancar: durante 30s aunque falle, no cuenta como fallo (mssql tarda en inicializar).

@@ -1,4 +1,5 @@
 name: lite-techne-microservices
+
 services:
   litetechne-auth:
     image: litetechne-auth
@@ -7,7 +8,8 @@ services:
       SYNCHRONIZE: true
       LOGGING: true
     depends_on:
-      - bd-lite-techne-auth
+      bd-lite-techne-auth:
+        condition: service_healthy
     ports:
       - "3000:3000"
 
@@ -18,8 +20,10 @@ services:
       SYNCHRONIZE: true
       LOGGING: true
     depends_on:
-      - bd-lite-techne-catalog
-      - rabbitmq
+      bd-lite-techne-catalog:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
     ports:
       - "3001:3001"
 
@@ -30,8 +34,10 @@ services:
       SYNCHRONIZE: true
       LOGGING: true
     depends_on:
-      - bd-lite-techne-inventory
-      - rabbitmq
+      bd-lite-techne-inventory:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
     ports:
       - "3002:3002"
 
@@ -42,7 +48,9 @@ services:
       SYNCHRONIZE: true
       LOGGING: true
     depends_on:
-      - bd-lite-techne-report
-      - rabbitmq
+      bd-lite-techne-report:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
     ports:
       - "3003:3003"
