@@ -13,7 +13,8 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
   bd-lite-techne-auth:
     image: postgres:17
     container_name: bd-lite-techne-auth
@@ -87,6 +88,7 @@ volumes:
   catalog-db-data:
   inventory-db-data:
   report-db-data:
+  rabbitmq-data:
   lite-techne:
     external: true
 

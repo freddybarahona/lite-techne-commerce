@@ -1,1 +1,4 @@
 /backend
+
+
+#docker compose -f docker-compose.databases.yml -f docker-compose.microservices.yml up -d
