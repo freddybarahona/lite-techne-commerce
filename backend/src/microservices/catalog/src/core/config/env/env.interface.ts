@@ -8,6 +8,7 @@ export interface Ienv{
     db_name: string
     synchronize: boolean
     logging: boolean
+    jwt_secret: string
     
     category_1_id: number
     category_1_name: string
