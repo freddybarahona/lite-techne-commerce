@@ -2,7 +2,7 @@ name: lite-techne-microservices
 
 services:
   litetechne-auth:
-    image: lite-techne-auth
+    image: litetechne-auth
     container_name: lite-techne-auth
     environment:
       SYNCHRONIZE: true
@@ -14,7 +14,7 @@ services:
       - "3000:3000"
 
   litetechne-catalog:
-    image: lite-techne-catalog
+    image: litetechne-catalog
     container_name: lite-techne-catalog
     environment:
       SYNCHRONIZE: true
@@ -28,7 +28,7 @@ services:
       - "3001:3001"
 
   litetechne-inventory:
-    image: lite-techne-inventory
+    image: litetechne-inventory
     container_name: lite-techne-inventory
     environment:
       SYNCHRONIZE: true
@@ -42,7 +42,7 @@ services:
       - "3002:3002"
 
   litetechne-report:
-    image: lite-techne-report
+    image: litetechne-report
     container_name: lite-techne-report
     environment:
       SYNCHRONIZE: true
