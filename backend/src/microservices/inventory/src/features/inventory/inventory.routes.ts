@@ -1,17 +1,21 @@
 import { Request, Response, Router } from "express";
 import { InventoryMakers } from "../../factories/inventory.makers";
+import { Auth } from "../../../../shared/infrastructure/middlewares/auth.jwt";
 
 export default class InventoryRoutes{
   private readonly router= Router()
 
-  constructor(private readonly maker: InventoryMakers){}
+  constructor(
+    private readonly maker: InventoryMakers,
+    private readonly auth: Auth
+  ){}
 
   registrar_ruta(): Router{
-    this.router.post("", this.createInventory.bind(this))
-    this.router.get("", this.getAll.bind(this))
-    this.router.get("/:product_id", this.getOne.bind(this))
-    this.router.patch("/:product_id", this.modifyOne.bind(this))
-    this.router.delete("/:product_id", this.deleteOne.bind(this))
+    this.router.post("", this.auth.validate, this.createInventory.bind(this))
+    this.router.get("", this.auth.validate, this.getAll.bind(this))
+    this.router.get("/:product_id", this.auth.validate, this.getOne.bind(this))
+    this.router.patch("/:product_id", this.auth.validate, this.modifyOne.bind(this))
+    this.router.delete("/:product_id", this.auth.validate, this.deleteOne.bind(this))
 
     return this.router
   }

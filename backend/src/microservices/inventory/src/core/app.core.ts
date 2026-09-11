@@ -3,6 +3,7 @@ import cors from "cors"
 import InventoryRoutes from "../features/inventory/inventory.routes"
 import { InventoryMakers } from "../factories/inventory.makers"
 import { Environment } from "./config/env/env"
+import { Auth } from "../../../../shared/infrastructure/middlewares/auth.jwt"
 
 export default class AppCore{
   app= express()
@@ -20,8 +21,9 @@ export default class AppCore{
     
     this.app.use(cors({origin: "*"}))
     const env= new Environment()
+    const auth= new Auth(env.jwt_secret)
     const makers = new InventoryMakers(env)
-    const inventoryRoutes= new InventoryRoutes(makers)
+    const inventoryRoutes= new InventoryRoutes(makers, auth)
     this.app.use("/inventory", inventoryRoutes.registrar_ruta()) 
   }
 }
