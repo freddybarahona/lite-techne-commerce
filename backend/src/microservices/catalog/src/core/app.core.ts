@@ -1,7 +1,7 @@
 import express from "express"
 import cors from "cors"
 import { Environment } from "./config/env/env"
-import { Auth } from "../../../../shared/infrastructure/middlewares/auth.jwt"
+import { Auth } from "./../../../shared/infrastructure/middlewares/auth.jwt"
 import { ProductMakers } from "../factories/product.makers"
 import { CategoryMakers } from "../factories/category.makers"
 import { ProductRoutes } from "../features/product/product.routes"
