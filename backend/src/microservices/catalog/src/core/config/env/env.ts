@@ -1,6 +1,7 @@
 import dotenv from "dotenv"
 import { Ienv } from "./env.interface"
 
+dotenv.config()
 export class Environment implements Ienv{
   port= Number(process.env.PORT_BACK)
 
