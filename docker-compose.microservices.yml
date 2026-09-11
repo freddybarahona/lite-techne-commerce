@@ -11,8 +11,6 @@ services:
     depends_on:
       bd-lite-techne-auth:
         condition: service_healthy
-    ports:
-      - "3000:3000"
     restart: unless-stopped
 
   litetechne-catalog:
@@ -27,8 +25,6 @@ services:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
-    ports:
-      - "3001:3001"
     restart: unless-stopped
 
   litetechne-inventory:
@@ -43,8 +39,6 @@ services:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
-    ports:
-      - "3002:3002"
     restart: unless-stopped
 
   litetechne-report:
@@ -59,8 +53,6 @@ services:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
-    ports:
-      - "3003:3003"
     restart: unless-stopped
 
   litetechne-gateway:
