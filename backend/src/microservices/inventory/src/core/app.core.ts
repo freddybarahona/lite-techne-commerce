@@ -3,7 +3,7 @@ import cors from "cors"
 import InventoryRoutes from "../features/inventory/inventory.routes"
 import { InventoryMakers } from "../factories/inventory.makers"
 import { Environment } from "./config/env/env"
-import { Auth } from "../../../../shared/infrastructure/middlewares/auth.jwt"
+import { Auth } from "./../../../shared/infrastructure/middlewares/auth.jwt"
 
 export default class AppCore{
   app= express()
