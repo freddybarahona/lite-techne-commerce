@@ -1,0 +1,36 @@
+http:
+  routers:
+    auth:
+      rule: "PathPrefix(`/auth`)"
+      service: auth-svc
+      entryPoints: ["web"]
+    catalog:
+      rule: "PathPrefix(`/products`) || PathPrefix(`/categories`)"
+      service: catalog-svc
+      entryPoints: ["web"]
+    inventory:
+      rule: "PathPrefix(`/inventory`)"
+      service: inventory-svc
+      entryPoints: ["web"]
+    report:
+      rule: "PathPrefix(`/report`)"
+      service: report-svc
+      entryPoints: ["web"]
+
+  services:
+    auth-svc:
+      loadBalancer:
+        servers:
+          - url: "http://lite-techne-auth:3000"
+    catalog-svc:
+      loadBalancer:
+        servers:
+          - url: "http://lite-techne-catalog:3001"
+    inventory-svc:
+      loadBalancer:
+        servers:
+          - url: "http://lite-techne-inventory:3002"
+    report-svc:
+      loadBalancer:
+        servers:
+          - url: "http://lite-techne-report:3003"
