@@ -12,8 +12,8 @@ export default class InventoryRoutes{
 
   registrar_ruta(): Router{
     this.router.post("", this.auth.validate, this.createInventory.bind(this))
-    this.router.get("", this.auth.validate, this.getAll.bind(this))
-    this.router.get("/:product_id", this.auth.validate, this.getOne.bind(this))
+    this.router.get("", this.getAll.bind(this))
+    this.router.get("/:product_id", this.getOne.bind(this))
     this.router.patch("/:product_id", this.auth.validate, this.modifyOne.bind(this))
     this.router.delete("/:product_id", this.auth.validate, this.deleteOne.bind(this))
 
