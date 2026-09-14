@@ -1,36 +1,47 @@
-http:
-  routers:
-    auth:
-      rule: "PathPrefix(`/auth`)"
-      service: auth-svc
-      entryPoints: ["web"]
+http: #Sección de configuración para tráfico HTTP
+  routers:  #Los "semáforos": cada entrada define UNA regla de ruteo
+    auth: #Nombre del router
+      rule: "PathPrefix(`/auth`)" #REGLA: si la URL empieza con /auth → este router
+      service: auth-svc #A qué service (backend) lo manda
+      entryPoints: ["web"]  #Solo atiende requests que entren por la puerta "web" (:80)
+    
     catalog:
       rule: "PathPrefix(`/products`) || PathPrefix(`/categories`)"
       service: catalog-svc
       entryPoints: ["web"]
+    
     inventory:
       rule: "PathPrefix(`/inventory`)"
       service: inventory-svc
       entryPoints: ["web"]
+    
     report:
       rule: "PathPrefix(`/report`)"
       service: report-svc
       entryPoints: ["web"]
 
-  services:
-    auth-svc:
-      loadBalancer:
-        servers:
-          - url: "http://lite-techne-auth:3000"
+  services: #Los "backends": la dirección real adonde manda el tráfico
+    auth-svc: #Nombre del servicio (lo referencian los routers)
+      loadBalancer: #Traefik reparte el tráfico entre los servidores listados
+        servers:   
+          - url: "http://lite-techne-auth:3000" #DESTINO: hostname del contenedor en la red Docker + puerto interno
+    
     catalog-svc:
       loadBalancer:
         servers:
           - url: "http://lite-techne-catalog:3001"
+    
     inventory-svc:
       loadBalancer:
         servers:
           - url: "http://lite-techne-inventory:3002"
+    
     report-svc:
       loadBalancer:
         servers:
           - url: "http://lite-techne-report:3003"
+
+
+#todo lo que esta comentado es sobre los aspectos generales
+#significa que lo no comentado es lo que se repite
+#tomando el esquema anterior

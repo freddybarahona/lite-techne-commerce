@@ -1,12 +1,13 @@
-entryPoints:
-  web:
-    address: ":80"
+entryPoints: #puertas de entrada del gateway
+  web:  #nombre que le damos a la puerta
+    address: ":80" #escucha en puerto 80 de maquina
 
-api:
-  dashboard: true
-  insecure: true
+api:  # Activa la API REST interna de Traefik
+  dashboard: true #Habilita la interfaz web /dashboard/
+  insecure: true  #Expone esa API/dashboard sin autenticación
 
-providers:
-  file:
-    directory: /etc/traefik/dynamic
-    watch: true
+providers:  #"De dónde leo mi configuración"
+
+  file: #Proveedor de archivos (no usa Docker Swarm/K8s)
+    directory: /etc/traefik/dynamic #Carpeta del contenedor donde están los .yml 
+    watch: true #Vigila si cambian archivos en esa carpeta (como están "baked" en la imagen, no hay cambios en caliente)
