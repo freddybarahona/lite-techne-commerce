@@ -1,0 +1,74 @@
+name: lite-techne-microservices
+
+services:
+  litetechne-auth:
+    image: litetechne-auth
+    container_name: lite-techne-auth
+    environment:
+      SYNCHRONIZE: false
+      LOGGING: false
+      JWT_SECRET: secretodetest
+    depends_on:
+      bd-lite-techne-auth:
+        condition: service_healthy
+    restart: unless-stopped
+
+  litetechne-catalog:
+    image: litetechne-catalog
+    container_name: lite-techne-catalog
+    environment:
+      SYNCHRONIZE: false
+      LOGGING: false
+      JWT_SECRET: secretodetest
+    depends_on:
+      bd-lite-techne-catalog:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+
+  litetechne-inventory:
+    image: litetechne-inventory
+    container_name: lite-techne-inventory
+    environment:
+      SYNCHRONIZE: false
+      LOGGING: false
+      JWT_SECRET: secretodetest
+    depends_on:
+      bd-lite-techne-inventory:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+
+  litetechne-report:
+    image: litetechne-report
+    container_name: lite-techne-report
+    environment:
+      SYNCHRONIZE: false
+      LOGGING: false
+      JWT_SECRET: secretodetest
+    depends_on:
+      bd-lite-techne-report:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    restart: unless-stopped
+
+  litetechne-gateway:
+    image: litetechne-gateway
+    container_name: lite-techne-gateway
+    command: ["--configFile=/etc/traefik/traefik.yml"]
+    depends_on:
+      litetechne-auth:
+        condition: service_started
+      litetechne-catalog:
+        condition: service_started
+      litetechne-inventory:
+        condition: service_started
+      litetechne-report:
+        condition: service_started
+    ports:
+      - "80:80"
+      - "8081:8080"
+    restart: unless-stopped
