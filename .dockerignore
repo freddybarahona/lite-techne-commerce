@@ -1,5 +1,5 @@
 # Node
-**/node_modules
+**/node_moduleslog
 **/dist
 **/package-lock.json
 **/.npmrc
@@ -25,7 +25,6 @@
 .DS_Store
 Thumbs.db
 
-/backend
 
 #docker compose -f docker-compose.databases.yml -f docker-compose.microservices.yml up -d
 
