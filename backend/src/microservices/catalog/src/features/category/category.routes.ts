@@ -15,11 +15,11 @@ export class CategoryRoutes{
       this.makers.instance().then(c=> c.create(req,res))
     })
 
-    router.get("", this.auth.validate, (req,res)=>{
+    router.get("", (req,res)=>{
       this.makers.instance().then(c=> c.getAllCategories(req,res))
     })
 
-    router.get("/:id", this.auth.validate, (req,res)=>{
+    router.get("/:id", (req,res)=>{
       this.makers.instance().then(c=> c.getCategoryById(req,res))
     })
 
