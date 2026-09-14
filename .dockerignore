@@ -30,6 +30,4 @@ Thumbs.db
 
 # Varios a la vez con cambios 
 #docker compose -f docker-compose.databases.yml -f docker-compose.microservices.yml up -d litetechne-auth litetechne-catalog litetechne-inventory litetechne-report 
-/microservices
 
-.gitignore
