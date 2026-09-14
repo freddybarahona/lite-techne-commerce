@@ -1,7 +1,11 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
   "workbench.colorTheme": "Blood Angels"
 =======
   "workbench.colorTheme": "Alpha Legion"
 >>>>>>> feature/inventory-ms
+=======
+  "workbench.colorTheme": "Adeptus Mechanicus"
+>>>>>>> feature/report-ms
 }
