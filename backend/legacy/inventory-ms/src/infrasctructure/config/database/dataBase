@@ -1,0 +1,24 @@
+docker run --name bd-lite-techne-inventory -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Admin1234@" -p 1434:1433 -d mcr.microsoft.com/mssql/server:2025-latest
+
+este es el comando para crear el contenedor de docker donde estara la base de datos de inventory
+
+# Catalog
+-p 1433:1433 //puerto de tu maquina : puerto dentro del contenedor
+
+en sql server el puerto por defecto al crear el contenedor es el 1433 por eso debemos mantenerlo asi dentro del contenedor
+
+# Inventory
+-p 1434:1433
+
+
+USE master;
+
+IF NOT EXISTS(select name FROM sys.databases WHERE name = 'InventoryDB')
+	CREATE DATABASE InventoryDB;
+
+USE InventoryDB;
+
+
+dividelo por lotes ya que dbeaver no lo 
+lee asi al completo 
+osea selecciona y ejecuta una parte y luego la otra

@@ -1,3 +1,7 @@
 {
+<<<<<<< HEAD
   "workbench.colorTheme": "Blood Angels"
+=======
+  "workbench.colorTheme": "Alpha Legion"
+>>>>>>> feature/inventory-ms
 }

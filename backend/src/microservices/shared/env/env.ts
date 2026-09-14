@@ -1,5 +1,6 @@
 import dotenv from "dotenv"
 <<<<<<< HEAD
+<<<<<<< HEAD
 dotenv.config()
 export class env {
   //info de rabbitmq
@@ -8,9 +9,14 @@ export class env {
 
 }
 =======
+=======
+>>>>>>> feature/inventory-ms
 
 export class env {
   //info de rabbitmq
   rabbitmq_url=Boolean(process.env.DOCKER)? String(process.env.RABBITMQ_URL_DOCKER) : String(process.env.RABBITMQ_URL)
 }
+<<<<<<< HEAD
 >>>>>>> feature/catalog-ms
+=======
+>>>>>>> feature/inventory-ms
