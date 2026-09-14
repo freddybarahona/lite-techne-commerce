@@ -54,4 +54,5 @@ export class ResponseConstants{
   static USER_FOUND_NOT= "Usuario no encontrado"
   static USER_ROLE_INVALID= "Ese rol es invalido"
   static USERS_EMPTY= "no se encontraron usuarios en Users data"
+  static PRODUCT_ALREADY_EXISTS= "este producto ya existe"
 }

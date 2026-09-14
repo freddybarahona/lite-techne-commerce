@@ -5,6 +5,7 @@ const EXCHANGE= "litetechne"
 export class EventConsumer{
   static async subscribe({queue, routing_key, handler}:{queue: string, routing_key: string, handler: (routingKey: string, data: any) => Promise<void> | void}){
       const channel= await RabbitMQConnection.getChannel()
+  
       await channel.assertExchange(EXCHANGE, "topic", {durable: true})
       await channel.assertQueue(queue, {durable: true})
       await channel.bindQueue(queue, EXCHANGE, routing_key)

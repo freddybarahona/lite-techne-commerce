@@ -1,5 +1,6 @@
 import amqp from "amqplib"
 import { env } from "../../env/env"
+import { InitializeConstants } from "../../constants/initialize.constants"
 
 export class RabbitMQConnection{
   private static connection: amqp.ChannelModel | null = null
@@ -7,11 +8,11 @@ export class RabbitMQConnection{
   private static env= new env
 
   static async getChannel(): Promise<amqp.Channel>{
-    if(this.channel) 
-      return this.channel
-
     this.connection= await amqp.connect(this.env.rabbitmq_url || "amqp://localhost")
     this.channel = await this.connection.createChannel() 
+    if(this.channel){
+      console.log(InitializeConstants.toolConnectionEstablished({tool: "rabbitmq"}))
+    }
     return this.channel
   }
 }
