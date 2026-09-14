@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 **/**/node_modules
 **/**/package-lock.json
 **/**/.env
 
 #git merge <rama>	Todos los commits	✅ Se conserva completa
 #git merge --squash <rama>	Solo el estado final (un diff)	❌ Se aplana en un solo commit
+=======
+**/.env
+
+**/package-lock.json
+
+**/node_modules
+>>>>>>> develop

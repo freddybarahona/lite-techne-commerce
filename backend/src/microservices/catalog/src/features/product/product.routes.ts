@@ -15,11 +15,19 @@ export class ProductRoutes{
       this.makers.instance().then(c=> c.create(req,res))
     })
 
+<<<<<<< HEAD
     router.get("", this.auth.validate, (req,res)=>{
       this.makers.instance().then(c=> c.getAllProducts(req,res))
     })
 
     router.get("/:id", this.auth.validate, (req,res)=>{
+=======
+    router.get("", (req,res)=>{
+      this.makers.instance().then(c=> c.getAllProducts(req,res))
+    })
+
+    router.get("/:id", (req,res)=>{
+>>>>>>> develop
       this.makers.instance().then(c=> c.getProductById(req,res))
     })
 
