@@ -1,4 +1,3 @@
-import { InitializeConstants } from "../../constants/initialize.constants"
 import { RabbitMQConnection } from "./rabbitmq.connection"
 
 const EXCHANGE= "litetechne"

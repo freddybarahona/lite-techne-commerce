@@ -41,7 +41,18 @@ export class ResponseConstants{
   }
 
   static CATEGORY_ALREADY_EXISTS= "esta categoria ya existe"
-  static ERASED_ELEMENT= "elemento borrado correctamente" 
-  static PRODUCT_ALREADY_EXISTS= "este producto ya existe"
+  static ERASED_ELEMENT= "elemento borrado correctamente"
+
+  //auth responses
+  static USER_LOGIN= "Inicio de sesion exitoso"
+  static USER_FOUND_YES= "Usuario encontrado con exito"
+  static USER_CREATED_YES= "Usuario creado con exito"
+  static USER_BAD_EMAIL_PASSWORD= "Email o contrasena incorrecta"
   static USER_TOKEN_INVALID= "Su token es invalido o ya expiro"
+  static USER_EMAIL_INVALID= "El correo electronico es invalido"
+  static USER_EMAIL_EXISTS= "Este correo electronico ya esta registrado"
+  static USER_FOUND_NOT= "Usuario no encontrado"
+  static USER_ROLE_INVALID= "Ese rol es invalido"
+  static USERS_EMPTY= "no se encontraron usuarios en Users data"
+  static PRODUCT_ALREADY_EXISTS= "este producto ya existe"
 }
