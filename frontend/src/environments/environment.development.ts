@@ -1,1 +1,4 @@
-export const environment = {};
+export const environment = {
+  production: false,
+  back_url: "http://localhost:80"
+};
