@@ -10,6 +10,6 @@
 
 **/catalog
 
-
+./../frontend
 
 # docker run --name bd-lite-techne-report -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=Admin1234@" -p 1435:1433 -d mcr.microsoft.com/mssql/server:2025-latest

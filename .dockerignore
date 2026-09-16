@@ -1,5 +1,9 @@
 # Node
+<<<<<<< HEAD
 **/node_moduleslog
+=======
+**/node_modules
+>>>>>>> feature/catalog-ms
 **/dist
 **/package-lock.json
 **/.npmrc
@@ -23,6 +27,7 @@
 
 # Sistema
 .DS_Store
+<<<<<<< HEAD
 Thumbs.db
 
 
@@ -31,3 +36,6 @@ Thumbs.db
 # Varios a la vez con cambios 
 #docker compose -f docker-compose.databases.yml -f docker-compose.microservices.yml up -d litetechne-auth litetechne-catalog litetechne-inventory litetechne-report 
 
+=======
+Thumbs.db
+>>>>>>> feature/catalog-ms
