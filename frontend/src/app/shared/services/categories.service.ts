@@ -23,4 +23,6 @@ export class CategoriesService {
   getCategoryById(): Observable<GenericResponse<CategoryDTO>>{
     return this.http.get<GenericResponse<CategoryDTO>>(`${this.url}${this.rama}/1`)
   }
+
+  
 }
