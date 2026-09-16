@@ -6,6 +6,7 @@ import { CreateCategoryRequest } from '../interfaces/create.category.request.int
 import { CategoryDTO } from '../interfaces/category.dto.interface';
 import { Observable } from 'rxjs';
 import { ramas_disp } from '../../ramas';
+import { UpdateCategoryRequest } from '../../update.category.request.interface';
 
 @Service()
 export class CategoriesService {
@@ -21,8 +22,14 @@ export class CategoriesService {
   } 
 
   getCategoryById(): Observable<GenericResponse<CategoryDTO>>{
-    return this.http.get<GenericResponse<CategoryDTO>>(`${this.url}${this.rama}/1`)
+    return this.http.get<GenericResponse<CategoryDTO>>(`${this.url}${this.rama}1`)
   }
 
-  
+  updateCategory(request: UpdateCategoryRequest, id: number): Observable<GenericResponse<CategoryDTO>>{
+    return this.http.put<GenericResponse<CategoryDTO>>(`${this.url}${this.rama}${id}`, request)
+  }
+
+  softDeleteCategory(id: number): Observable<GenericResponse<null>>{
+    return this.http.delete<GenericResponse<null>>(`${this.url}${this.rama}${id}`)
+  }
 }
