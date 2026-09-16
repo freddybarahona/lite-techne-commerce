@@ -1,1 +1,4 @@
-export interface ModificarCategoryInterface {}
+export interface UpdateCategoryRequest {
+  name: string
+  description: string
+}

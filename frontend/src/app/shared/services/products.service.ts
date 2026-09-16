@@ -25,7 +25,11 @@ export class ProductsService {
     return this.http.get<GenericResponse<ProductDTO[]>>(`${this.url}${this.rama}${id}`)
   }
 
-  UpdateProduct(id: number, request: number): Observable<GenericResponse<ProductDTO>>{
+  UpdateProduct(id: number, request: UdateProductRequest): Observable<GenericResponse<ProductDTO>>{
     return this.http.put<GenericResponse<ProductDTO>>(`${this.url}${this.rama}${id}`, request)
+  }
+
+  softDeleteProduct(id: number): Observable<GenericResponse<null>>{
+    return this.http.delete<GenericResponse<null>>(`${this.url}${this.rama}${id}`)
   }
 }
