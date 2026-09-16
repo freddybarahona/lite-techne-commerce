@@ -4,9 +4,9 @@ import { environment } from '../../../environments/environment';
 //los imports de environment que sean a produccion porque angular lo resolvera por su cuenta si no funciona
 import { Observable } from 'rxjs';
 import { GenericResponse } from '../../core/interfaces/generic.response';
-import { UserDTO } from '../interfaces/user.dto.interface';
-import { LoginRequest } from '../interfaces/login.request.interface';
-import { RegisterRequest } from '../interfaces/register.request.interface';
+import { UserDTO } from '../interfaces/auth/user.dto.interface';
+import { LoginRequest } from '../interfaces/auth/login.request.interface';
+import { RegisterRequest } from '../interfaces/auth/register.request.interface';
 import { ramas_disp } from '../../ramas';
 
 @Service()

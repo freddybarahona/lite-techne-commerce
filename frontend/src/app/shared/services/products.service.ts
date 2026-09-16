@@ -3,9 +3,10 @@ import { inject, Service } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { ramas_disp } from '../../ramas';
 import { GenericResponse } from '../../core/interfaces/generic.response';
-import { ProductDTO } from '../interfaces/product.dto.interface';
+import { ProductDTO } from '../interfaces/products/product.dto.interface';
 import { Observable } from 'rxjs';
-import { CreateProductRequest } from '../interfaces/create.product.request.interface';
+import { CreateProductRequest } from '../interfaces/products/create.product.request.interface';
+import { UpdateProductRequest } from '../interfaces/products/update.product.request';
 
 @Service()
 export class ProductsService {
@@ -25,7 +26,7 @@ export class ProductsService {
     return this.http.get<GenericResponse<ProductDTO[]>>(`${this.url}${this.rama}${id}`)
   }
 
-  UpdateProduct(id: number, request: UdateProductRequest): Observable<GenericResponse<ProductDTO>>{
+  UpdateProduct(id: number, request: UpdateProductRequest): Observable<GenericResponse<ProductDTO>>{
     return this.http.put<GenericResponse<ProductDTO>>(`${this.url}${this.rama}${id}`, request)
   }
 

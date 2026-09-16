@@ -2,11 +2,11 @@ import { inject, Service } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { GenericResponse } from '../../core/interfaces/generic.response';
-import { CreateCategoryRequest } from '../interfaces/create.category.request.interface';
-import { CategoryDTO } from '../interfaces/category.dto.interface';
+import { CreateCategoryRequest } from '../interfaces/categories/create.category.request.interface';
+import { CategoryDTO } from '../interfaces/categories/category.dto.interface';
 import { Observable } from 'rxjs';
 import { ramas_disp } from '../../ramas';
-import { UpdateCategoryRequest } from '../../update.category.request.interface';
+import { UpdateCategoryRequest } from '../interfaces/categories/update.category.request.interface';
 
 @Service()
 export class CategoriesService {

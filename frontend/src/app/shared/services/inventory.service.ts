@@ -4,9 +4,9 @@ import { environment } from '../../../environments/environment';
 import { ramas_disp } from '../../ramas';
 import { Observable } from 'rxjs';
 import { GenericResponse } from '../../core/interfaces/generic.response';
-import { InventoryDTO } from '../interfaces/inventory.dto';
-import { CreateInventoryRequest } from '../interfaces/create.inventory.request';
-import { UpdateInventoryRequest } from '../interfaces/update.inventory.request';
+import { InventoryDTO } from '../interfaces/inventories/inventory.dto';
+import { CreateInventoryRequest } from '../interfaces/inventories/create.inventory.request';
+import { UpdateInventoryRequest } from '../interfaces/inventories/update.inventory.request';
 
 @Service()
 export class InventoryService {
