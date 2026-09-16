@@ -17,8 +17,8 @@ export class CategoriesService {
     return this.http.post<GenericResponse<CategoryDTO>>(`${this.url}${this.rama}`, request)
   }
 
-  getCategories(): Observable<GenericResponse<CategoryDTO>>{
-    return this.http.get<GenericResponse<CategoryDTO>>(`${this.url}${this.rama}`)
+  getCategories(): Observable<GenericResponse<CategoryDTO[]>>{
+    return this.http.get<GenericResponse<CategoryDTO[]>>(`${this.url}${this.rama}`)
   } 
 
   getCategoryById(): Observable<GenericResponse<CategoryDTO>>{
