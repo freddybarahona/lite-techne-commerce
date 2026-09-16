@@ -16,3 +16,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimations()
   ]
 };
+
+
+//https://opncd.ai/share/PdVwkuwK
