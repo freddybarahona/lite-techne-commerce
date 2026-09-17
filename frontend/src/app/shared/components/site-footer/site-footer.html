@@ -1,14 +1,14 @@
 <footer class="mt-auto">
-  <div class="flex flex-wrap items-start justify-around gap-8 bg-[#1e1e1e] px-5 py-8 text-white">
+  <div class="flex flex-wrap items-start justify-around gap-8 bg-[#1e1e1e] px-5 py-8 text-white" animate.enter="footer-enter" animate.leave="footer-leave">
     <section class="min-w-50">
       <button type="button" (click)="toggle('industry')" [attr.aria-expanded]="industryVisible" class="cursor-pointer text-left text-lg font-bold transition-colors hover:text-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400">Lite-Techne</button>
-      @if (industryVisible) { <p class="mt-2 text-sm text-neutral-300">Ecommerce Administrativo de tecnologia</p> }
+      @if (industryVisible) { <p class="mt-2 text-sm text-neutral-300" animate.enter="footer-enter" animate.leave="footer-leave">Ecommerce Administrativo de tecnologia</p> }
     </section>
 
     <section class="min-w-50">
       <button type="button" (click)="toggle('information')" [attr.aria-expanded]="informationVisible" class="cursor-pointer text-left text-base font-bold transition-colors hover:text-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400">Información</button>
       @if (informationVisible) {
-        <div class="mt-2 space-y-1 text-sm text-neutral-300">
+        <div class="mt-2 space-y-1 text-sm text-neutral-300" animate.enter="footer-enter" animate.leave="footer-leave">
           <p>Términos y Condiciones</p>
           <p>Privacidad</p>
           <p>Soporte</p>
@@ -23,7 +23,7 @@
     <section class="min-w-50">
       <button type="button" (click)="toggle('social')" [attr.aria-expanded]="socialVisible" class="cursor-pointer text-left text-base font-bold transition-colors hover:text-cyan-400 focus:outline-none focus:ring-2 focus:ring-cyan-400">Redes Sociales</button>
       @if (socialVisible) {
-        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook de NovaMarket" class="mt-3 justify-text flex text-white transition-colors hover:text-cyan-400">
+        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook de NovaMarket" class="mt-3 justify-text flex text-white transition-colors hover:text-cyan-400" animate.enter="footer-enter" animate.leave="footer-leave">
           <svg viewBox="0 0 24 24" fill="currentColor" class="size-6" aria-hidden="true"><path d="M13.5 21v-8h2.75l.41-3.2H13.5V7.76c0-.93.26-1.56 1.59-1.56h1.7V3.34A22.7 22.7 0 0 0 14.3 3C11.84 3 10.15 4.5 10.15 7.27V9.8H7.5V13h2.65v8h3.35Z" /></svg>
         </a>
       }

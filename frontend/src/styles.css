@@ -1,3 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+
+@keyframes footer-enter {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.footer-enter {
+  animation: footer-enter 250ms ease-out;
+}
+
+.footer-leave {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 200ms ease-in, transform 200ms ease-in;
+}
