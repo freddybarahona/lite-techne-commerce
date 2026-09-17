@@ -1,1 +1,25 @@
-<p>login.component works!</p>
+<h2>Iniciar sesión</h2>
+
+<form (ngSubmit)="login()">
+  <div>
+    <label>Email</label>
+    <input type="email" name="email" [(ngModel)]="email" />
+  </div>
+  <div>
+    <label>Password</label>
+    <input type="password" name="password" [(ngModel)]="password" />
+  </div>
+
+  @if (loading()) {
+    <p>Verificando...</p>
+  }
+  @if (errors_back().length) {
+    <ul>
+      @for (e of errors_back(); track e) {
+        <li>{{ e }}</li>
+      }
+    </ul>
+  }
+
+  <button type="submit" [disabled]="loading()">Entrar</button>
+</form>

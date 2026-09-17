@@ -9,7 +9,11 @@ export type UserRole = 'ADMINISTRATOR' | 'SELLER' | 'CUSTOMER';
 export class AuthSessionService {
   private readonly platformId = inject(PLATFORM_ID);
   private readonly tokenKey = 'token';
-
+  saveToken(token: string){
+    if(isPlatformBrowser(this.platformId)){
+      localStorage.setItem(this.tokenKey, token)
+    }
+  }
   getToken(): string | null {
     if (!isPlatformBrowser(this.platformId)) {
       return null;
@@ -45,14 +49,11 @@ export class AuthSessionService {
     const role = this.getPayload()?.role;
     switch(Number(role)){
       case 1:
-        let final : UserRole= 'ADMINISTRATOR'
-        return final
+        return 'ADMINISTRATOR'
       case 2:
-        final= 'SELLER'
-        return final
+        return 'SELLER'
       case 3:
-        final= 'CUSTOMER'
-        return final
+        return 'CUSTOMER'
       default: 
         return null
     }
