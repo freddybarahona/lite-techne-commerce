@@ -8,30 +8,9 @@ import { ShellComponent } from './shared/components/shell.component/shell.compon
 
 export const routes: Routes = [
   {
-    path:'', component: ShellComponent, children: [
-      {path: 'about', component: AboutUsComponent},
-      {path: 'contact', component: ContactComponent},
-      {path: 'home', component: HomeComponent},
-      {
-        path: 'group-products',
-        loadChildren: () => import('./shared/components/group.products/group.customer.routes')
-      },
-      {
-        path: 'product',
-        loadChildren: () => import('./shared/components/specific.product/specific.product.routes')
-      },
-      {
-        path: 'seller',
-        canActivate: [authGuard, roleGuard],
-        data: { roles: ['SELLER'] },
-        loadChildren: () => import('./features/seller/seller.routes')
-      },
-      {
-        path: '', 
-        redirectTo: 'home', 
-        pathMatch: 'full'
-      },
-    ]
+    path:'', 
+    component: ShellComponent, 
+    loadChildren: () => import('./shared/components/shell.component/shell.routes')
   },
   {
     path: 'auth',
