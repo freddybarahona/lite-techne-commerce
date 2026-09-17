@@ -14,7 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideHttpClient(withInterceptors([authInterceptor])),
   ]
-};
+}
 
 
 //https://opncd.ai/share/PdVwkuwK

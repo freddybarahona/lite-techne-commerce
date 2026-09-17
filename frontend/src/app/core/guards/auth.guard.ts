@@ -7,7 +7,7 @@ import { jwtDecode} from 'jwt-decode';
 /** 
  * bloquea rutas privada cuando el buscador no tiene un jwt valido
 */
-export const authGuard: CanActivateFn = (route, state) => {
+export const authGuard: CanActivateFn = () => {
   const platformId = inject(PLATFORM_ID);
   if (!isPlatformBrowser(platformId)) {
     return true;
@@ -15,13 +15,6 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   const session = inject(AuthSessionService)
   const router = inject(Router);
-  
-  const token = session.getToken()
-  
-  if(!token){
-    return router.createUrlTree(['auth/login'])
-  }
 
-  const payload = jwtDecode<JwtPayload>
   return session.isAuthenticated() || router.createUrlTree(['/auth/login']);
 };

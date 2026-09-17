@@ -36,7 +36,9 @@ export class AuthSessionService {
       return false;
     }
 
-    return !payload.exp || payload.exp * 1000 > Date.now();
+    return !payload.exp // ¿no tiene expiración? → considerado válido
+    || payload.exp * 1000 > Date.now(); // ¿o aún no expiró? → válido
+    //valida el tiempo de expiracion si existe o si es mayor que el tiempo actual
   }
 
   getRole(): UserRole | null {
