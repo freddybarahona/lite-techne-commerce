@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { JwtPayload } from '../interfaces/jwt-payload';
+import { jwtDecode } from 'jwt-decode';
 
 export type UserRole = 'ADMINISTRATOR' | 'SELLER' | 'CUSTOMER';
 
@@ -22,17 +23,10 @@ export class AuthSessionService {
     if (!token) {
       return null;
     }
-
-    try {
-      const payload = token.split('.')[1];
-      if (!payload) {
-        return null;
-      }
-
-      const base64 = payload.replace(/-/g, '+').replace(/_/g, '/');
-      return JSON.parse(atob(base64)) as JwtPayload;
-    } catch {
-      return null;
+    try{
+      return jwtDecode<JwtPayload>(token)
+    }catch{
+      return null
     }
   }
 
@@ -47,9 +41,19 @@ export class AuthSessionService {
 
   getRole(): UserRole | null {
     const role = this.getPayload()?.role;
-    return role === 'ADMINISTRATOR' || role === 'SELLER' || role === 'CUSTOMER'
-      ? role
-      : null;
+    switch(Number(role)){
+      case 1:
+        let final : UserRole= 'ADMINISTRATOR'
+        return final
+      case 2:
+        final= 'SELLER'
+        return final
+      case 3:
+        final= 'CUSTOMER'
+        return final
+      default: 
+        return null
+    }
   }
 
   getDashboard(): string {
