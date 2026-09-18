@@ -11,7 +11,7 @@ http: #Sección de configuración para tráfico HTTP
       entryPoints: ["web"]
     
     inventory:
-      rule: "PathPrefix(`/inventory`)"
+      rule: "PathPrefix(`/inventory`) || PathPrefix(`/cart`)"
       service: inventory-svc
       entryPoints: ["web"]
     
