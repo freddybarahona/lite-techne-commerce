@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthSessionService } from '../../../core/auth/auth-session.service';
+
 
 @Component({
   selector: 'app-site-header',
@@ -8,6 +9,16 @@ import { AuthSessionService } from '../../../core/auth/auth-session.service';
   templateUrl: './site-header.html',
 })
 export class SiteHeader {
-  private readonly session = inject(AuthSessionService);
-  isLogged = () => this.session.isAuthenticated();
+  private readonly router = inject(Router)
+  private readonly session = inject(AuthSessionService)
+  isLogged = () => this.session.isAuthenticated()
+
+  logout(){
+    this.session.deleteToken()
+    this.router.navigate(['/home'])
+  }
+
+  get dashboard(){ //getter con binding una forma mejor de obtener y crear propiedad
+    return this.session.getDashboard()
+  }
 }

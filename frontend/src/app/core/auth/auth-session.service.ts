@@ -14,6 +14,13 @@ export class AuthSessionService {
       localStorage.setItem(this.tokenKey, token)
     }
   }
+
+  deleteToken(){
+    if(isPlatformBrowser(this.platformId)){
+      localStorage.removeItem(this.tokenKey)
+    }
+  }
+
   getToken(): string | null {
     if (!isPlatformBrowser(this.platformId)) {
       return null;
@@ -62,13 +69,13 @@ export class AuthSessionService {
   getDashboard(): string {
     switch (this.getRole()) {
       case 'ADMINISTRATOR':
-        return '/administrator';
+        return '/administrator'
       case 'SELLER':
-        return '/seller';
+        return '/seller'
       case 'CUSTOMER':
-        return '/customer';
+        return '/customer'
       default:
-        return '/auth/login';
+        return '/auth/login'
     }
   }
 }
