@@ -16,6 +16,10 @@ export class CartRepository implements ICartRepository{
     return await this.repository.findOneBy({cart_id: id})
   }
 
+  async updateCart({entity}:{entity: Cart}): Promise<Cart> {
+    return await this.repository.save(entity)
+  }
+
   async deleteCart({id}:{id: number}): Promise<boolean> {
     const result= await this.repository.delete(id)
     return result.affected ? true : false

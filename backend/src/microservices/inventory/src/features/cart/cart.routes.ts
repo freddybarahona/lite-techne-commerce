@@ -12,6 +12,7 @@ export default class CartRoutes{
 
   registrar_ruta(): Router{
     this.router.post("", this.auth.validate, this.createCart.bind(this))
+    this.router.patch("/:cart_id", this.auth.validate, this.modifyOne.bind(this))
     this.router.delete("/:cart_id", this.auth.validate, this.deleteOne.bind(this))
 
     return this.router
@@ -20,6 +21,12 @@ export default class CartRoutes{
   private async createCart(req: Request, res: Response){
     const controller=await this.maker.instance()
     const rsp = await controller.crearCart(req)
+    res.status(rsp.statusCode).json(rsp)
+  }
+
+  private async modifyOne(req: Request, res: Response){
+    const controller= await this.maker.instance()
+    const rsp= await controller.modificar_quantity_cart_id(req)
     res.status(rsp.statusCode).json(rsp)
   }
 
