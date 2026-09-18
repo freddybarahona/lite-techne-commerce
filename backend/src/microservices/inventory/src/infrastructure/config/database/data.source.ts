@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm";
 import { Environment } from "../../../core/config/env/env";
 import { Inventory } from "../../../domain/entities/inventory";
+import { Cart } from "../../../domain/entities/cart";
 import path from "node:path";
 
 export default class AppDataSource{
@@ -17,7 +18,7 @@ export default class AppDataSource{
         password: this.env.db_password,
         database: this.env.db_name,
         options: { encrypt: true, trustServerCertificate: true},
-        entities: [Inventory],
+        entities: [Inventory, Cart],
         migrations:[
           path.join(__dirname, "../../migrations/*.js")
         ],
