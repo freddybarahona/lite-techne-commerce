@@ -25,6 +25,12 @@ export default [
     loadChildren: () => import('../../../features/seller/seller.routes')
   },
   {
+    path: 'customer',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: ['CUSTOMER'] },
+    loadChildren: () => import('../../../features/customer/customer.routes')
+  },
+  {
     path: '', 
     redirectTo: 'home', 
     pathMatch: 'full'

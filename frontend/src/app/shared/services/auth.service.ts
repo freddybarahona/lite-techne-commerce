@@ -7,7 +7,7 @@ import { GenericResponse } from '../../core/interfaces/generic.response';
 import { UserDTO } from '../interfaces/auth/user.dto.interface';
 import { LoginRequest } from '../interfaces/auth/login.request.interface';
 import { RegisterRequest } from '../interfaces/auth/register.request.interface';
-import { ramas_disp } from '../../ramas';
+import { ramas_disp } from '../ramas';
 
 @Service()
 export class Auth {

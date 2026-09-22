@@ -5,7 +5,7 @@ import { GenericResponse } from '../../core/interfaces/generic.response';
 import { CreateCategoryRequest } from '../interfaces/categories/create.category.request.interface';
 import { CategoryDTO } from '../interfaces/categories/category.dto.interface';
 import { Observable } from 'rxjs';
-import { ramas_disp } from '../../ramas';
+import { ramas_disp } from '../ramas';
 import { UpdateCategoryRequest } from '../interfaces/categories/update.category.request.interface';
 
 @Service()

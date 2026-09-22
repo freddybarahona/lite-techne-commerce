@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { ramas_disp } from '../../ramas';
+import { ramas_disp } from '../ramas';
 import { GenericResponse } from '../../core/interfaces/generic.response';
 import { CartDTO } from '../interfaces/cart/cart.dto';
 import { Observable } from 'rxjs';
