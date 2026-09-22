@@ -2,7 +2,7 @@ import { environment } from "../environments/environment"
 
 const url= environment.back_url
 
-type ramas= "auth" | "categories" | "products" | "inventory" | "report"
+type ramas= "auth" | "categories" | "products" | "inventory" | "report" | "cart"
 
 type sub_ramas= "inventory-history" | ""
 
@@ -13,5 +13,6 @@ export type ramas_disp= Exclude<
   "/products/inventory-history" | 
   "/auth/inventory-history" | 
   "/categories/inventory-history" | 
-  "/inventory/inventory-history"
+  "/inventory/inventory-history" | 
+  "/cart/inventory-history"
 >
