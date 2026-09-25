@@ -18,7 +18,12 @@ export class SiteHeader {
   areElements=false
   
   getUserCart(){
-    this.cart.
+      this.cart.getCartItems(1).subscribe({next: (response) =>{
+        
+      }, error: (err) =>{
+
+      }
+    })
   }
 
 
