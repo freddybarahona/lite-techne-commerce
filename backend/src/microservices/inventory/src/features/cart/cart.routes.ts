@@ -15,7 +15,7 @@ export default class CartRoutes{
     this.router.post("", this.auth.validate, this.createCart.bind(this))
     this.router.patch("/:cart_id", this.auth.validate, this.modifyOne.bind(this))
     this.router.delete("/:cart_id", this.auth.validate, this.deleteOne.bind(this))
-    this.router.get("/:customer_id", this.auth.validate, this.getOne.bind(this))
+    this.router.get("", this.auth.validate, this.getOne.bind(this))
 
     return this.router
   }
