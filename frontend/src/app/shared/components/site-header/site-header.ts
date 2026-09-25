@@ -1,17 +1,21 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthSessionService } from '../../../core/auth/auth-session.service';
-
+import { ModalComponent } from '../modal/modal.component/modal.component';
 
 @Component({
   selector: 'app-site-header',
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive, ModalComponent],
   templateUrl: './site-header.html',
 })
 export class SiteHeader {
   private readonly router = inject(Router)
   private readonly session = inject(AuthSessionService)
+  cartOpen: boolean= false
+  cartSize:'sm'|'md'|'lg'= 'md'
+  areElements= false
   
+  openCart(){ this.cartOpen = true}
   
   isLogged = () => this.session.isAuthenticated()
 
