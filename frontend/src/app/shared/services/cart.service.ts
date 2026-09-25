@@ -14,8 +14,8 @@ export class CartService {
   private url= environment.back_url
   private rama: ramas_disp='/cart/' 
 
-  getCartItems(customer_id: number): Observable<GenericResponse<CartDTO>>{
-    return this.http.get<GenericResponse<CartDTO>>(`${this.url}${this.rama}/${customer_id}`)
+  getCartItems(): Observable<GenericResponse<CartDTO[]>>{
+    return this.http.get<GenericResponse<CartDTO[]>>(`${this.url}${this.rama}`)
   }
 
   createCartItem(request: CreateCartItemRequest): Observable<GenericResponse<CartDTO>>{

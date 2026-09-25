@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthSessionService } from '../../../core/auth/auth-session.service';
 import { ModalComponent } from '../modal/modal.component/modal.component';
 import { CartService } from '../../services/cart.service';
+import { CartDTO } from '../../interfaces/cart/cart.dto';
 
 @Component({
   selector: 'app-site-header',
@@ -16,10 +17,14 @@ export class SiteHeader {
   cartOpen: boolean= false
   cartSize:'sm'|'md'|'lg'= 'md'
   areElements=false
+  cartItems= signal<CartDTO[]>([])
   
   getUserCart(){
-      this.cart.getCartItems(1).subscribe({next: (response) =>{
-        
+      this.cart.getCartItems().subscribe({next: (response) =>{
+        if(response.data.length > 0){
+          this.areElements=true
+        }
+        console.log("obtuvimos bien la ruta")
       }, error: (err) =>{
 
       }
