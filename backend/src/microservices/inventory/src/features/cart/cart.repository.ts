@@ -16,6 +16,10 @@ export class CartRepository implements ICartRepository{
     return await this.repository.findOneBy({cart_id: id})
   }
 
+  async getCartByCustomerId({id}:{id: number}): Promise<Cart[] | null> {
+    return await this.repository.findBy({customer_id: id})
+  }
+
   async updateCart({entity}:{entity: Cart}): Promise<Cart> {
     return await this.repository.save(entity)
   }

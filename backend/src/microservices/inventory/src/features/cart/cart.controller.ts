@@ -8,6 +8,11 @@ import { UpdateCartRequest } from "../requests/update.cart.request"
 export class CartControllers{
   constructor(private readonly useCase: CartUseCases){}
 
+  async obtenerCart(req: Request){
+    const customer_id= (req as any).user.id
+    return await this.useCase.verificacionObtenerCart({customer_id: customer_id})
+  }
+
   async crearCart(req: Request){
     const request: CreateCartRequest={
       product_id: req.body.product_id,

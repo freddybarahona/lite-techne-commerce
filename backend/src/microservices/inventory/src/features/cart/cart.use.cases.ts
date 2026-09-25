@@ -12,6 +12,21 @@ import { UpdateCartRequest } from "../requests/update.cart.request";
 export class CartUseCases{
   constructor(private readonly repository: ICartRepository){}
 
+  async verificacionObtenerCart({customer_id}:{customer_id: number}): Promise<GenericResponse<CartDTO[] | null>>{
+    const errors: string[]= []
+    const carts= await this.repository.getCartByCustomerId({id: customer_id})
+    if(carts == null) errors.push(ResponseConstants.dbEmpty({entity:"cart data"}))
+    if(errors.length < 0) return formResponse.create({success: false, statusCode: 400, message: errors})
+
+    const DTO: CartDTO[]=[]
+    for (const cart of carts!) {
+      const process= CartMapper.mapDTO({entity:cart})
+      DTO.push(process)
+    }
+
+    return formResponse.create({success: true, statusCode: 200, message: [ResponseConstants.dbFull({cant: DTO.length, entity: 'cart data'})], dataDTO: DTO})
+  }
+
   async verificacionCreacionCart({request_validado, customer_id}:{request_validado: CreateCartRequest, customer_id: number}): Promise<GenericResponse<CartDTO | null>>{
     const errors: string[]= await ValidatorHelper.getErrors({request: request_validado})
     console.log("errores: ", errors)
