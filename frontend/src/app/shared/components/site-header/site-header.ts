@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthSessionService } from '../../../core/auth/auth-session.service';
 import { ModalComponent } from '../modal/modal.component/modal.component';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-site-header',
@@ -11,10 +12,16 @@ import { ModalComponent } from '../modal/modal.component/modal.component';
 export class SiteHeader {
   private readonly router = inject(Router)
   private readonly session = inject(AuthSessionService)
+  private readonly cart= inject(CartService)
   cartOpen: boolean= false
   cartSize:'sm'|'md'|'lg'= 'md'
-  areElements= false
+  areElements=false
   
+  getUserCart(){
+    this.cart.
+  }
+
+
   openCart(){ this.cartOpen = true}
   
   isLogged = () => this.session.isAuthenticated()
@@ -32,10 +39,10 @@ export class SiteHeader {
     return this.session.getDashboard()
   }
 
-  get cart(){
+  /* get cart(){
     const subrute= this.dashboard + '/cart'
     return subrute
-  }
+  } */
 
   get subrute(){
     switch(this.dashboard){
