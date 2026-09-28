@@ -12,7 +12,7 @@ import { UpdateInventoryRequest } from '../interfaces/inventories/update.invento
 export class InventoryService {
   private http= inject(HttpClient)
   private url= `${environment.back_url}`
-  private rama: ramas_disp= '/products/'
+  private rama: ramas_disp= '/inventory/'
 
   createInventory(request: CreateInventoryRequest): Observable<GenericResponse<InventoryDTO>>{
     return this.http.post<GenericResponse<InventoryDTO>>(`${this.url}${this.rama}`, request)

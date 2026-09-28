@@ -1,4 +1,4 @@
-import { Component, computed, HostListener, input, output } from '@angular/core';
+import { Component, HostListener, input, output } from '@angular/core';
 
 @Component({
   imports: [],

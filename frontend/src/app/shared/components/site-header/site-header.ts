@@ -7,6 +7,7 @@ import { CartDTO } from '../../interfaces/cart/cart.dto';
 
 @Component({
   selector: 'app-site-header',
+  host: { class: 'sticky top-0 z-40 block'},
   imports: [RouterLink, RouterLinkActive, ModalComponent],
   templateUrl: './site-header.html',
 })

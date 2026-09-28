@@ -1,1 +1,79 @@
-<p>home.component works!</p>
+<section class="p-5 sm:p-8">                          <!-- margen como tarjetas -->
+  <div class="relative">
+    <div class="overflow-hidden rounded-2xl" #viewport> <!-- este es el viewport -->
+      <div class="flex touch-pan-y">
+        @for (slide of slides(); track slide.url) {
+          <div class="min-w-0 flex-[0_0_100%]">
+            <img [src]="slide.url" alt="..." class="h-64 w-full object-cover sm:h-96 md:h-[28rem]">
+          </div>
+        }
+      </div>
+    </div>
+    <!-- flechas -->
+    <button (click)="prev()"
+  class="absolute left-3 top-1/2 z-10 grid size-12 -translate-y-1/2 place-items-center text-6xl leading-none text-slate-500">
+  ‹
+</button>
+<button (click)="next()"
+  class="absolute right-3 top-1/2 z-10 grid size-12 -translate-y-1/2 place-items-center text-6xl leading-none text-slate-500">
+  ›
+</button>
+    <!-- puntos -->
+    <div class="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-2">
+      @for (i of dots(); track i) {
+        <button (click)="go(i)" class="size-2.5 rounded-full transition"
+                [class.bg-cyan-500]="selected() === i"
+                [class.bg-white/60]="selected() !== i"></button>
+      }
+    </div>
+  </div>
+</section>
+<section class="p-5 pb-16 sm:p-8 sm:pb-20">
+  <div class="max-w-3xl">
+    <span class="text-xs font-bold uppercase tracking-widest text-cyan-600">Nuestras categorias</span>
+    <h2 class="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">ELECTRONICS</h2>
+    <div class="mt-3 h-1 w-14 rounded-full bg-cyan-500"></div>
+    <p class="mt-5 text-base leading-relaxed text-slate-500">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
+      et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+      aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur.
+    </p>
+  </div>
+</section>
+<section class="p-5 pb-16 sm:p-8 sm:pb-20">
+  <div class="ml-auto max-w-3xl text-right">
+    <h2 class="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">GAMING</h2>
+    <div class="ml-auto mt-3 h-1 w-14 rounded-full bg-cyan-500"></div>
+    <p class="mt-5 text-base leading-relaxed text-slate-500">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
+      et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+      aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur.
+    </p>
+  </div>
+</section>
+<section class="p-5 pb-16 sm:p-8 sm:pb-20">
+  <div class="max-w-3xl">
+    <h2 class="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">MONITORS</h2>
+    <div class="mt-3 h-1 w-14 rounded-full bg-cyan-500"></div>
+    <p class="mt-5 text-base leading-relaxed text-slate-500">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
+      et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+      aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur.
+    </p>
+  </div>
+</section>
+<section class="p-5 pb-16 sm:p-8 sm:pb-20">
+  <div class="ml-auto max-w-3xl text-right">
+    <h2 class="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">ACCESORIES</h2>
+    <div class="ml-auto mt-3 h-1 w-14 rounded-full bg-cyan-500"></div>
+    <p class="mt-5 text-base leading-relaxed text-slate-500">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
+      et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+      aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur.
+    </p>
+  </div>
+</section>

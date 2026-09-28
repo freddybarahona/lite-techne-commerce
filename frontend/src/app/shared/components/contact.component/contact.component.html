@@ -1,1 +1,63 @@
-<p>contact.component works!</p>
+<section class="p-5 sm:p-8">
+  <div class="mt-5 grid overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm lg:grid-cols-3">
+    <!-- 1) INFO EMPRESA -->
+    <div class="flex flex-col gap-6 p-6">
+      <div class="flex items-start gap-3">
+        <span class="grid size-10 shrink-0 place-items-center rounded-lg bg-cyan-100 text-cyan-600">
+          <!-- SVG teléfono -->
+        </span>
+        <div>
+          <p class="text-sm font-bold text-slate-900">Teléfono</p>
+          @for(telefono of telefonos(); track telefono.ind){
+            <p class="text-sm text-slate-500">{{telefono.telf}}</p>
+          }
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <span class="grid size-10 shrink-0 place-items-center rounded-lg bg-cyan-100 text-cyan-600">
+          <!-- SVG ubicación -->
+        </span>
+        <div>
+          <p class="text-sm font-bold text-slate-900">Dirección</p>
+          @for(direccion of direcciones(); track direccion.ind){
+            <p class="text-sm text-slate-500">{{direccion.dir}}</p>
+          }
+        </div>
+      </div>
+      <div class="flex items-start gap-3">
+        <span class="grid size-10 shrink-0 place-items-center rounded-lg bg-cyan-100 text-cyan-600">
+          <!-- SVG correo -->
+        </span>
+        <div>
+          <p class="text-sm font-bold text-slate-900">Correo electrónico</p>
+          @for(correo of correos(); track correo.ind){
+            <p class="text-sm text-slate-500">{{correo.correo}}</p>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- 2) IMAGEN VERTICAL EDIFICIO -->
+    <div class="relative min-h-64 lg:h-full">
+      <img
+        src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80"
+        alt="Nuestra oficina"
+        class="absolute inset-0 h-full w-full object-cover" />
+    </div>
+
+    <!-- 3) FORMULARIO -->
+    <div class="p-6">
+      <h2 class="text-xl font-bold tracking-tight text-slate-900">Ponerse en contacto</h2>
+      <form class="mt-5 flex flex-col gap-4">
+        <input type="text" placeholder="Nombre"
+          class="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/30" />
+        <input type="email" placeholder="Correo electrónico"
+          class="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/30" />
+        <button type="submit"
+          class="mt-1 rounded-lg bg-cyan-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2">
+          Enviar
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
