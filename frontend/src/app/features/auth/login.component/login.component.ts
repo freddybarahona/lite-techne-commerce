@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LoginRequest } from '../../../shared/interfaces/auth/login.request.interface';
 import { Auth } from '../../../shared/services/auth.service';
 import { AuthSessionService } from '../../../core/auth/auth-session.service';
@@ -7,7 +7,8 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
   imports: [
-    FormsModule
+    FormsModule,
+    RouterLink
   ],
   selector: 'app-login.component',
   templateUrl: './login.component.html',
@@ -19,6 +20,7 @@ export class LoginComponent {
 
   public email = ''
   public password = ''
+  public showPassword = signal(false)
   public errors_back = signal<string[]>([])
   public loading = signal(false)
 

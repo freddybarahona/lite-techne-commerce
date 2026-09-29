@@ -1,25 +1,94 @@
-<h2>Iniciar sesión</h2>
+<section class="grid min-h-screen place-items-center bg-gradient-to-br from-white via-slate-50 to-cyan-50/40 px-5 py-12">
+  <main class="w-full max-w-4xl overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm lg:grid lg:grid-cols-2">
 
-<form (ngSubmit)="login()">
-  <div>
-    <label>Email</label>
-    <input type="email" name="email" [(ngModel)]="email" />
-  </div>
-  <div>
-    <label>Password</label>
-    <input type="password" name="password" [(ngModel)]="password" />
-  </div>
+    <!-- panel de marca -->
+    <div class="flex flex-col bg-gradient-to-br from-cyan-600 to-cyan-800 p-8 text-white sm:p-10">
+      <div class="flex items-center gap-3">
+        <a routerLink="/" aria-label="Volver al inicio" title="Volver al inicio"
+           class="grid size-11 shrink-0 place-items-center rounded-lg text-cyan-100 transition-colors hover:bg-white/10 hover:text-white">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+          </svg>
+        </a>
+        <div class="flex items-center gap-3">
+          <span class="grid size-12 place-items-center rounded-xl bg-white/15">
+            <!-- SVG building-storefront del header -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z" />
+            </svg>
+          </span>
+          <span class="text-2xl font-bold tracking-tight">Lite-Techne</span>
+        </div>
+      </div>
+      <div class="flex flex-1 flex-col justify-center">
+        <span class="mt-14 text-xs font-bold uppercase tracking-widest text-cyan-200">Bienvenido de nuevo</span>
+        <h1 class="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">Tu tienda tecnológica, un paso adentro.</h1>
+        <div class="mt-4 h-1 w-14 rounded-full bg-white"></div>
+        <p class="mt-6 text-sm leading-relaxed text-cyan-100">Accede para gestionar productos y tus pedidos.</p>
+        <!-- <ul class="mt-8 flex flex-col gap-3 text-sm text-cyan-100">
+          <li class="flex items-center gap-2.5"><span class="size-2 rounded-full bg-cyan-300"></span>Catálogo centralizado</li>
+          <li class="flex items-center gap-2.5"><span class="size-2 rounded-full bg-cyan-300"></span>Roles por usuario</li>
+          <li class="flex items-center gap-2.5"><span class="size-2 rounded-full bg-cyan-300"></span>Reportes en tiempo real</li>
+        </ul> -->
+      </div>
+    </div>
 
-  @if (loading()) {
-    <p>Verificando...</p>
-  }
-  @if (errors_back().length) {
-    <ul>
-      @for (e of errors_back(); track e) {
-        <li>{{ e }}</li>
+    <!-- formulario -->
+    <div class="flex flex-col justify-center p-8 sm:p-10">
+      <span class="text-xs font-bold uppercase tracking-widest text-cyan-600">Bienvenido de nuevo</span>
+      <h2 class="mt-2 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">Inicia sesión en tu cuenta</h2>
+      <div class="mt-3 h-1 w-14 rounded-full bg-cyan-500"></div>
+
+      @if (errors_back().length) {
+        <div class="mt-6 rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-600" role="alert">
+          <p class="font-semibold">No pudimos iniciar sesión</p>
+          <ul class="mt-1 list-inside list-disc">
+            @for (e of errors_back(); track e) { <li>{{ e }}</li> }
+          </ul>
+        </div>
       }
-    </ul>
-  }
 
-  <button type="submit" [disabled]="loading()">Entrar</button>
-</form>
+      <form (ngSubmit)="login()" class="mt-6 flex flex-col gap-5">
+        <div class="flex flex-col gap-1.5">
+          <label for="email" class="text-sm font-semibold text-slate-700">Correo electrónico</label>
+          <input id="email" type="email" name="email" [(ngModel)]="email" required autocomplete="email"
+            class="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/30" />
+        </div>
+        <div class="flex flex-col gap-1.5">
+          <label for="password" class="text-sm font-semibold text-slate-700">Contraseña</label>
+          <div class="relative">
+            <input id="password" name="password" [type]="showPassword() ? 'text' : 'password'"
+              [(ngModel)]="password" required autocomplete="current-password"
+              class="w-full rounded-lg border border-slate-200 py-2.5 pl-4 pr-11 text-sm text-slate-900 placeholder:text-slate-400 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/30" />
+            <button type="button" (click)="showPassword.set(!showPassword())"
+              [attr.aria-label]="showPassword() ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+              class="absolute right-2 top-1/2 grid size-8 -translate-y-1/2 place-items-center rounded-lg text-slate-400 transition-colors hover:text-slate-600">
+              @if (showPassword()) {
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
+                </svg>
+              } @else {
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
+              }
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="loading()"
+          class="mt-1 flex items-center justify-center gap-2 rounded-lg bg-cyan-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60">
+          @if (loading()) {
+            <span class="size-4 animate-spin rounded-full border-2 border-white/40 border-t-white" aria-hidden="true"></span>
+            Entrando...
+          } @else { Entrar }
+        </button>
+      </form>
+
+      <p class="mt-6 text-center text-sm text-slate-500">¿No tienes cuenta?
+        <a routerLink="/auth/register" class="font-semibold text-cyan-600 hover:text-cyan-700">Regístrate</a>
+      </p>
+    </div>
+  </main>
+</section>
