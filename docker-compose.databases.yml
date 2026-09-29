@@ -20,11 +20,11 @@ services:
     image: postgres:17
     container_name: bd-lite-techne-auth
     environment:
-      POSTGRES_DB: bd-lite-techne
+      POSTGRES_DB: bd-lite-techne-auth
       POSTGRES_USER: adminadmin
       POSTGRES_PASSWORD: adminadmin
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U adminadmin -d bd-lite-techne"]
+      test: ["CMD-SHELL", "pg_isready -U adminadmin -d bd-lite-techne-auth"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -35,13 +35,13 @@ services:
     volumes:
       - lite-techne:/var/lib/postgresql/data
 
-  bd-lite-techne-catalog:
+  bd-lite-techne-c-i-r:
     image: mcr.microsoft.com/mssql/server:2025-latest
-    container_name: bd-lite-techne-catalog
+    container_name: bd-lite-techne-c-i-r
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: "Admin1234@"
-      MSSQL_MEMORY_LIMIT_MB: "768" #por defecto esto esta en 1024 MB o 1GB
+      MSSQL_MEMORY_LIMIT_MB: "2048" #por defecto esto esta en 1024 MB o 1GB
     healthcheck:
       test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q \"SELECT 1\" || exit 1"]
       interval: 10s
@@ -53,45 +53,7 @@ services:
     restart: unless-stopped
     volumes:
       - catalog-db-data:/var/opt/mssql
-
-  bd-lite-techne-inventory:
-    image: mcr.microsoft.com/mssql/server:2025-latest
-    container_name: bd-lite-techne-inventory
-    environment:
-      ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "Admin1234@"
-      MSSQL_MEMORY_LIMIT_MB: "768"
-    healthcheck:
-      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q \"SELECT 1\" || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 15
-      start_period: 45s
-    ports:
-      - "1434:1433"
-    restart: unless-stopped
-    volumes:
-      - inventory-db-data:/var/opt/mssql
-
-  bd-lite-techne-report:
-    image: mcr.microsoft.com/mssql/server:2025-latest
-    container_name: bd-lite-techne-report
-    environment:
-      ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "Admin1234@"
-      MSSQL_MEMORY_LIMIT_MB: "768"
-    healthcheck:
-      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q \"SELECT 1\" || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 15
-      start_period: 45s
-    ports:
-      - "1435:1433"
-    restart: unless-stopped
-    volumes:
-      - report-db-data:/var/opt/mssql
-
+      
 volumes:
   catalog-db-data:
   inventory-db-data:
