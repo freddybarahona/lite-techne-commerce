@@ -1,0 +1,26 @@
+# Node
+**/node_modules
+**/dist
+**/package-lock.json
+**/.npmrc
+
+# Entorno y secretos
+**/.env.*
+!**/.env.example
+
+# Git
+.git
+.gitignore
+
+# Logs
+**/*.log
+**/npm-debug.log*
+
+# Editor / IDE
+.vscode
+.idea
+*.swp
+
+# Sistema
+.DS_Store
+Thumbs.db

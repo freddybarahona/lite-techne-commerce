@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, Unique } from "typeorm"
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, Unique, UpdateDateColumn } from "typeorm"
 
 @Entity("inventories")
 @Unique("UQ_PRODUCT_ID", ['product_id']) 
@@ -20,6 +20,15 @@ export class Inventory{
   
   @Column()
   last_movement!: Date
+
+  @CreateDateColumn()
+  created_at!: Date
+
+  @UpdateDateColumn()
+  updated_at!: Date
+
+  @DeleteDateColumn()
+  deleted_at!: Date
 }
 //el nodemon necesita reiniciarse para este tipo 
 //de constraints porque sino no lo lee ya que 
