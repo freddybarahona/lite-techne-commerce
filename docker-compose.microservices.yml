@@ -20,6 +20,10 @@ services:
       SYNCHRONIZE: false
       LOGGING: false
       JWT_SECRET: secretodetest
+      DB_HOST: host.docker.internal
+      DB_PORT: 1433
+      DB_USER: sa
+      DB_PASSWORD: "Admin1234@"
     depends_on:
       bd-lite-techne-c-i-r:
         condition: service_healthy
@@ -34,6 +38,10 @@ services:
       SYNCHRONIZE: false
       LOGGING: false
       JWT_SECRET: secretodetest
+      DB_HOST: host.docker.internal
+      DB_PORT: 1433
+      DB_USER: sa
+      DB_PASSWORD: "Admin1234@"
     depends_on:
       bd-lite-techne-c-i-r:
         condition: service_healthy
@@ -48,6 +56,10 @@ services:
       SYNCHRONIZE: false
       LOGGING: false
       JWT_SECRET: secretodetest
+      DB_HOST: host.docker.internal
+      DB_PORT: 1433
+      DB_USER: sa
+      DB_PASSWORD: "Admin1234@"
     depends_on:
       bd-lite-techne-c-i-r:
         condition: service_healthy

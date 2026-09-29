@@ -1,4 +1,4 @@
-name: lite-techne-databases
+name: lite-techne-microservices
 
 services:
   rabbitmq:
@@ -52,12 +52,11 @@ services:
       - "1433:1433"
     restart: unless-stopped
     volumes:
-      - catalog-db-data:/var/opt/mssql
-      
+      - c-i-r:/var/opt/mssql
+
 volumes:
-  catalog-db-data:
-  inventory-db-data:
-  report-db-data:
+  c-i-r:
+    external: true
   rabbitmq-data:
   lite-techne:
     external: true
