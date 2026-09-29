@@ -1,5 +1,5 @@
 /backend
-
+/backups
 /node_modules
 
 .package-lock.json
