@@ -74,12 +74,23 @@ export class InventoryUseCases{
     }
     
     inventory_data.stock== undefined? exists!.stock : exists!.stock= inventory_data.stock
-    inventory_data.reserved_stock== undefined? exists!.reserved_stock : exists!.reserved_stock= inventory_data.reserved_stock!
+
+    if(inventory_data.reserved_stock != undefined){
+      // SEMANTICA NUEVA: el input se RESTA del reserved actual
+      if(inventory_data.reserved_stock > exists!.reserved_stock){
+        errors.push("la cantidad a restar supera el reserved actual")
+        return formResponse.create({success: false, statusCode: 400, message: errors})
+      }
+      exists!.reserved_stock = exists!.reserved_stock - inventory_data.reserved_stock
+    }
+
+    // guard del mínimo previo: el reserved final no puede superar el stock final
     if(exists!.reserved_stock > exists!.stock){
       errors.push("reserved_stock no puede superar el stock disponible")
       return formResponse.create({success: false, statusCode: 400, message: errors})
     }
-    exists!.minimum_stock= exists!.stock-inventory_data.reserved_stock!
+
+    exists!.minimum_stock = exists!.stock - exists!.reserved_stock
     //console.log(exists)
 
     const repo_result= await this.repository.modInventoryById({entity: exists!})
