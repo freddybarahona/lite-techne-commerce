@@ -12,6 +12,7 @@
              [attr.aria-label]="'Ver detalle de ' + card.name"></a>
           <h3 class="text-lg font-bold text-slate-900">{{ card.name }}</h3>
           <p class="mt-1 line-clamp-3 text-sm text-slate-500">{{ card.description }}</p>
+          <p class="mt-1 line-clamp-3 text-sm text-slate-500">{{ card.category }}</p>
           <p class="mt-3 text-xl font-extrabold text-cyan-600">{{ card.price | currency}}</p>
           <div class="mt-4 flex items-center gap-2">
             @if (card.available > 0) {
@@ -29,7 +30,7 @@
   }
 </section>
 
-
-<!-- 
+<!-- https://opncd.ai/share/DL3bQ79y -->
+ <!-- 
 CurrencyPipe formatea un número como dinero: le agrega símbolo de moneda, separadores de miles y decimales según la configuración. Lo que tú harías a mano ("$1,999.50") lo hace el pipe.
 -->

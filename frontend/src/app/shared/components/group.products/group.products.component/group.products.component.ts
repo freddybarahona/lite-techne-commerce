@@ -40,11 +40,12 @@ export class GroupProductsComponent implements OnInit {
           product_id: p.product_id,
           name: p.name,
           description: p.description,
+          category: p.category.category_id== 1? 'Electronics' : p.category.category_id== 2? 'Gaming' : p.category.category_id== 3? 'Monitors' : 'Accesories',
           price: p.price,
           is_active: p.is_active,
           stock: inv?.stock ?? 0,
           reserved_stock: inv?.reserved_stock ?? 0,
-          available: inv ? inv.stock - inv.reserved_stock : 0,
+          available: inv?.minimum_stock ?? 0,
         } satisfies InventoryByProduct //util para return basado en fidelidad de interfaz sin rellenar manualmente
       }) 
       
