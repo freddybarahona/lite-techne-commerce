@@ -5,10 +5,12 @@ import { forkJoin } from 'rxjs';
 import { ProductDTO } from '../../../interfaces/products/product.dto.interface';
 import { InventoryByProduct } from '../../../interfaces/inventory.by.product';
 import { CurrencyPipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   imports: [
-    CurrencyPipe
+    CurrencyPipe,
+    RouterLink
   ],
   selector: 'app-group.products.component',
   templateUrl: './group.products.component.html',
