@@ -75,7 +75,11 @@ export class InventoryUseCases{
     
     inventory_data.stock== undefined? exists!.stock : exists!.stock= inventory_data.stock
     inventory_data.reserved_stock== undefined? exists!.reserved_stock : exists!.reserved_stock= inventory_data.reserved_stock!
-    exists!.minimum_stock= inventory_data.stock!-inventory_data.reserved_stock!
+    if(exists!.reserved_stock > exists!.stock){
+      errors.push("reserved_stock no puede superar el stock disponible")
+      return formResponse.create({success: false, statusCode: 400, message: errors})
+    }
+    exists!.minimum_stock= exists!.stock-inventory_data.reserved_stock!
     //console.log(exists)
 
     const repo_result= await this.repository.modInventoryById({entity: exists!})
