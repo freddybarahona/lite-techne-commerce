@@ -10,49 +10,61 @@
     </a>
 
     <ul class="mx-auto flex max-w-3xl flex-wrap items-center justify-center gap-2 sm:justify-around sm:gap-5">
-      <li><a routerLink="/home" routerLinkActive="bg-cyan-500 !text-slate-950" [routerLinkActiveOptions]="{ exact: true }" class="block rounded-lg px-4 py-2 text-sm font-extrabold text-gray transition-colors hover:text-cyan-400">Home</a></li>
-      <li><a routerLink="/group-products" routerLinkActive="bg-cyan-500 !text-slate-950" class="block rounded-lg px-4 py-2 text-sm font-extrabold text-gray transition-colors hover:text-cyan-400">Productos</a></li>
+      <li><a routerLink="/home" [class.text-cyan-400]="isActive('/home')" [class.text-slate-600]="!isActive('/home')" class="group flex flex-col items-center gap-1 px-4 py-2 text-sm font-extrabold transition-colors hover:text-cyan-400"><span>Home</span><span class="h-1 w-full rounded-full transition-colors duration-200 group-hover:bg-cyan-400" [class.bg-transparent]="!isActive('/home')" [class.bg-cyan-400]="isActive('/home')"></span></a></li>
+      <li><a routerLink="/group-products" [class.text-cyan-400]="isActive('/group-products')" [class.text-slate-600]="!isActive('/group-products')" class="group flex flex-col items-center gap-1 px-4 py-2 text-sm font-extrabold transition-colors hover:text-cyan-400"><span>Productos</span><span class="h-1 w-full rounded-full transition-colors duration-200 group-hover:bg-cyan-400" [class.bg-transparent]="!isActive('/group-products')" [class.bg-cyan-400]="isActive('/group-products')"></span></a></li>
       @if(!isLogged()){
-        <li><a routerLink="/about" routerLinkActive="bg-cyan-500 !text-slate-950" class="block rounded-lg px-4 py-2 text-sm font-extrabold text-gray transition-colors hover:text-cyan-400">Sobre nosotros</a></li>
-        <li><a routerLink="/contact" routerLinkActive="bg-cyan-500 !text-slate-950" class="block rounded-lg px-4 py-2 text-sm font-extrabold text-gray transition-colors hover:text-cyan-400">Contacto</a></li>
+        <li><a routerLink="/about" [class.text-cyan-400]="isActive('/about')" [class.text-slate-600]="!isActive('/about')" class="group flex flex-col items-center gap-1 px-4 py-2 text-sm font-extrabold transition-colors hover:text-cyan-400"><span>Sobre nosotros</span><span class="h-1 w-full rounded-full transition-colors duration-200 group-hover:bg-cyan-400" [class.bg-transparent]="!isActive('/about')" [class.bg-cyan-400]="isActive('/about')"></span></a></li>
+        <li><a routerLink="/contact" [class.text-cyan-400]="isActive('/contact')" [class.text-slate-600]="!isActive('/contact')" class="group flex flex-col items-center gap-1 px-4 py-2 text-sm font-extrabold transition-colors hover:text-cyan-400"><span>Contacto</span><span class="h-1 w-full rounded-full transition-colors duration-200 group-hover:bg-cyan-400" [class.bg-transparent]="!isActive('/contact')" [class.bg-cyan-400]="isActive('/contact')"></span></a></li>
       }
         @if (isLogged()) {
           @if (role=='SELLER'){
             <li>
-              <a [routerLink]="dashboard" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="bg-cyan-500 !text-slate-950" class="bg-cyan-500 !text-slate-950" class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-extrabold text-gray transition-colors hover:text-cyan-400">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
-                </svg>
-                Inventario
+              <a [routerLink]="dashboard" [class.text-cyan-400]="isActive('/seller')" [class.text-slate-600]="!isActive('/seller')" class="group flex flex-col items-center gap-1 px-4 py-2 text-sm font-extrabold transition-colors hover:text-cyan-400">
+                <span class="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                  </svg>
+                  Inventario
+                </span>
+                <span class="h-1 w-full rounded-full transition-colors duration-200 group-hover:bg-cyan-400" [class.bg-transparent]="!isActive('/seller')" [class.bg-cyan-400]="isActive('/seller')"></span>
               </a>
             </li>
           }
           @if (role=='ADMINISTRATOR'){
             <li>
-              <a [routerLink]="dashboard" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="bg-cyan-500 !text-slate-950" class="bg-cyan-500 !text-slate-950" class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-extrabold text-gray transition-colors hover:text-cyan-400">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
-                </svg>
-                Usuarios
+              <a [routerLink]="dashboard" [class.text-cyan-400]="isActive('/administrator')" [class.text-slate-600]="!isActive('/administrator')" class="group flex flex-col items-center gap-1 px-4 py-2 text-sm font-extrabold transition-colors hover:text-cyan-400">
+                <span class="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                  </svg>
+                  Usuarios
+                </span>
+                <span class="h-1 w-full rounded-full transition-colors duration-200 group-hover:bg-cyan-400" [class.bg-transparent]="!isActive('/administrator')" [class.bg-cyan-400]="isActive('/administrator')"></span>
               </a>
             </li>
             <li>
-              <a [routerLink]="subrute" routerLinkActive="bg-cyan-500 !text-slate-950" class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-extrabold text-gray transition-colors hover:text-cyan-400">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
-                </svg>
-                Inventario
+              <a [routerLink]="subrute" [class.text-cyan-400]="isActive('/administrator/report-items')" [class.text-slate-600]="!isActive('/administrator/report-items')" class="group flex flex-col items-center gap-1 px-4 py-2 text-sm font-extrabold transition-colors hover:text-cyan-400">
+                <span class="flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+                  </svg>
+                  Inventario
+                </span>
+                <span class="h-1 w-full rounded-full transition-colors duration-200 group-hover:bg-cyan-400" [class.bg-transparent]="!isActive('/administrator/report-items')" [class.bg-cyan-400]="isActive('/administrator/report-items')"></span>
               </a>
             </li>
           }
         }
     </ul>
     @if (!isLogged()) {
-      <a routerLink="/auth/login" class="inline-flex items-center gap-2 rounded-lg bg-cyan-500 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" />
-        </svg>
-        Login
+      <a routerLink="/auth/login" [class.text-cyan-400]="isActive('/auth/login')" [class.text-slate-600]="!isActive('/auth/login')" class="group flex flex-col items-center gap-1 px-4 py-2 text-sm font-extrabold transition-colors hover:text-cyan-400">
+        <span class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 9V5.25A2.25 2.25 0 0 1 10.5 3h6a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 16.5 21h-6a2.25 2.25 0 0 1-2.25-2.25V15M12 9l3 3m0 0-3 3m3-3H2.25" />
+          </svg>
+          Login
+        </span>
+        <span class="h-1 w-full rounded-full transition-colors duration-200 group-hover:bg-cyan-400" [class.bg-transparent]="!isActive('/auth/login')" [class.bg-cyan-400]="isActive('/auth/login')"></span>
       </a>
     }@else{
       <div class="flex items-center gap-2">

@@ -1,5 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, NavigationEnd } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { filter } from 'rxjs';
 import { AuthSessionService } from '../../../core/auth/auth-session.service';
 import { ModalComponent } from '../modal/modal.component/modal.component';
 import { CartService } from '../../services/cart.service';
@@ -8,7 +10,7 @@ import { CartDTO } from '../../interfaces/cart/cart.dto';
 @Component({
   selector: 'app-site-header',
   host: { class: 'sticky top-0 z-40 block'},
-  imports: [RouterLink, RouterLinkActive, ModalComponent],
+  imports: [RouterLink, ModalComponent],
   templateUrl: './site-header.html',
 })
 export class SiteHeader {
@@ -19,6 +21,15 @@ export class SiteHeader {
   cartSize:'sm'|'md'|'lg'= 'md'
   areElements=false
   cartItems= signal<CartDTO[]>([])
+  currentUrl= signal(this.router.url)
+
+  constructor() {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd), takeUntilDestroyed())
+      .subscribe(() => this.currentUrl.set(this.router.url))
+  }
+
+  isActive = (path: string) => this.currentUrl() === path || (path === '/home' && this.currentUrl() === '/')
   
   getUserCart(){
       this.cart.getCartItems().subscribe({next: (response) =>{
