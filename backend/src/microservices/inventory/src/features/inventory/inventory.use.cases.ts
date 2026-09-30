@@ -81,7 +81,7 @@ export class InventoryUseCases{
         errors.push("la cantidad a restar supera el reserved actual")
         return formResponse.create({success: false, statusCode: 400, message: errors})
       }
-      exists!.reserved_stock = exists!.reserved_stock - inventory_data.reserved_stock
+      exists!.reserved_stock = exists!.reserved_stock + inventory_data.reserved_stock
     }
 
     // guard del mínimo previo: el reserved final no puede superar el stock final
