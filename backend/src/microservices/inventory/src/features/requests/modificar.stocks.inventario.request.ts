@@ -15,10 +15,6 @@ export class ModificarStocksInventarioRequest{
   @IsNumber({},{message: ResponseConstants.onlyTypes({campo: "reserved", type: "enteros"}) })
   reserved_stock?: number
   
-  @IsOptional()
-  @IsNumber({},{message: ResponseConstants.onlyTypes({campo: "minimum", type: "enteros"}) })
-  minimum_stock?: number
-  
   @IsDate({message: ResponseConstants.onlyTypes({campo: "last_movement", type: "fecha"}) })
   @IsNotEmpty({message: ResponseConstants.requiredSpace({campo:"last_movement"})})
   last_movement!: Date
