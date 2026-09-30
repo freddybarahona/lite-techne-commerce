@@ -5,7 +5,7 @@ services:
     image: rabbitmq:3-management
     container_name: lite-techne-rabbitmq
     healthcheck:
-      test: ["CMD-SHELL", "rabbitmq-diagnostics -q ping"]
+      test: ["CMD-SHELL", "rabbitmq-diagnostics -q ping && bash -ec 'exec 3<>/dev/tcp/127.0.0.1/5672'"]
       interval: 10s
       timeout: 5s
       retries: 5
