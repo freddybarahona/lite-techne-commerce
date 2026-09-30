@@ -13,9 +13,7 @@ export class CreateInventoryRequest{
   @IsNumber({},{message: ResponseConstants.onlyTypes({campo: "reserved_stock", type: "enteros"}) })
   @IsNotEmpty({message: ResponseConstants.requiredSpace({campo:"reserved_stock"})})
   reserved_stock!: number
-  
-  @IsNumber({},{message: ResponseConstants.onlyTypes({campo: "minimum_stock", type: "enteros"}) })
-  @IsNotEmpty({message: ResponseConstants.requiredSpace({campo:"minimum_stock"})})
+
   minimum_stock!: number
   
   @IsDate({message: ResponseConstants.onlyTypes({campo: "last_movement", type: "fecha"}) })

@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import { CartMakers } from "../../factories/cart.makers";
 import { Auth } from "../../../../shared/infrastructure/middlewares/auth.jwt";
-import { validate } from "class-validator";
+
 
 export default class CartRoutes{
   private readonly router= Router()

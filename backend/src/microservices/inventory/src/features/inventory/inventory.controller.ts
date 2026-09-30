@@ -12,9 +12,9 @@ export class InventoryControllers{
     const fecha_actual= new Date()
     const request: CreateInventoryRequest={
       product_id: req.body.product_id,
-      stock: req.body.stock,
-      reserved_stock: req.body.reserved,
-      minimum_stock: req.body.minimum,
+      stock: Number(req.body.stock),
+      reserved_stock: req.body.reserved == undefined ? 0: Number(req.body.reserved),
+      minimum_stock: Number(req.body.stock)- Number(req.body.reserved),
       last_movement: fecha_actual
     }
     console.log("request: ", request)
