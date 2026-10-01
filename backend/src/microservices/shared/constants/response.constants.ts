@@ -24,6 +24,10 @@ export class ResponseConstants{
     return `el campo ${params.data} tiene un maximo de ${params.max} caracteres`
   }
 
+  static minLength(params:{data: string, min: number}){
+    return `el campo ${params.data} tiene un minimo de ${params.min} caracteres`
+  }
+
   static dbEmpty(params:{entity: string} ){
     return `no se encontraron elementos en ${params.entity} data`
   }

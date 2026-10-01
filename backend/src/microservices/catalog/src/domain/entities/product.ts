@@ -9,7 +9,7 @@ export class Product {
   @Column({nullable: false, length: 100})
   name!: string
 
-  @Column({nullable: false, length: 150})
+  @Column({nullable: false, length: 500})
   description!: string
   @Column({nullable: false, type: "decimal", precision: 10 ,scale: 2})
   price!: number

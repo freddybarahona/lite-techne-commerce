@@ -16,7 +16,7 @@ export class ProductControllers{
       return res.status(400).json(formResponse.create({success:false, statusCode:400, message: errors}))
     }
 
-    const response= await this.useCase.createProduct({request_validado})
+    const response= await this.useCase.createProduct({request_validado:request_validado})
     return res.status(response.statusCode).json(response)
   }
 
