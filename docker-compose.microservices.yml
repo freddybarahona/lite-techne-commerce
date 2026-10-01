@@ -5,9 +5,31 @@ services:
     image: litetechne-auth
     container_name: lite-techne-auth
     environment:
+      PORT: 3000
       SYNCHRONIZE: false
       LOGGING: false
       JWT_SECRET: secretodetest
+      #info de la BD
+      DB_HOST: host.docker.internal
+      DB_PORT: 5432
+      DB_NAME: bd-lite-techne-auth
+      DB_USER: adminadmin
+      DB_PASSWORD: adminadmin
+      #informacion de semillas
+      ROLE_1_ID: 1
+      ROLE_1_NAME: ADMINISTRATOR
+      ROLE_1_DESCRIPTION: administrador del sistema
+      ROLE_2_ID: 2
+      ROLE_2_NAME: CUSTOMER
+      ROLE_2_DESCRIPTION: persona que compra en la tienda
+      ROLE_3_ID: 3
+      ROLE_3_NAME: SELLER
+      ROLE_3_DESCRIPTION: persona que vende productos
+      BASE_USER_FIRSTNAME: Freddy
+      BASE_USER_LASTNAME: Barahona
+      BASE_USER_EMAIL: admin@litetechne.com
+      BASE_USER_PASSWORD: Admin1234@
+      BASE_USER_ISACTIVE: true
     depends_on:
       bd-lite-techne-auth:
         condition: service_healthy
@@ -20,10 +42,26 @@ services:
       SYNCHRONIZE: false
       LOGGING: false
       JWT_SECRET: secretodetest
+      #info de la BD
       DB_HOST: host.docker.internal
       DB_PORT: 1433
       DB_USER: sa
       DB_PASSWORD: "Admin1234@"
+      #info de rabbitmq
+      RABBITMQ_URL: amqp://localhost
+      #informacion de semillas
+      CATEGORY_1_ID: 1
+      CATEGORY_1_NAME: Electronics
+      CATEGORY_1_DESCRIPTION: "Productos con uso de bateria con componentes electronicos"
+      CATEGORY_2_ID: 2
+      CATEGORY_2_NAME: Gaming
+      CATEGORY_2_DESCRIPTION: "Productos complementarios para jugar videojuegos"
+      CATEGORY_3_ID: 3
+      CATEGORY_3_NAME: Monitors
+      CATEGORY_3_DESCRIPTION: "Productos para visualizar contenido multimedia"
+      CATEGORY_4_ID: 4
+      CATEGORY_4_NAME: Accesories
+      CATEGORY_4_DESCRIPTION: "Productos complementarios para el uso diario"
     depends_on:
       bd-lite-techne-c-i-r:
         condition: service_healthy
